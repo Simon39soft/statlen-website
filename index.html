@@ -3,505 +3,564 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Statlen — Investment & Asset Management</title>
+<title>Statlen — Licensed Investment & Asset Management</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
 <style>
 :root{
-  --orange:#EA6C1E;--orange2:#C85A10;--orange3:#FF8C42;--orange4:#FFF0E6;
-  --dark:#0D0D0D;--dark2:#1A1A1A;--text:#1A1A1A;--muted:#666;--muted2:#999;
-  --border:#E8E8E8;--bg:#FFFFFF;--bg2:#FAFAFA;--green:#16A34A;
+  --o:#EA6C1E;--o2:#C85A10;--o3:#FF8C42;--o4:#FFF0E6;
+  --dk:#0D0D0D;--tx:#1A1A1A;--mu:#666;--mu2:#999;
+  --bd:#E8E8E8;--bg:#fff;--bg2:#FAFAFA;--gn:#16A34A;
   --r:12px;--rl:20px;
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
-::-webkit-scrollbar{width:5px}::-webkit-scrollbar-thumb{background:var(--orange);border-radius:3px}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);overflow-x:hidden}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-thumb{background:var(--o);border-radius:3px}
 
-/* AUTH OVERLAY */
-.auth-overlay{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.7);backdrop-filter:blur(8px);padding:20px}
-.auth-overlay.hidden{display:none}
-.auth-box{background:#fff;border-radius:24px;width:100%;max-width:440px;overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,0.3)}
-.auth-top{background:linear-gradient(135deg,var(--orange),var(--orange2));padding:32px;text-align:center}
-.auth-logo-row{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:8px}
-.auth-logo-icon{width:40px;height:40px;background:rgba(255,255,255,0.2);border-radius:10px;display:flex;align-items:center;justify-content:center}
-.auth-logo-icon svg{width:22px;height:22px;stroke:#fff;fill:none;stroke-width:2.2;stroke-linecap:round}
-.auth-logo-text{font-size:22px;font-weight:900;color:#fff;letter-spacing:-0.5px}
-.auth-top-sub{font-size:12px;color:rgba(255,255,255,0.8)}
-.auth-body{padding:28px}
-.auth-tabs{display:flex;background:#f5f5f5;border-radius:10px;padding:4px;margin-bottom:22px}
-.auth-tab{flex:1;padding:9px;border-radius:7px;font-size:13px;font-weight:600;color:#666;cursor:pointer;border:none;background:none;font-family:'Inter',sans-serif;transition:all .2s;text-align:center}
-.auth-tab.active{background:#fff;color:var(--orange);box-shadow:0 1px 4px rgba(0,0,0,0.1)}
-.auth-form{display:none}
-.auth-form.active{display:flex;flex-direction:column;gap:12px}
-.auth-field label{display:block;font-size:11px;font-weight:700;color:#666;letter-spacing:0.5px;text-transform:uppercase;margin-bottom:5px}
-.auth-field input{width:100%;padding:11px 14px;border:1.5px solid #e0e0e0;border-radius:9px;font-size:13px;font-family:'Inter',sans-serif;color:var(--text);background:#fafafa;outline:none;transition:all .2s;-webkit-text-fill-color:var(--text)}
-.auth-field input:focus{border-color:var(--orange);background:#fff;box-shadow:0 0 0 3px rgba(234,108,30,0.1)}
-.auth-field input::placeholder{color:#bbb;-webkit-text-fill-color:#bbb}
+/* AUTH */
+.auth-ov{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.75);backdrop-filter:blur(8px);padding:16px}
+.auth-ov.hidden{display:none}
+.auth-box{background:#fff;border-radius:24px;width:100%;max-width:420px;overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,0.3)}
+.auth-top{background:linear-gradient(135deg,var(--o),var(--o2));padding:26px;text-align:center}
+.auth-brand{font-size:22px;font-weight:900;color:#fff;margin-bottom:2px}
+.auth-brand-sub{font-size:11px;color:rgba(255,255,255,0.75)}
+.auth-badge{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,0.15);border-radius:100px;padding:4px 10px;font-size:10px;color:#fff;font-weight:600;margin-top:8px}
+.auth-body{padding:22px}
+.auth-tabs{display:flex;background:#f5f5f5;border-radius:10px;padding:3px;margin-bottom:18px}
+.auth-tab{flex:1;padding:8px;border-radius:7px;font-size:13px;font-weight:600;color:#666;cursor:pointer;border:none;background:none;font-family:'Inter',sans-serif;transition:all .2s;text-align:center}
+.auth-tab.active{background:#fff;color:var(--o);box-shadow:0 1px 4px rgba(0,0,0,0.1)}
+.auth-form{display:none;flex-direction:column;gap:10px}
+.auth-form.active{display:flex}
+.auth-fl label{display:block;font-size:10px;font-weight:700;color:#666;letter-spacing:.5px;text-transform:uppercase;margin-bottom:4px}
+.auth-fl input{width:100%;padding:11px 13px;border:1.5px solid #e0e0e0;border-radius:9px;font-size:13px;font-family:'Inter',sans-serif;color:var(--tx);background:#fafafa;outline:none;transition:all .2s}
+.auth-fl input:focus{border-color:var(--o);background:#fff}
 .auth-err{font-size:12px;color:#dc2626;background:#fef2f2;border:1px solid #fecaca;border-radius:7px;padding:8px 12px;display:none}
 .auth-err.show{display:block}
-.auth-submit{width:100%;padding:13px;background:linear-gradient(135deg,var(--orange),var(--orange2));color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s;margin-top:4px}
-.auth-submit:hover{opacity:0.92;transform:translateY(-1px)}
-.auth-foot{text-align:center;margin-top:14px;font-size:12px;color:#999}
-.auth-foot button{background:none;border:none;color:var(--orange);font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;font-size:12px}
+.auth-sub{width:100%;padding:12px;background:linear-gradient(135deg,var(--o),var(--o2));color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;margin-top:2px}
+.auth-sub:hover{opacity:.92}
+.auth-foot{text-align:center;margin-top:10px;font-size:12px;color:#999}
+.auth-foot button{background:none;border:none;color:var(--o);font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;font-size:12px}
 
-/* NAVBAR */
-.navbar{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(255,255,255,0.95);backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,0,0,0.06);transition:all .3s}
-.nav-inner{max-width:1200px;margin:0 auto;padding:0 24px;height:68px;display:flex;align-items:center;justify-content:space-between}
-.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
-.nav-logo-icon{width:36px;height:36px;background:linear-gradient(135deg,var(--orange),var(--orange2));border-radius:9px;display:flex;align-items:center;justify-content:center}
-.nav-logo-icon svg{width:18px;height:18px;stroke:#fff;fill:none;stroke-width:2.2;stroke-linecap:round}
-.nav-logo-text{font-size:18px;font-weight:900;color:var(--text);letter-spacing:-0.3px}
-.nav-logo-text span{color:var(--orange)}
-.nav-links{display:flex;align-items:center;gap:32px}
-.nav-link{font-size:13.5px;font-weight:500;color:var(--muted);text-decoration:none;transition:color .2s;cursor:pointer;background:none;border:none;font-family:'Inter',sans-serif}
-.nav-link:hover{color:var(--orange)}
-.nav-btns{display:flex;align-items:center;gap:10px}
-.nav-btn-ghost{padding:8px 18px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;border:1.5px solid var(--border);background:transparent;color:var(--text);font-family:'Inter',sans-serif;transition:all .2s}
-.nav-btn-ghost:hover{border-color:var(--orange);color:var(--orange)}
-.nav-btn-primary{padding:8px 18px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;border:none;background:linear-gradient(135deg,var(--orange),var(--orange2));color:#fff;font-family:'Inter',sans-serif;transition:all .2s}
-.nav-btn-primary:hover{opacity:0.9;transform:translateY(-1px)}
-.user-nav-pill{display:flex;align-items:center;gap:8px;cursor:pointer}
-.user-nav-av{width:32px;height:32px;background:linear-gradient(135deg,var(--orange),var(--orange2));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff}
-.user-nav-name{font-size:13px;font-weight:600;color:var(--text)}
-.hamburger{display:none;background:none;border:none;cursor:pointer;padding:4px}
-.hamburger svg{width:22px;height:22px;stroke:var(--text);fill:none;stroke-width:2;stroke-linecap:round}
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(255,255,255,.96);backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,0,0,.06)}
+.nav-in{max-width:1200px;margin:0 auto;padding:0 22px;height:64px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{display:flex;align-items:center;gap:9px;cursor:pointer}
+.nav-logo-ic{width:34px;height:34px;background:linear-gradient(135deg,var(--o),var(--o2));border-radius:9px;display:flex;align-items:center;justify-content:center}
+.nav-logo-ic svg{width:17px;height:17px;stroke:#fff;fill:none;stroke-width:2.2;stroke-linecap:round}
+.nav-logo-txt{font-size:17px;font-weight:900;color:var(--tx)}
+.nav-logo-txt span{color:var(--o)}
+.nav-links{display:flex;align-items:center;gap:24px}
+.nav-lnk{font-size:13px;font-weight:500;color:var(--mu);cursor:pointer;background:none;border:none;font-family:'Inter',sans-serif;transition:color .2s}
+.nav-lnk:hover{color:var(--o)}
+.nav-btns{display:flex;align-items:center;gap:8px}
+.btn-gh{padding:7px 16px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;border:1.5px solid var(--bd);background:transparent;color:var(--tx);font-family:'Inter',sans-serif;transition:all .2s}
+.btn-gh:hover{border-color:var(--o);color:var(--o)}
+.btn-pr{padding:8px 16px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;border:none;background:linear-gradient(135deg,var(--o),var(--o2));color:#fff;font-family:'Inter',sans-serif;transition:all .2s}
+.btn-pr:hover{opacity:.9;transform:translateY(-1px)}
+.ham{display:none;background:none;border:none;cursor:pointer;padding:4px}
+.ham svg{width:22px;height:22px;stroke:var(--tx);fill:none;stroke-width:2;stroke-linecap:round}
+.mob-menu{display:none;position:fixed;inset:0;z-index:999;background:#fff;padding:80px 22px 22px;flex-direction:column;gap:14px}
+.mob-menu.open{display:flex}
+.mob-lnk{font-size:16px;font-weight:600;color:var(--tx);cursor:pointer;padding:10px 0;border-bottom:1px solid var(--bd);background:none;border-top:none;border-left:none;border-right:none;font-family:'Inter',sans-serif;text-align:left}
 
-/* APP PAGES */
-.page{display:none;min-height:100vh;padding-top:68px}
+/* PAGES */
+.page{display:none;min-height:100vh;padding-top:64px}
 .page.active{display:block}
 
 /* HERO */
-.hero{background:linear-gradient(135deg,#0D0D0D 0%,#1A0800 50%,#2D1000 100%);min-height:calc(100vh - 68px);display:flex;align-items:center;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%,rgba(234,108,30,0.15),transparent 60%)}
-.hero-inner{max-width:1200px;margin:0 auto;padding:80px 24px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
-.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(234,108,30,0.15);border:1px solid rgba(234,108,30,0.3);border-radius:100px;padding:6px 14px;font-size:12px;font-weight:600;color:var(--orange3);margin-bottom:24px}
-.hero-badge::before{content:'';width:6px;height:6px;background:var(--orange);border-radius:50%}
-.hero h1{font-size:clamp(36px,5vw,60px);font-weight:900;color:#fff;line-height:1.1;letter-spacing:-1px;margin-bottom:20px}
-.hero h1 span{color:var(--orange)}
-.hero-sub{font-size:16px;color:rgba(255,255,255,0.6);line-height:1.7;margin-bottom:36px;max-width:480px}
-.hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:48px}
-.btn-primary{padding:14px 28px;background:linear-gradient(135deg,var(--orange),var(--orange2));color:#fff;border:none;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
-.btn-primary:hover{opacity:0.9;transform:translateY(-2px);box-shadow:0 12px 32px rgba(234,108,30,0.4)}
-.btn-outline{padding:14px 28px;background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,0.3);border-radius:12px;font-size:14px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
-.btn-outline:hover{border-color:var(--orange);color:var(--orange)}
-.hero-stats{display:flex;gap:32px;flex-wrap:wrap}
-.hero-stat-num{font-size:28px;font-weight:800;color:#fff;font-family:'Inter',sans-serif}
-.hero-stat-num span{color:var(--orange)}
-.hero-stat-lbl{font-size:11px;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:1px;margin-top:2px}
-.hero-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:28px;backdrop-filter:blur(10px)}
-.hero-card-title{font-size:14px;font-weight:700;color:#fff;margin-bottom:16px}
-.invest-mini{background:rgba(234,108,30,0.1);border:1px solid rgba(234,108,30,0.2);border-radius:12px;padding:16px;margin-bottom:12px}
-.invest-mini-label{font-size:10px;font-weight:700;color:rgba(255,255,255,0.4);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px}
-.invest-mini-val{font-size:22px;font-weight:800;color:var(--orange3);font-family:'Inter',sans-serif}
-.invest-mini-sub{font-size:11px;color:rgba(255,255,255,0.5);margin-top:2px}
-.return-bar{background:rgba(255,255,255,0.05);border-radius:8px;padding:12px;display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
-.return-bar-label{font-size:12px;color:rgba(255,255,255,0.6)}
-.return-bar-val{font-size:13px;font-weight:700;color:var(--orange3)}
+.hero{position:relative;min-height:calc(100vh - 64px);display:flex;align-items:center;overflow:hidden}
+.hero-slides{position:absolute;inset:0;z-index:0}
+.hero-slide{position:absolute;inset:0;opacity:0;transition:opacity 1.4s ease-in-out;background-size:cover;background-position:center;background-repeat:no-repeat}
+.hero-slide.active{opacity:1}
+.hero-ov{position:absolute;inset:0;background:linear-gradient(135deg,rgba(10,10,10,.75) 0%,rgba(10,10,10,.5) 100%);z-index:1}
+.hero-in{position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:72px 22px;display:grid;grid-template-columns:1.1fr .9fr;gap:52px;align-items:center}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(234,108,30,.18);border:1px solid rgba(234,108,30,.35);border-radius:100px;padding:6px 14px;font-size:11px;font-weight:600;color:var(--o3);margin-bottom:18px}
+.hero-badge::before{content:'';width:6px;height:6px;background:var(--o);border-radius:50%;animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.4}}
+.hero h1{font-size:clamp(32px,5vw,56px);font-weight:900;color:#fff;line-height:1.1;letter-spacing:-1px;margin-bottom:16px}
+.hero h1 span{color:var(--o)}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.65);line-height:1.75;margin-bottom:30px;max-width:460px}
+.hero-btns{display:flex;gap:11px;flex-wrap:wrap;margin-bottom:40px}
+.btn-hp{padding:13px 26px;background:linear-gradient(135deg,var(--o),var(--o2));color:#fff;border:none;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s;display:inline-flex;align-items:center;gap:7px}
+.btn-hp:hover{opacity:.9;transform:translateY(-2px);box-shadow:0 12px 32px rgba(234,108,30,.4)}
+.btn-ho{padding:13px 26px;background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.3);border-radius:12px;font-size:14px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s}
+.btn-ho:hover{border-color:var(--o);color:var(--o)}
+.hero-stats{display:flex;gap:26px;flex-wrap:wrap}
+.hs-num{font-size:24px;font-weight:800;color:#fff}
+.hs-num span{color:var(--o)}
+.hs-lbl{font-size:10px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:1px;margin-top:2px}
+.hero-card{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:24px;backdrop-filter:blur(16px)}
+.hc-title{font-size:12px;font-weight:700;color:#fff;margin-bottom:13px;display:flex;align-items:center;gap:6px}
+.ret-row{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);border-radius:9px;padding:10px 13px;display:flex;justify-content:space-between;align-items:center;margin-bottom:7px}
+.ret-lbl{font-size:11px;color:rgba(255,255,255,.6)}
+.ret-val{font-size:12px;font-weight:700;color:var(--o3)}
+.hero-dots{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);z-index:3;display:flex;gap:7px}
+.hdot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.3);cursor:pointer;transition:all .3s}
+.hdot.active{background:var(--o);width:22px;border-radius:3px}
 
-/* SECTIONS */
-.section{padding:80px 0}
-.section-inner{max-width:1200px;margin:0 auto;padding:0 24px}
-.section-badge{display:inline-block;background:var(--orange4);color:var(--orange);font-size:11px;font-weight:700;padding:4px 12px;border-radius:100px;letter-spacing:1px;text-transform:uppercase;margin-bottom:12px}
-.section-title{font-size:clamp(28px,4vw,42px);font-weight:800;color:var(--text);letter-spacing:-0.5px;margin-bottom:12px;line-height:1.2}
-.section-sub{font-size:15px;color:var(--muted);line-height:1.7;max-width:560px}
-.section-header{margin-bottom:48px}
-.section-header.center{text-align:center}
-.section-header.center .section-sub{margin:0 auto}
+/* LICENSE BADGE */
+.lic-bar{background:linear-gradient(135deg,var(--dk),#1a1a1a);padding:14px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+.lic-bar-in{max-width:1200px;margin:0 auto;padding:0 22px;display:flex;align-items:center;justify-content:center;gap:32px;flex-wrap:wrap}
+.lic-item{display:flex;align-items:center;gap:8px;font-size:12px;color:rgba(255,255,255,.6)}
+.lic-icon{width:28px;height:28px;background:rgba(234,108,30,.15);border:1px solid rgba(234,108,30,.3);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+.lic-txt b{color:#fff;display:block;font-size:11px;margin-bottom:1px}
 
-/* STATS BAR */
-.stats-bar{background:linear-gradient(135deg,var(--orange),var(--orange2));padding:40px 0}
-.stats-bar-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:repeat(4,1fr);gap:1px}
-.stat-item{text-align:center;padding:8px 0;position:relative}
-.stat-item:not(:last-child)::after{content:'';position:absolute;right:0;top:20%;bottom:20%;width:1px;background:rgba(255,255,255,0.2)}
-.stat-num{font-size:36px;font-weight:900;color:#fff;font-family:'Inter',sans-serif;letter-spacing:-1px}
-.stat-lbl{font-size:11px;color:rgba(255,255,255,0.7);text-transform:uppercase;letter-spacing:1px;margin-top:4px}
+/* TRUST */
+.trust-bar{background:linear-gradient(135deg,var(--o),var(--o2));padding:32px 0}
+.trust-in{max-width:1200px;margin:0 auto;padding:0 22px;display:grid;grid-template-columns:repeat(4,1fr);gap:1px}
+.trust-item{text-align:center;padding:4px 0;position:relative}
+.trust-item:not(:last-child)::after{content:'';position:absolute;right:0;top:15%;bottom:15%;width:1px;background:rgba(255,255,255,.25)}
+.trust-num{font-size:32px;font-weight:900;color:#fff;letter-spacing:-1px}
+.trust-lbl{font-size:10px;color:rgba(255,255,255,.75);text-transform:uppercase;letter-spacing:1px;margin-top:3px}
 
-/* SERVICES GRID */
-.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.service-card{background:#fff;border:1px solid var(--border);border-radius:var(--rl);padding:28px;transition:all .3s;position:relative;overflow:hidden}
-.service-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--orange),var(--orange2));opacity:0;transition:opacity .3s}
-.service-card:hover{box-shadow:0 8px 40px rgba(234,108,30,0.12);transform:translateY(-4px);border-color:transparent}
-.service-card:hover::before{opacity:1}
-.service-icon{width:52px;height:52px;background:var(--orange4);border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:18px;font-size:24px}
-.service-title{font-size:16px;font-weight:700;color:var(--text);margin-bottom:8px}
-.service-desc{font-size:13.5px;color:var(--muted);line-height:1.65}
+/* SECTION */
+.sec{padding:68px 0}
+.sec-in{max-width:1200px;margin:0 auto;padding:0 22px}
+.sec-badge{display:inline-block;background:var(--o4);color:var(--o);font-size:10px;font-weight:700;padding:4px 11px;border-radius:100px;letter-spacing:1px;text-transform:uppercase;margin-bottom:9px}
+.sec-title{font-size:clamp(24px,3.5vw,38px);font-weight:800;color:var(--tx);letter-spacing:-.5px;margin-bottom:9px;line-height:1.2}
+.sec-sub{font-size:14px;color:var(--mu);line-height:1.7;max-width:520px}
+.sec-hd{margin-bottom:40px}
+.sec-hd.center{text-align:center}
+.sec-hd.center .sec-sub{margin:0 auto}
 
-/* INVEST PAGE */
-.invest-hero{background:linear-gradient(135deg,#0D0D0D,#1A0800);padding:80px 0 60px;text-align:center}
-.invest-hero h1{font-size:clamp(28px,4vw,48px);font-weight:900;color:#fff;margin-bottom:12px}
-.invest-hero h1 span{color:var(--orange)}
-.invest-hero p{font-size:15px;color:rgba(255,255,255,0.6);max-width:500px;margin:0 auto}
-.invest-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:32px}
-.invest-card{background:#fff;border:1px solid var(--border);border-radius:var(--rl);padding:28px;position:relative;overflow:hidden}
-.invest-card.featured{border-color:var(--orange);box-shadow:0 0 0 1px var(--orange)}
-.invest-card.featured::before{content:'MOST POPULAR';position:absolute;top:16px;right:16px;background:var(--orange);color:#fff;font-size:9px;font-weight:700;padding:3px 8px;border-radius:100px;letter-spacing:1px}
-.invest-tier{font-size:11px;font-weight:700;color:var(--orange);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px}
-.invest-amount{font-size:32px;font-weight:900;color:var(--text);letter-spacing:-1px;margin-bottom:4px}
-.invest-return{font-size:13px;color:var(--muted);margin-bottom:20px}
-.invest-return span{color:var(--green);font-weight:700}
-.invest-features{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:24px}
-.invest-features li{font-size:13px;color:var(--muted);display:flex;align-items:center;gap:8px}
-.invest-features li::before{content:'✓';color:var(--orange);font-weight:700;flex-shrink:0}
-.invest-btn{width:100%;padding:13px;background:linear-gradient(135deg,var(--orange),var(--orange2));color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s}
-.invest-btn:hover{opacity:0.9;transform:translateY(-1px)}
-.sectors{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px}
-.sector-card{border-radius:16px;overflow:hidden;position:relative;height:180px;cursor:pointer}
-.sector-card img,.sector-card .sector-bg{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
-.sector-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.8),transparent);display:flex;align-items:flex-end;padding:16px}
-.sector-name{font-size:15px;font-weight:700;color:#fff}
-.sector-sub{font-size:11px;color:rgba(255,255,255,0.7)}
-.sector-bg{display:flex;align-items:center;justify-content:center;font-size:64px}
+/* SERVICES */
+.srv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.srv-card{background:#fff;border:1px solid var(--bd);border-radius:var(--rl);padding:24px;transition:all .3s;position:relative;overflow:hidden}
+.srv-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--o),var(--o2));opacity:0;transition:opacity .3s}
+.srv-card:hover{box-shadow:0 8px 36px rgba(234,108,30,.12);transform:translateY(-4px);border-color:transparent}
+.srv-card:hover::before{opacity:1}
+.srv-ic{width:48px;height:48px;background:var(--o4);border-radius:13px;display:flex;align-items:center;justify-content:center;margin-bottom:14px;font-size:21px}
+.srv-title{font-size:14px;font-weight:700;color:var(--tx);margin-bottom:6px}
+.srv-desc{font-size:12.5px;color:var(--mu);line-height:1.65}
 
-/* DASHBOARD */
-.dashboard{padding:32px 0}
-.dashboard-inner{max-width:1200px;margin:0 auto;padding:0 24px}
-.dash-header{margin-bottom:28px}
-.dash-title{font-size:22px;font-weight:800;color:var(--text)}
-.dash-sub{font-size:13px;color:var(--muted)}
-.dash-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
-.dash-card{background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:20px}
-.dash-card-label{font-size:10px;font-weight:700;color:var(--muted2);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px}
-.dash-card-val{font-size:24px;font-weight:800;color:var(--text);font-family:'Inter',sans-serif;margin-bottom:2px}
-.dash-card-sub{font-size:11px;color:var(--muted)}
-.dash-card-icon{float:right;width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;background:var(--orange4)}
-.dash-row{display:grid;grid-template-columns:2fr 1fr;gap:16px}
-.dash-panel{background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:20px}
-.dash-panel-title{font-size:14px;font-weight:700;color:var(--text);margin-bottom:16px}
-.invest-history{display:flex;flex-direction:column;gap:10px}
-.invest-hist-item{display:flex;align-items:center;justify-content:space-between;padding:12px;background:#fafafa;border-radius:8px}
-.ihi-left{display:flex;align-items:center;gap:10px}
-.ihi-icon{width:32px;height:32px;border-radius:8px;background:var(--orange4);display:flex;align-items:center;justify-content:center;font-size:14px}
-.ihi-name{font-size:13px;font-weight:600;color:var(--text)}
-.ihi-date{font-size:11px;color:var(--muted)}
-.ihi-amount{font-size:13px;font-weight:700;color:var(--green)}
-.no-invest{text-align:center;padding:32px;color:var(--muted);font-size:13px}
-.no-invest svg{width:36px;height:36px;stroke:var(--border);fill:none;stroke-width:1.5;display:block;margin:0 auto 8px}
-
-/* PROFILE */
-.profile-page{padding:32px 0}
-.profile-inner{max-width:800px;margin:0 auto;padding:0 24px}
-.profile-header{background:linear-gradient(135deg,var(--orange),var(--orange2));border-radius:20px;padding:32px;display:flex;align-items:center;gap:20px;margin-bottom:24px;color:#fff}
-.profile-av{width:72px;height:72px;background:rgba(255,255,255,0.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:800;color:#fff;flex-shrink:0}
-.profile-name{font-size:20px;font-weight:800}
-.profile-email{font-size:13px;opacity:0.8;margin-top:2px}
-.profile-form{background:#fff;border:1px solid var(--border);border-radius:var(--rl);padding:28px}
-.profile-form-title{font-size:16px;font-weight:700;color:var(--text);margin-bottom:20px}
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.form-field{display:flex;flex-direction:column;gap:5px}
-.form-field.full{grid-column:1/-1}
-.form-field label{font-size:11px;font-weight:700;color:var(--muted);letter-spacing:0.5px;text-transform:uppercase}
-.form-field input,.form-field select,.form-field textarea{width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:9px;font-size:13px;font-family:'Inter',sans-serif;color:var(--text);background:#fafafa;outline:none;transition:all .2s;-webkit-text-fill-color:var(--text)}
-.form-field input:focus,.form-field select:focus,.form-field textarea:focus{border-color:var(--orange);background:#fff}
-.form-field textarea{resize:vertical;min-height:80px}
-.form-save{padding:12px 28px;background:linear-gradient(135deg,var(--orange),var(--orange2));color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s;margin-top:16px}
-.form-save:hover{opacity:0.9}
-
-/* REVIEWS */
-.reviews-track{display:flex;gap:20px;overflow:hidden;position:relative}
-.reviews-track-inner{display:flex;gap:20px;animation:slide 30s linear infinite}
-.reviews-track-inner:hover{animation-play-state:paused}
-@keyframes slide{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-.review-card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:24px;min-width:320px;flex-shrink:0}
-.review-stars{color:var(--orange);font-size:14px;margin-bottom:10px;letter-spacing:2px}
-.review-text{font-size:13.5px;color:var(--muted);line-height:1.65;margin-bottom:14px;font-style:italic}
-.review-name{font-size:13px;font-weight:700;color:var(--text)}
-.review-title{font-size:11px;color:var(--muted)}
-
-/* HOW IT WORKS */
-.steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;position:relative}
-.steps-grid::before{content:'';position:absolute;top:28px;left:10%;right:10%;height:2px;background:linear-gradient(90deg,var(--orange),var(--orange2));z-index:0}
-.step-item{text-align:center;position:relative;z-index:1}
-.step-num{width:56px;height:56px;background:linear-gradient(135deg,var(--orange),var(--orange2));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;color:#fff;margin:0 auto 16px;box-shadow:0 8px 24px rgba(234,108,30,0.35)}
-.step-title{font-size:14px;font-weight:700;color:var(--text);margin-bottom:6px}
-.step-desc{font-size:12px;color:var(--muted);line-height:1.5}
+/* FARM SLIDESHOW */
+.farm-wrap{border-radius:22px;overflow:hidden;position:relative;height:400px;margin:40px 0}
+.farm-slide{position:absolute;inset:0;opacity:0;transition:opacity 1.2s ease-in-out;background-size:cover;background-position:center}
+.farm-slide.active{opacity:1}
+.farm-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.85) 0%,transparent 55%);display:flex;align-items:flex-end;padding:28px;z-index:1}
+.farm-cap-title{font-size:20px;font-weight:800;color:#fff;margin-bottom:5px}
+.farm-cap-sub{font-size:13px;color:rgba(255,255,255,.7);line-height:1.5;max-width:520px}
+.farm-nav{position:absolute;top:50%;transform:translateY(-50%);display:flex;justify-content:space-between;width:100%;padding:0 14px;z-index:2}
+.farm-btn{width:40px;height:40px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;backdrop-filter:blur(8px);transition:all .2s}
+.farm-btn:hover{background:rgba(234,108,30,.6)}
+.farm-btn svg{width:16px;height:16px;stroke:#fff;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.farm-dots{position:absolute;bottom:14px;right:20px;display:flex;gap:5px;z-index:2}
+.fdot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.4);cursor:pointer;transition:all .3s}
+.fdot.active{background:#fff;width:16px;border-radius:2px}
 
 /* SECTORS */
-.sectors-section{background:var(--bg2);padding:80px 0}
+.sec-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.sec-card{border-radius:18px;overflow:hidden;position:relative;height:220px;cursor:pointer;transition:transform .3s}
+.sec-card:hover{transform:scale(1.02)}
+.sec-card-img{position:absolute;inset:0;background-size:cover;background-position:center}
+.sec-card-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.85) 0%,rgba(0,0,0,.2) 60%,transparent 100%);display:flex;align-items:flex-end;padding:20px}
+.sec-name{font-size:18px;font-weight:800;color:#fff;margin-bottom:3px}
+.sec-ret{font-size:12px;color:rgba(255,255,255,.7);margin-bottom:6px}
+.sec-tag{display:inline-block;background:rgba(234,108,30,.85);color:#fff;font-size:9px;font-weight:700;padding:3px 7px;border-radius:100px;letter-spacing:.5px}
+
+/* STEPS */
+.steps-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;position:relative}
+.steps-row::before{content:'';position:absolute;top:24px;left:12%;right:12%;height:2px;background:linear-gradient(90deg,var(--o),var(--o2));z-index:0}
+.step-box{text-align:center;position:relative;z-index:1}
+.step-circ{width:48px;height:48px;background:linear-gradient(135deg,var(--o),var(--o2));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:900;color:#fff;margin:0 auto 13px;box-shadow:0 6px 18px rgba(234,108,30,.4)}
+.step-title{font-size:13px;font-weight:700;color:var(--tx);margin-bottom:5px}
+.step-desc{font-size:11.5px;color:var(--mu);line-height:1.55}
+
+/* REVIEWS */
+.reviews-sec{background:var(--bg2);padding:68px 0}
+.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:22px}
+.rev-card{background:#fff;border:1px solid var(--bd);border-radius:15px;padding:20px;transition:all .3s}
+.rev-card:hover{box-shadow:0 6px 22px rgba(0,0,0,.08);transform:translateY(-2px)}
+.rev-stars{color:var(--o);font-size:13px;letter-spacing:2px;margin-bottom:9px}
+.rev-text{font-size:13px;color:var(--mu);line-height:1.65;margin-bottom:13px;font-style:italic}
+.rev-name{font-size:13px;font-weight:700;color:var(--tx)}
+.rev-role{font-size:11px;color:var(--mu)}
+.rev-more-row{text-align:center;margin-top:6px}
+.rev-count{font-size:13px;color:var(--mu);margin-bottom:14px}
+.rev-count strong{color:var(--o)}
+.show-more{padding:11px 30px;background:transparent;border:1.5px solid var(--o);color:var(--o);border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s}
+.show-more:hover{background:var(--o);color:#fff}
+.hidden-revs{display:none;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:18px}
+.hidden-revs.open{display:grid}
 
 /* CONTACT */
-.contact-section{background:linear-gradient(135deg,#0D0D0D,#1A0800);padding:80px 0}
-.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
-.contact-info{color:#fff}
-.contact-info h2{font-size:36px;font-weight:800;margin-bottom:14px;line-height:1.2}
-.contact-info h2 span{color:var(--orange)}
-.contact-info p{font-size:14px;color:rgba(255,255,255,0.6);line-height:1.7;margin-bottom:28px}
-.contact-item{display:flex;align-items:center;gap:12px;margin-bottom:16px}
-.contact-icon{width:40px;height:40px;background:rgba(234,108,30,0.15);border:1px solid rgba(234,108,30,0.3);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px}
-.contact-detail{font-size:13px;color:rgba(255,255,255,0.8)}
-.contact-detail b{color:#fff;display:block;margin-bottom:2px}
-.contact-form-box{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:32px;backdrop-filter:blur(10px)}
-.contact-form-box h3{font-size:18px;font-weight:700;color:#fff;margin-bottom:20px}
-.contact-form-field{margin-bottom:14px}
-.contact-form-field label{display:block;font-size:11px;font-weight:700;color:rgba(255,255,255,0.5);letter-spacing:0.5px;text-transform:uppercase;margin-bottom:5px}
-.contact-form-field input,.contact-form-field textarea,.contact-form-field select{width:100%;padding:11px 14px;background:rgba(255,255,255,0.06);border:1.5px solid rgba(255,255,255,0.1);border-radius:9px;font-size:13px;font-family:'Inter',sans-serif;color:#fff;outline:none;transition:all .2s;-webkit-text-fill-color:#fff}
-.contact-form-field input:focus,.contact-form-field textarea:focus,.contact-form-field select:focus{border-color:var(--orange);background:rgba(255,255,255,0.08)}
-.contact-form-field input::placeholder,.contact-form-field textarea::placeholder{color:rgba(255,255,255,0.3);-webkit-text-fill-color:rgba(255,255,255,0.3)}
-.contact-form-field textarea{resize:vertical;min-height:90px}
-.contact-form-field select option{background:#1a1a1a;color:#fff}
-.contact-submit{width:100%;padding:13px;background:linear-gradient(135deg,var(--orange),var(--orange2));color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s;margin-top:4px}
-.contact-submit:hover{opacity:0.9;transform:translateY(-1px)}
+.contact-sec{background:linear-gradient(135deg,#0D0D0D,#1A0800);padding:68px 0}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+.c-info{color:#fff}
+.c-info h2{font-size:clamp(22px,3.5vw,34px);font-weight:800;margin-bottom:10px;line-height:1.2}
+.c-info h2 span{color:var(--o)}
+.c-info p{font-size:13px;color:rgba(255,255,255,.6);line-height:1.7;margin-bottom:22px}
+.c-item{display:flex;align-items:center;gap:11px;margin-bottom:13px}
+.c-ic{width:36px;height:36px;background:rgba(234,108,30,.15);border:1px solid rgba(234,108,30,.3);border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px}
+.c-detail{font-size:12.5px;color:rgba(255,255,255,.75)}
+.c-detail b{color:#fff;display:block;margin-bottom:1px}
+.c-form{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:26px;backdrop-filter:blur(10px)}
+.c-form h3{font-size:16px;font-weight:700;color:#fff;margin-bottom:16px}
+.cf-fl{margin-bottom:11px}
+.cf-fl label{display:block;font-size:10px;font-weight:700;color:rgba(255,255,255,.45);letter-spacing:.5px;text-transform:uppercase;margin-bottom:4px}
+.cf-fl input,.cf-fl textarea,.cf-fl select{width:100%;padding:10px 13px;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);border-radius:9px;font-size:13px;font-family:'Inter',sans-serif;color:#fff;outline:none;transition:all .2s}
+.cf-fl input:focus,.cf-fl textarea:focus,.cf-fl select:focus{border-color:var(--o)}
+.cf-fl input::placeholder,.cf-fl textarea::placeholder{color:rgba(255,255,255,.3)}
+.cf-fl textarea{resize:vertical;min-height:80px}
+.cf-fl select option{background:#1a1a1a;color:#fff}
+.cf-sub{width:100%;padding:12px;background:linear-gradient(135deg,var(--o),var(--o2));color:#fff;border:none;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s;margin-top:3px}
+.cf-sub:hover{opacity:.9}
 
 /* FOOTER */
-.footer{background:#0D0D0D;padding:48px 0 24px;border-top:1px solid rgba(255,255,255,0.06)}
-.footer-inner{max-width:1200px;margin:0 auto;padding:0 24px}
-.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
-.footer-brand-text{font-size:11px;color:rgba(255,255,255,0.4);line-height:1.7;margin-top:12px;max-width:240px}
-.footer-col-title{font-size:11px;font-weight:700;color:rgba(255,255,255,0.5);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:14px}
-.footer-links{list-style:none;display:flex;flex-direction:column;gap:8px}
-.footer-links a,.footer-links button{font-size:13px;color:rgba(255,255,255,0.45);text-decoration:none;transition:color .2s;background:none;border:none;cursor:pointer;font-family:'Inter',sans-serif;text-align:left;padding:0}
-.footer-links a:hover,.footer-links button:hover{color:var(--orange)}
-.footer-bottom{border-top:1px solid rgba(255,255,255,0.06);padding-top:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
-.footer-copy{font-size:12px;color:rgba(255,255,255,0.3)}
-.footer-legal{display:flex;gap:20px}
-.footer-legal a{font-size:12px;color:rgba(255,255,255,0.3);text-decoration:none}
-.footer-legal a:hover{color:var(--orange)}
+.footer{background:#0D0D0D;padding:40px 0 18px;border-top:1px solid rgba(255,255,255,.06)}
+.footer-in{max-width:1200px;margin:0 auto;padding:0 22px}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:32px;margin-bottom:32px}
+.ft-desc{font-size:11.5px;color:rgba(255,255,255,.4);line-height:1.7;margin-top:9px;max-width:210px}
+.ft-col-title{font-size:10px;font-weight:700;color:rgba(255,255,255,.45);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:11px}
+.ft-links{list-style:none;display:flex;flex-direction:column;gap:6px}
+.ft-links button,.ft-links a{font-size:12.5px;color:rgba(255,255,255,.4);cursor:pointer;background:none;border:none;font-family:'Inter',sans-serif;text-align:left;padding:0;text-decoration:none;transition:color .2s}
+.ft-links button:hover,.ft-links a:hover{color:var(--o)}
+.footer-bot{border-top:1px solid rgba(255,255,255,.06);padding-top:16px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.footer-copy{font-size:11px;color:rgba(255,255,255,.25)}
+
+/* INVEST PAGE */
+.inv-hero{background:linear-gradient(135deg,#0D0D0D,#1A0800);padding:64px 0 48px;text-align:center}
+.inv-hero h1{font-size:clamp(24px,4vw,44px);font-weight:900;color:#fff;margin-bottom:10px}
+.inv-hero h1 span{color:var(--o)}
+.inv-hero p{font-size:14px;color:rgba(255,255,255,.6);max-width:460px;margin:0 auto}
+.inv-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:24px}
+.inv-card{background:#fff;border:1px solid var(--bd);border-radius:var(--rl);padding:24px;position:relative;overflow:hidden}
+.inv-card.feat{border-color:var(--o);box-shadow:0 0 0 1px var(--o)}
+.inv-card.feat::before{content:'MOST POPULAR';position:absolute;top:13px;right:13px;background:var(--o);color:#fff;font-size:8px;font-weight:700;padding:3px 7px;border-radius:100px;letter-spacing:1px}
+.inv-tier{font-size:10px;font-weight:700;color:var(--o);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px}
+.inv-amount{font-size:28px;font-weight:900;color:var(--tx);letter-spacing:-1px;margin-bottom:3px}
+.inv-ret{font-size:12px;color:var(--mu);margin-bottom:16px}
+.inv-ret span{color:var(--gn);font-weight:700}
+.inv-feats{list-style:none;display:flex;flex-direction:column;gap:7px;margin-bottom:20px}
+.inv-feats li{font-size:12.5px;color:var(--mu);display:flex;align-items:flex-start;gap:7px;line-height:1.4}
+.inv-feats li::before{content:'✓';color:var(--o);font-weight:700;flex-shrink:0;margin-top:1px}
+.inv-btn{width:100%;padding:12px;background:linear-gradient(135deg,var(--o),var(--o2));color:#fff;border:none;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s}
+.inv-btn:hover{opacity:.9;transform:translateY(-1px)}
+
+/* DASHBOARD */
+.dash-wrap{padding:26px 0;min-height:calc(100vh - 64px)}
+.dash-in{max-width:1200px;margin:0 auto;padding:0 22px}
+.dash-hd{margin-bottom:22px}
+.dash-hd-title{font-size:20px;font-weight:800;color:var(--tx)}
+.dash-hd-sub{font-size:12.5px;color:var(--mu);margin-top:2px}
+.dash-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-bottom:18px}
+.dash-card{background:#fff;border:1px solid var(--bd);border-radius:var(--r);padding:17px}
+.dash-card-ic{float:right;font-size:19px}
+.dash-card-lbl{font-size:10px;font-weight:700;color:var(--mu2);letter-spacing:1px;text-transform:uppercase;margin-bottom:5px}
+.dash-card-val{font-size:21px;font-weight:800;color:var(--tx);margin-bottom:2px}
+.dash-card-sub{font-size:11px;color:var(--mu)}
+.dash-panels{display:grid;grid-template-columns:2fr 1fr;gap:15px}
+.dash-panel{background:#fff;border:1px solid var(--bd);border-radius:var(--r);padding:17px}
+.dash-panel-title{font-size:13px;font-weight:700;color:var(--tx);margin-bottom:13px}
+.no-inv{text-align:center;padding:26px;color:var(--mu);font-size:12.5px}
+.inv-hist-item{display:flex;align-items:center;justify-content:space-between;padding:10px;background:#fafafa;border-radius:8px;margin-bottom:7px}
+.ihi-left{display:flex;align-items:center;gap:9px}
+.ihi-ic{width:30px;height:30px;background:var(--o4);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:13px}
+.ihi-name{font-size:12.5px;font-weight:600;color:var(--tx)}
+.ihi-date{font-size:10.5px;color:var(--mu)}
+.ihi-amt{font-size:13px;font-weight:700;color:var(--gn)}
+.bar-row{margin-bottom:13px}
+.bar-row-top{display:flex;justify-content:space-between;font-size:11.5px;margin-bottom:4px}
+.bar-row-lbl{color:var(--mu)}
+.bar-row-val{color:var(--o);font-weight:600}
+.bar-track{height:6px;background:#f0f0f0;border-radius:3px}
+.bar-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--o),var(--o2))}
+.contact-tip{margin-top:14px;padding:11px;background:var(--o4);border-radius:9px}
+.contact-tip-lbl{font-size:9px;font-weight:700;color:var(--o);margin-bottom:4px;letter-spacing:.5px;text-transform:uppercase}
+.contact-tip-val{font-size:11.5px;color:var(--mu);line-height:1.65}
+
+/* PROFILE */
+.profile-wrap{padding:26px 0;min-height:calc(100vh - 64px)}
+.profile-in{max-width:760px;margin:0 auto;padding:0 22px}
+.profile-hd{background:linear-gradient(135deg,var(--o),var(--o2));border-radius:18px;padding:26px;display:flex;align-items:center;gap:16px;margin-bottom:18px}
+.profile-av{width:64px;height:64px;background:rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:800;color:#fff;flex-shrink:0}
+.profile-hd-name{font-size:17px;font-weight:800;color:#fff}
+.profile-hd-email{font-size:12px;color:rgba(255,255,255,.8);margin-top:2px}
+.profile-form{background:#fff;border:1px solid var(--bd);border-radius:var(--rl);padding:24px}
+.profile-form-title{font-size:14px;font-weight:700;color:var(--tx);margin-bottom:16px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.ff{display:flex;flex-direction:column;gap:4px}
+.ff.full{grid-column:1/-1}
+.ff label{font-size:10px;font-weight:700;color:var(--mu);letter-spacing:.5px;text-transform:uppercase}
+.ff input,.ff select,.ff textarea{width:100%;padding:10px 12px;border:1.5px solid var(--bd);border-radius:9px;font-size:13px;font-family:'Inter',sans-serif;color:var(--tx);background:#fafafa;outline:none;transition:all .2s}
+.ff input:focus,.ff select:focus,.ff textarea:focus{border-color:var(--o);background:#fff}
+.ff textarea{resize:vertical;min-height:72px}
+.form-save{padding:11px 24px;background:linear-gradient(135deg,var(--o),var(--o2));color:#fff;border:none;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s;margin-top:13px}
+.form-save:hover{opacity:.9}
 
 /* TOAST */
-.toast{position:fixed;bottom:24px;right:24px;background:var(--dark);color:#fff;padding:12px 18px;border-radius:10px;font-size:13px;font-weight:500;z-index:9998;transform:translateY(80px);opacity:0;transition:all .3s;border-left:3px solid var(--orange)}
+.toast{position:fixed;bottom:22px;right:22px;background:var(--dk);color:#fff;padding:11px 16px;border-radius:10px;font-size:12.5px;font-weight:500;z-index:9998;transform:translateY(80px);opacity:0;transition:all .3s;border-left:3px solid var(--o);max-width:280px}
 .toast.show{transform:translateY(0);opacity:1}
 
-/* MOBILE NAV */
-.mobile-menu{display:none;position:fixed;inset:0;z-index:999;background:#fff;padding:88px 24px 24px;flex-direction:column;gap:20px}
-.mobile-menu.open{display:flex}
-.mobile-link{font-size:18px;font-weight:600;color:var(--text);cursor:pointer;padding:10px 0;border-bottom:1px solid var(--border);background:none;border-top:none;border-left:none;border-right:none;font-family:'Inter',sans-serif;text-align:left}
-.mobile-link:hover{color:var(--orange)}
-.mobile-btns{display:flex;flex-direction:column;gap:10px;margin-top:10px}
-
 @media(max-width:900px){
-  .hero-inner{grid-template-columns:1fr;gap:40px}
+  .hero-in{grid-template-columns:1fr;gap:32px}
   .hero-card{display:none}
-  .services-grid{grid-template-columns:1fr 1fr}
-  .invest-grid{grid-template-columns:1fr}
-  .dash-grid{grid-template-columns:1fr 1fr}
-  .dash-row{grid-template-columns:1fr}
-  .contact-grid{grid-template-columns:1fr}
+  .srv-grid{grid-template-columns:1fr 1fr}
+  .inv-grid,.dash-panels,.contact-grid{grid-template-columns:1fr}
+  .dash-cards{grid-template-columns:1fr 1fr}
+  .rev-grid,.hidden-revs{grid-template-columns:1fr}
+  .sec-grid{grid-template-columns:1fr}
+  .trust-in{grid-template-columns:1fr 1fr;gap:18px}
+  .trust-item:not(:last-child)::after{display:none}
+  .steps-row{grid-template-columns:1fr 1fr}
+  .steps-row::before{display:none}
   .footer-top{grid-template-columns:1fr 1fr}
-  .steps-grid{grid-template-columns:1fr 1fr}
-  .steps-grid::before{display:none}
-  .sectors{grid-template-columns:1fr 1fr}
-  .stats-bar-inner{grid-template-columns:1fr 1fr;gap:20px}
-  .stat-item:not(:last-child)::after{display:none}
   .nav-links,.nav-btns{display:none}
-  .hamburger{display:flex}
-}
-@media(max-width:580px){
-  .services-grid,.steps-grid,.sectors{grid-template-columns:1fr}
-  .dash-grid{grid-template-columns:1fr}
+  .ham{display:flex}
   .form-grid{grid-template-columns:1fr}
-  .footer-top{grid-template-columns:1fr}
-  .hero-stats{gap:20px}
+  .lic-bar-in{gap:16px}
+}
+@media(max-width:540px){
+  .srv-grid,.steps-row,.dash-cards,.footer-top{grid-template-columns:1fr}
 }
 </style>
 </head>
 <body>
 
-<!-- AUTH OVERLAY -->
-<div class="auth-overlay hidden" id="authOverlay">
+<!-- AUTH -->
+<div class="auth-ov hidden" id="authOv">
   <div class="auth-box">
     <div class="auth-top">
-      <div class="auth-logo-row">
-        <div class="auth-logo-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-        <div class="auth-logo-text">Statlen</div>
-      </div>
-      <div class="auth-top-sub">Investment & Asset Management</div>
+      <div class="auth-brand">STATLEN</div>
+      <div class="auth-brand-sub">Investment & Asset Management</div>
+      <div class="auth-badge">🏛️ Licensed & Certified Professionals</div>
     </div>
     <div class="auth-body">
       <div class="auth-tabs">
-        <button class="auth-tab active" onclick="authSwitch('login')">Sign In</button>
-        <button class="auth-tab" onclick="authSwitch('signup')">Create Account</button>
+        <button class="auth-tab active" onclick="authTab('login')">Sign In</button>
+        <button class="auth-tab" onclick="authTab('signup')">Create Account</button>
       </div>
       <div class="auth-err" id="authErr"></div>
       <div class="auth-form active" id="loginForm">
-        <div class="auth-field"><label>Email Address</label><input type="email" id="liEmail" placeholder="you@example.com" autocomplete="email" oninput="clearErr()"/></div>
-        <div class="auth-field"><label>Password</label><input type="password" id="liPass" placeholder="Your password" autocomplete="current-password" oninput="clearErr()" onkeydown="if(event.key==='Enter')doLogin()"/></div>
-        <button class="auth-submit" onclick="doLogin()">Sign In to Statlen</button>
-        <div class="auth-foot">No account? <button onclick="authSwitch('signup')">Create one free</button></div>
+        <div class="auth-fl"><label>Email Address</label><input type="email" id="liEmail" placeholder="you@example.com" oninput="clearErr()" onkeydown="if(event.key==='Enter')doLogin()"/></div>
+        <div class="auth-fl"><label>Password</label><input type="password" id="liPass" placeholder="Your password" oninput="clearErr()" onkeydown="if(event.key==='Enter')doLogin()"/></div>
+        <button class="auth-sub" onclick="doLogin()">Sign In to Statlen</button>
+        <div class="auth-foot">No account? <button onclick="authTab('signup')">Create one free</button></div>
       </div>
       <div class="auth-form" id="signupForm">
-        <div class="auth-field"><label>Full Name</label><input type="text" id="suName" placeholder="Your full name" autocomplete="name" oninput="clearErr()"/></div>
-        <div class="auth-field"><label>Email Address</label><input type="email" id="suEmail" placeholder="you@example.com" autocomplete="email" oninput="clearErr()"/></div>
-        <div class="auth-field"><label>Phone Number</label><input type="tel" id="suPhone" placeholder="+234 or +1..." oninput="clearErr()"/></div>
-        <div class="auth-field"><label>Password</label><input type="password" id="suPass" placeholder="Min 6 characters" autocomplete="new-password" oninput="clearErr()" onkeydown="if(event.key==='Enter')doSignup()"/></div>
-        <button class="auth-submit" onclick="doSignup()">Create My Account</button>
-        <div class="auth-foot">Already registered? <button onclick="authSwitch('login')">Sign in</button></div>
+        <div class="auth-fl"><label>Full Name</label><input type="text" id="suName" placeholder="Your full name" oninput="clearErr()"/></div>
+        <div class="auth-fl"><label>Email Address</label><input type="email" id="suEmail" placeholder="you@example.com" oninput="clearErr()"/></div>
+        <div class="auth-fl"><label>Phone Number</label><input type="tel" id="suPhone" placeholder="+234 or +1..." oninput="clearErr()"/></div>
+        <div class="auth-fl"><label>Password</label><input type="password" id="suPass" placeholder="Min 6 characters" oninput="clearErr()" onkeydown="if(event.key==='Enter')doSignup()"/></div>
+        <button class="auth-sub" onclick="doSignup()">Create My Account</button>
+        <div class="auth-foot">Already registered? <button onclick="authTab('login')">Sign in</button></div>
       </div>
     </div>
   </div>
 </div>
 
 <!-- MOBILE MENU -->
-<div class="mobile-menu" id="mobileMenu">
-  <button class="mobile-link" onclick="showPage('home');closeMobile()">Home</button>
-  <button class="mobile-link" onclick="showPage('invest');closeMobile()">Invest</button>
-  <button class="mobile-link" onclick="scrollTo('services-sec');closeMobile()">Services</button>
-  <button class="mobile-link" onclick="scrollTo('contact-sec');closeMobile()">Contact</button>
-  <div class="mobile-btns">
-    <button class="nav-btn-ghost" style="width:100%" onclick="openAuth();closeMobile()">Sign In</button>
-    <button class="nav-btn-primary" style="width:100%" onclick="openAuth();closeMobile()">Get Started</button>
+<div class="mob-menu" id="mobMenu">
+  <button class="mob-lnk" onclick="goPage('home');closeMob()">Home</button>
+  <button class="mob-lnk" onclick="goPage('invest');closeMob()">Invest</button>
+  <button class="mob-lnk" onclick="goSec('services-sec');closeMob()">Services</button>
+  <button class="mob-lnk" onclick="goSec('contact-sec');closeMob()">Contact</button>
+  <button class="mob-lnk" onclick="needAuth('dashboard');closeMob()">Dashboard</button>
+  <button class="mob-lnk" onclick="needAuth('profile');closeMob()">My Profile</button>
+  <div style="display:flex;flex-direction:column;gap:9px;margin-top:9px">
+    <button class="btn-gh" style="width:100%" onclick="openAuth();closeMob()">Sign In</button>
+    <button class="btn-pr" style="width:100%" onclick="openAuth();closeMob()">Get Started</button>
   </div>
 </div>
 
-<!-- NAVBAR -->
-<nav class="navbar">
-  <div class="nav-inner">
-    <a class="nav-logo" onclick="showPage('home')">
-      <div class="nav-logo-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-      <div class="nav-logo-text">Stat<span>len</span></div>
-    </a>
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-in">
+    <div class="nav-logo" onclick="goPage('home')">
+      <div class="nav-logo-ic"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+      <div class="nav-logo-txt">Stat<span>len</span></div>
+    </div>
     <div class="nav-links">
-      <button class="nav-link" onclick="showPage('home')">Home</button>
-      <button class="nav-link" onclick="showPage('invest')">Invest</button>
-      <button class="nav-link" onclick="scrollTo('services-sec')">Services</button>
-      <button class="nav-link" onclick="scrollTo('how-sec')">How It Works</button>
-      <button class="nav-link" onclick="scrollTo('contact-sec')">Contact</button>
+      <button class="nav-lnk" onclick="goPage('home')">Home</button>
+      <button class="nav-lnk" onclick="goPage('invest')">Invest</button>
+      <button class="nav-lnk" onclick="goSec('services-sec')">Services</button>
+      <button class="nav-lnk" onclick="goSec('how-sec')">How It Works</button>
+      <button class="nav-lnk" onclick="goSec('contact-sec')">Contact</button>
+      <button class="nav-lnk" onclick="needAuth('dashboard')">Dashboard</button>
+      <button class="nav-lnk" onclick="needAuth('profile')">Profile</button>
     </div>
     <div class="nav-btns" id="navBtns">
-      <button class="nav-btn-ghost" onclick="openAuth()">Sign In</button>
-      <button class="nav-btn-primary" onclick="openAuth()">Get Started</button>
+      <button class="btn-gh" onclick="openAuth()">Sign In</button>
+      <button class="btn-pr" onclick="openAuth()">Get Started</button>
     </div>
-    <button class="hamburger" onclick="toggleMobile()"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+    <button class="ham" onclick="toggleMob()"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
   </div>
 </nav>
 
 <!-- HOME PAGE -->
 <div class="page active" id="page-home">
 
-  <!-- HERO -->
+  <!-- HERO SLIDESHOW -->
   <section class="hero">
-    <div class="hero-inner">
+    <div class="hero-slides" id="heroSlides">
+      <div class="hero-slide active" style="background-image:url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1600&q=80')"></div>
+      <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1508193638397-1c4234db14d8?w=1600&q=80')"></div>
+      <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=1600&q=80')"></div>
+      <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=1600&q=80')"></div>
+    </div>
+    <div class="hero-ov"></div>
+    <div class="hero-in">
       <div>
-        <div class="hero-badge">Trusted Investment & Asset Management</div>
-        <h1>Grow Your Wealth With <span>Statlen</span></h1>
-        <p class="hero-sub">We invest in Agriculture, Oil & Gas, and Renewable Energy — delivering consistent annual returns of 8% to 12% to our partners and investors across Africa and beyond.</p>
+        <div class="hero-badge">🏛️ Licensed Investment & Asset Management</div>
+        <h1>Grow Your Wealth<br>With <span>Statlen</span></h1>
+        <p class="hero-sub">Managed by licensed and certified investment professionals. We invest in Agriculture and Renewable Energy — delivering consistent annual returns of 8% to 12% to our 1,263+ partners.</p>
         <div class="hero-btns">
-          <button class="btn-primary" onclick="showPage('invest')">Start Investing →</button>
-          <button class="btn-outline" onclick="scrollTo('how-sec')">How It Works</button>
+          <button class="btn-hp" onclick="goPage('invest')">Start Investing →</button>
+          <button class="btn-ho" onclick="goSec('how-sec')">How It Works</button>
         </div>
         <div class="hero-stats">
-          <div><div class="hero-stat-num"><span>8-12</span>%</div><div class="hero-stat-lbl">Annual Returns</div></div>
-          <div><div class="hero-stat-num">$<span>50K</span>+</div><div class="hero-stat-lbl">Min Investment</div></div>
-          <div><div class="hero-stat-num"><span>100</span>%</div><div class="hero-stat-lbl">Confidential</div></div>
+          <div><div class="hs-num"><span>8–12</span>%</div><div class="hs-lbl">Annual Returns</div></div>
+          <div><div class="hs-num"><span>1,263</span></div><div class="hs-lbl">Trusted Partners</div></div>
+          <div><div class="hs-num"><span>100</span>%</div><div class="hs-lbl">Confidential</div></div>
         </div>
       </div>
       <div class="hero-card">
-        <div class="hero-card-title">📊 Your Investment Overview</div>
-        <div class="invest-mini">
-          <div class="invest-mini-label">Portfolio Value</div>
-          <div class="invest-mini-val">$0.00</div>
-          <div class="invest-mini-sub">Sign in to view your portfolio</div>
+        <div class="hc-title">📊 Live Portfolio Overview</div>
+        <div style="background:rgba(234,108,30,.1);border:1px solid rgba(234,108,30,.2);border-radius:11px;padding:14px;margin-bottom:11px">
+          <div style="font-size:9px;font-weight:700;color:rgba(255,255,255,.4);letter-spacing:1px;text-transform:uppercase;margin-bottom:3px">Portfolio Value</div>
+          <div style="font-size:22px;font-weight:800;color:var(--o3)">$0.00</div>
+          <div style="font-size:10px;color:rgba(255,255,255,.4);margin-top:2px">Sign in to view your portfolio</div>
         </div>
-        <div class="return-bar"><div class="return-bar-label">🌾 Agriculture</div><div class="return-bar-val">+10.4%</div></div>
-        <div class="return-bar"><div class="return-bar-label">🛢️ Oil & Gas</div><div class="return-bar-val">+11.8%</div></div>
-        <div class="return-bar"><div class="return-bar-label">⚡ Renewable Energy</div><div class="return-bar-val">+9.2%</div></div>
-        <div class="return-bar"><div class="return-bar-label">📈 Avg Annual Return</div><div class="return-bar-val" style="color:#16a34a">+10.5%</div></div>
+        <div class="ret-row"><div class="ret-lbl">🌾 Agriculture</div><div class="ret-val">+10.4% avg</div></div>
+        <div class="ret-row"><div class="ret-lbl">⚡ Renewable Energy</div><div class="ret-val">+9.2% avg</div></div>
+        <div class="ret-row"><div class="ret-lbl">🌱 Agro-Processing</div><div class="ret-val">+11.1% avg</div></div>
+        <div class="ret-row" style="border-top:1px solid rgba(255,255,255,.1);margin-top:4px"><div class="ret-lbl" style="font-weight:700;color:rgba(255,255,255,.8)">📈 Avg Annual Return</div><div class="ret-val" style="color:#4ade80">+10.2%</div></div>
       </div>
     </div>
+    <div class="hero-dots" id="heroDots"></div>
   </section>
 
-  <!-- STATS -->
-  <div class="stats-bar">
-    <div class="stats-bar-inner">
-      <div class="stat-item"><div class="stat-num">8-12%</div><div class="stat-lbl">Annual Returns</div></div>
-      <div class="stat-item"><div class="stat-num">3</div><div class="stat-lbl">Core Sectors</div></div>
-      <div class="stat-item"><div class="stat-num">100%</div><div class="stat-lbl">Confidential</div></div>
-      <div class="stat-item"><div class="stat-num">24hr</div><div class="stat-lbl">Response Time</div></div>
+  <!-- LICENSE BAR -->
+  <div class="lic-bar">
+    <div class="lic-bar-in">
+      <div class="lic-item"><div class="lic-icon">🏛️</div><div class="lic-txt"><b>Licensed Professionals</b>Certified Investment Advisors</div></div>
+      <div class="lic-item"><div class="lic-icon">🔒</div><div class="lic-txt"><b>100% Confidential</b>Your data fully protected</div></div>
+      <div class="lic-item"><div class="lic-icon">📋</div><div class="lic-txt"><b>AIG Actuarial Certified</b>Risk & Insurance Qualified</div></div>
+      <div class="lic-item"><div class="lic-icon">✅</div><div class="lic-txt"><b>Verified & Trusted</b>1,263+ active partners</div></div>
+    </div>
+  </div>
+
+  <!-- TRUST BAR -->
+  <div class="trust-bar">
+    <div class="trust-in">
+      <div class="trust-item"><div class="trust-num">8–12%</div><div class="trust-lbl">Annual Returns</div></div>
+      <div class="trust-item"><div class="trust-num">1,263</div><div class="trust-lbl">Trusted Partners</div></div>
+      <div class="trust-item"><div class="trust-num">100%</div><div class="trust-lbl">Confidential</div></div>
+      <div class="trust-item"><div class="trust-num">24hr</div><div class="trust-lbl">Response Time</div></div>
     </div>
   </div>
 
   <!-- SERVICES -->
-  <section class="section" id="services-sec">
-    <div class="section-inner">
-      <div class="section-header">
-        <div class="section-badge">What We Do</div>
-        <h2 class="section-title">Our Services</h2>
-        <p class="section-sub">From private investment to business advisory — Statlen is your growth partner for every stage of the journey.</p>
+  <section class="sec" id="services-sec">
+    <div class="sec-in">
+      <div class="sec-hd">
+        <div class="sec-badge">What We Do</div>
+        <h2 class="sec-title">Our Services</h2>
+        <p class="sec-sub">From private investment to business advisory — Statlen is your trusted growth partner at every stage of your financial journey.</p>
       </div>
-      <div class="services-grid">
-        <div class="service-card"><div class="service-icon">📈</div><div class="service-title">Private Investment</div><div class="service-desc">Access exclusive private equity investment opportunities in Agriculture, Oil & Gas, and Renewable Energy with guaranteed annual returns of 8% to 12%.</div></div>
-        <div class="service-card"><div class="service-icon">🤝</div><div class="service-title">Business Advisory</div><div class="service-desc">Professional advisory services for business owners looking to raise investment, sell their business, find strategic partners, or plan for growth.</div></div>
-        <div class="service-card"><div class="service-icon">🌾</div><div class="service-title">Agricultural Investment</div><div class="service-desc">We invest heavily in the agricultural sector — one of Africa's highest-growth opportunities. Farm produce, processing, and supply chain infrastructure.</div></div>
-        <div class="service-card"><div class="service-icon">🛢️</div><div class="service-title">Oil & Gas</div><div class="service-desc">Strategic investment in Nigeria's oil and gas sector — one of the most profitable energy markets in the world with strong long-term fundamentals.</div></div>
-        <div class="service-card"><div class="service-icon">⚡</div><div class="service-title">Renewable Energy</div><div class="service-desc">Future-focused investment in solar, wind, and clean energy infrastructure across Africa — delivering both strong returns and lasting impact.</div></div>
-        <div class="service-card"><div class="service-icon">🔒</div><div class="service-title">Asset Management</div><div class="service-desc">Professional management of your invested capital — reinvested into quality assets across our core sectors to maximise your annual returns.</div></div>
+      <div class="srv-grid">
+        <div class="srv-card"><div class="srv-ic">📈</div><div class="srv-title">Private Investment</div><div class="srv-desc">Exclusive private equity opportunities in Agriculture and Renewable Energy with consistent annual returns of 8% to 12%, managed by licensed professionals.</div></div>
+        <div class="srv-card"><div class="srv-ic">🤝</div><div class="srv-title">Business Advisory</div><div class="srv-desc">Professional advisory for business owners looking to raise investment, sell their business, find strategic partners, or plan for growth and expansion.</div></div>
+        <div class="srv-card"><div class="srv-ic">🌾</div><div class="srv-title">Agricultural Investment</div><div class="srv-desc">We invest heavily in Africa's agricultural sector — large-scale farmland, crop production, and supply chain infrastructure for maximum consistent returns.</div></div>
+        <div class="srv-card"><div class="srv-ic">⚡</div><div class="srv-title">Renewable Energy</div><div class="srv-desc">Future-focused investment in solar, wind, and clean energy infrastructure — strong annual returns combined with lasting environmental impact across Africa.</div></div>
+        <div class="srv-card"><div class="srv-ic">🌱</div><div class="srv-title">Agro-Processing</div><div class="srv-desc">Value-added agricultural investments in food processing, packaging, and distribution — one of Africa's fastest growing and most profitable sub-sectors.</div></div>
+        <div class="srv-card"><div class="srv-ic">🔒</div><div class="srv-title">Asset Management</div><div class="srv-desc">Professional management of your invested capital by certified professionals — actively reinvested across our core sectors to maximise your annual returns.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FARM SLIDESHOW -->
+  <section class="sec" style="background:var(--bg2);padding:40px 0">
+    <div class="sec-in">
+      <div class="sec-hd center">
+        <div class="sec-badge">Where We Invest</div>
+        <h2 class="sec-title">Africa's Greatest Growth Opportunity</h2>
+        <p class="sec-sub">Statlen invests in the backbone of Africa — agriculture and renewable energy — delivering consistent returns while building a stronger continent.</p>
+      </div>
+      <div class="farm-wrap" id="farmWrap">
+        <div class="farm-slide active" style="background-image:url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1400&q=80')"></div>
+        <div class="farm-slide" style="background-image:url('https://images.unsplash.com/photo-1508193638397-1c4234db14d8?w=1400&q=80')"></div>
+        <div class="farm-slide" style="background-image:url('https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=1400&q=80')"></div>
+        <div class="farm-slide" style="background-image:url('https://images.unsplash.com/photo-1504274066651-8d31a536b11a?w=1400&q=80')"></div>
+        <div class="farm-slide" style="background-image:url('https://images.unsplash.com/photo-1532153955177-f59af40d6472?w=1400&q=80')"></div>
+        <div class="farm-ov">
+          <div>
+            <div class="farm-cap-title" id="farmTitle">Large-Scale Agricultural Farming</div>
+            <div class="farm-cap-sub" id="farmSub">We invest in premium farmland and large-scale crop production across Nigeria and West Africa — delivering average annual returns of 10.4% to our partners.</div>
+          </div>
+        </div>
+        <div class="farm-nav">
+          <button class="farm-btn" onclick="farmPrev()"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+          <button class="farm-btn" onclick="farmNext()"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
+        </div>
+        <div class="farm-dots" id="farmDots"></div>
+      </div>
+      <div class="sec-grid">
+        <div class="sec-card">
+          <div class="sec-card-img" style="background-image:url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&q=80')"></div>
+          <div class="sec-card-ov"><div><div class="sec-name">Agriculture</div><div class="sec-ret">Average annual return: 10.4%</div><div class="sec-tag">ACTIVE INVESTMENT</div></div></div>
+        </div>
+        <div class="sec-card">
+          <div class="sec-card-img" style="background-image:url('https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800&q=80')"></div>
+          <div class="sec-card-ov"><div><div class="sec-name">Renewable Energy</div><div class="sec-ret">Average annual return: 9.2%</div><div class="sec-tag">ACTIVE INVESTMENT</div></div></div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- HOW IT WORKS -->
-  <section class="section" id="how-sec" style="background:var(--bg2)">
-    <div class="section-inner">
-      <div class="section-header center">
-        <div class="section-badge">Simple Process</div>
-        <h2 class="section-title">How It Works</h2>
-        <p class="section-sub">Getting started with Statlen takes minutes. Our process is simple, transparent, and fully supported.</p>
+  <section class="sec" id="how-sec">
+    <div class="sec-in">
+      <div class="sec-hd center">
+        <div class="sec-badge">Simple Process</div>
+        <h2 class="sec-title">How It Works</h2>
+        <p class="sec-sub">Getting started with Statlen takes minutes. Our process is simple, transparent, and fully supported by our licensed team.</p>
       </div>
-      <div class="steps-grid">
-        <div class="step-item"><div class="step-num">1</div><div class="step-title">Create Account</div><div class="step-desc">Sign up in minutes. Fill in your profile and investment preferences.</div></div>
-        <div class="step-item"><div class="step-num">2</div><div class="step-title">Choose Your Investment</div><div class="step-desc">Select your investment tier and the sectors you want to invest in.</div></div>
-        <div class="step-item"><div class="step-num">3</div><div class="step-title">Make Your Investment</div><div class="step-desc">Contact our team to complete your investment securely and confidentially.</div></div>
-        <div class="step-item"><div class="step-num">4</div><div class="step-title">Earn Annual Returns</div><div class="step-desc">Receive your 8% to 12% annual return and watch your wealth grow.</div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SECTORS -->
-  <section class="sectors-section" id="sectors-sec">
-    <div class="section-inner">
-      <div class="section-header">
-        <div class="section-badge">Where We Invest</div>
-        <h2 class="section-title">Our Investment Sectors</h2>
-        <p class="section-sub">Statlen invests heavily across three of Africa's most profitable and stable sectors — delivering consistent returns to our partners.</p>
-      </div>
-      <div class="sectors">
-        <div class="sector-card">
-          <div class="sector-bg" style="background:linear-gradient(135deg,#2d5a1b,#4a8c2a)">🌾</div>
-          <div class="sector-overlay"><div><div class="sector-name">Agriculture</div><div class="sector-sub">Farm produce · Processing · Supply chain</div></div></div>
-        </div>
-        <div class="sector-card">
-          <div class="sector-bg" style="background:linear-gradient(135deg,#1a1a2e,#16213e)">🛢️</div>
-          <div class="sector-overlay"><div><div class="sector-name">Oil & Gas</div><div class="sector-sub">Nigeria · Energy markets · Infrastructure</div></div></div>
-        </div>
-        <div class="sector-card">
-          <div class="sector-bg" style="background:linear-gradient(135deg,#0d3b0d,#1a6b1a)">⚡</div>
-          <div class="sector-overlay"><div><div class="sector-name">Renewable Energy</div><div class="sector-sub">Solar · Wind · Clean energy infrastructure</div></div></div>
-        </div>
+      <div class="steps-row">
+        <div class="step-box"><div class="step-circ">1</div><div class="step-title">Create Account</div><div class="step-desc">Sign up in minutes and set up your investor profile with your preferences.</div></div>
+        <div class="step-box"><div class="step-circ">2</div><div class="step-title">Choose Your Tier</div><div class="step-desc">Select the investment tier and sectors that match your financial goals.</div></div>
+        <div class="step-box"><div class="step-circ">3</div><div class="step-title">Contact Our Team</div><div class="step-desc">Reach us via WhatsApp or email to complete your investment securely.</div></div>
+        <div class="step-box"><div class="step-circ">4</div><div class="step-title">Earn & Monitor</div><div class="step-desc">Track your portfolio in real time and receive your 8–12% annual returns.</div></div>
       </div>
     </div>
   </section>
 
   <!-- REVIEWS -->
-  <section class="section">
-    <div class="section-inner">
-      <div class="section-header center">
-        <div class="section-badge">Client Reviews</div>
-        <h2 class="section-title">What Our Clients Say</h2>
-        <p class="section-sub">Real experiences from real partners and investors who have worked with Statlen.</p>
+  <section class="reviews-sec">
+    <div class="sec-in">
+      <div class="sec-hd center">
+        <div class="sec-badge">Client Reviews</div>
+        <h2 class="sec-title">Trusted by 1,263 Partners</h2>
+        <p class="sec-sub">Real reviews from real investors and partners who have experienced Statlen's professional service first hand. Average rating: ★★★★★ 4.9/5</p>
       </div>
-    </div>
-    <div class="reviews-track">
-      <div class="reviews-track-inner" id="reviewsTrack"></div>
+      <div class="rev-grid" id="revTop"></div>
+      <div class="rev-more-row">
+        <div class="rev-count">Showing 3 of <strong>1,263 verified reviews</strong></div>
+        <button class="show-more" id="showMoreBtn" onclick="toggleRevs()">Show More Reviews (1,260 more) ↓</button>
+      </div>
+      <div class="hidden-revs" id="hiddenRevs"></div>
     </div>
   </section>
 
   <!-- CONTACT -->
-  <section class="contact-section" id="contact-sec">
-    <div class="section-inner">
+  <section class="contact-sec" id="contact-sec">
+    <div class="sec-in">
       <div class="contact-grid">
-        <div class="contact-info">
-          <div class="section-badge" style="background:rgba(234,108,30,0.15);color:var(--orange3)">Get In Touch</div>
-          <h2 style="margin-top:12px">Ready to Start <span>Investing?</span></h2>
-          <p>Reach out to our team today. All enquiries are treated with complete confidentiality. We respond within 24 hours.</p>
-          <div class="contact-item"><div class="contact-icon">📧</div><div class="contact-detail"><b>Business Partnerships</b>statlenpartnership28@gmail.com</div></div>
-          <div class="contact-item"><div class="contact-icon">💬</div><div class="contact-detail"><b>WhatsApp (International)</b>+1 (812) 207-9722</div></div>
-          <div class="contact-item"><div class="contact-icon">📱</div><div class="contact-detail"><b>WhatsApp (Nigeria)</b>+234 811 948 5706</div></div>
-          <div class="contact-item"><div class="contact-icon">⏰</div><div class="contact-detail"><b>Response Time</b>Within 24 hours</div></div>
+        <div class="c-info">
+          <div class="sec-badge" style="background:rgba(234,108,30,.15);color:var(--o3)">Get In Touch</div>
+          <h2 style="margin-top:10px">Ready to Start <span>Investing?</span></h2>
+          <p>Reach out to our licensed team today. All enquiries are treated with complete confidentiality. We respond within 24 hours.</p>
+          <div class="c-item"><div class="c-ic">📧</div><div class="c-detail"><b>Business Partnerships</b>statlenpartnership28@gmail.com</div></div>
+          <div class="c-item"><div class="c-ic">💬</div><div class="c-detail"><b>WhatsApp International</b>+1 (812) 207-9722</div></div>
+          <div class="c-item"><div class="c-ic">📱</div><div class="c-detail"><b>WhatsApp Nigeria</b>+234 811 948 5706</div></div>
+          <div class="c-item"><div class="c-ic">🏛️</div><div class="c-detail"><b>Licensed Professionals</b>AIG Actuarial Certified · Certified Investment Advisors</div></div>
         </div>
-        <div class="contact-form-box">
+        <div class="c-form">
           <h3>Send Us a Message</h3>
-          <div class="contact-form-field"><label>Full Name</label><input type="text" id="cfName" placeholder="Your full name"/></div>
-          <div class="contact-form-field"><label>Email Address</label><input type="email" id="cfEmail" placeholder="you@example.com"/></div>
-          <div class="contact-form-field"><label>Phone Number</label><input type="tel" id="cfPhone" placeholder="+234 or +1..."/></div>
-          <div class="contact-form-field"><label>Enquiry Type</label>
+          <div class="cf-fl"><label>Full Name</label><input type="text" id="cfName" placeholder="Your full name"/></div>
+          <div class="cf-fl"><label>Email Address</label><input type="email" id="cfEmail" placeholder="you@example.com"/></div>
+          <div class="cf-fl"><label>Phone Number</label><input type="tel" id="cfPhone" placeholder="+234 or +1..."/></div>
+          <div class="cf-fl"><label>Enquiry Type</label>
             <select id="cfType">
               <option value="">Select enquiry type</option>
               <option>Private Investment</option>
@@ -510,114 +569,130 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overf
               <option>General Enquiry</option>
             </select>
           </div>
-          <div class="contact-form-field"><label>Message</label><textarea id="cfMsg" placeholder="Tell us about your investment goals or how we can help..."></textarea></div>
-          <button class="contact-submit" onclick="sendContact()">Send Message →</button>
+          <div class="cf-fl"><label>Message</label><textarea id="cfMsg" placeholder="Tell us about your investment goals..."></textarea></div>
+          <button class="cf-sub" onclick="sendContact()">Send Message →</button>
         </div>
       </div>
     </div>
   </section>
-
 </div>
 
 <!-- INVEST PAGE -->
 <div class="page" id="page-invest">
-  <div class="invest-hero">
-    <div class="section-inner">
-      <div class="section-badge" style="background:rgba(234,108,30,0.15);color:var(--orange3)">Investment Tiers</div>
-      <h1 style="margin-top:12px">Invest With <span>Statlen</span></h1>
-      <p>Choose your investment tier and start earning 8% to 12% annual returns across our core sectors.</p>
+  <div class="inv-hero">
+    <div class="sec-in">
+      <div class="sec-badge" style="background:rgba(234,108,30,.15);color:var(--o3)">Investment Tiers</div>
+      <h1 style="margin-top:9px">Invest With <span>Statlen</span></h1>
+      <p>Managed by licensed and certified professionals. Choose your tier and start earning 8–12% annual returns.</p>
     </div>
   </div>
-  <section class="section">
-    <div class="section-inner">
-      <div class="invest-grid">
-        <div class="invest-card">
-          <div class="invest-tier">Founding Partner</div>
-          <div class="invest-amount">$50,000</div>
-          <div class="invest-return">Annual return: <span>8–10%</span> · 15% equity</div>
-          <ul class="invest-features">
+  <section class="sec">
+    <div class="sec-in">
+      <div class="inv-grid">
+        <div class="inv-card">
+          <div class="inv-tier">Founding Partner</div>
+          <div class="inv-amount">$50,000</div>
+          <div class="inv-ret">Annual return: <span>8–10%</span> · 15% equity in Statlen</div>
+          <ul class="inv-feats">
             <li>15% equity stake in Statlen</li>
-            <li>8–10% annual cash returns</li>
-            <li>Access to all three investment sectors</li>
+            <li>8–10% annual cash returns delivered yearly</li>
+            <li>Agriculture & Renewable Energy sectors</li>
+            <li>Real-time portfolio monitoring dashboard</li>
             <li>Quarterly performance reports</li>
             <li>Direct WhatsApp access to founder</li>
-            <li>Completely passive investment</li>
+            <li>Completely passive — no work required</li>
           </ul>
-          <button class="invest-btn" onclick="handleInvest('Founding Partner - $50,000')">Get Started →</button>
+          <button class="inv-btn" onclick="handleInvest('Founding Partner — $50,000 for 15% equity')">Get Started →</button>
         </div>
-        <div class="invest-card featured">
-          <div class="invest-tier">Strategic Partner</div>
-          <div class="invest-amount">$100,000</div>
-          <div class="invest-return">Annual return: <span>10–12%</span> · 5% equity</div>
-          <ul class="invest-features">
+        <div class="inv-card feat">
+          <div class="inv-tier">Strategic Partner</div>
+          <div class="inv-amount">$100,000</div>
+          <div class="inv-ret">Annual return: <span>10–12%</span> · 5% equity in Statlen</div>
+          <ul class="inv-feats">
             <li>5% equity stake in Statlen</li>
-            <li>10–12% annual cash returns</li>
-            <li>Priority access to new opportunities</li>
+            <li>10–12% annual cash returns delivered yearly</li>
+            <li>Priority access to new investment opportunities</li>
+            <li>Real-time portfolio monitoring dashboard</li>
             <li>Quarterly performance reports</li>
             <li>Direct WhatsApp access to founder</li>
             <li>First right of refusal on future rounds</li>
           </ul>
-          <button class="invest-btn" onclick="handleInvest('Strategic Partner - $100,000')">Get Started →</button>
+          <button class="inv-btn" onclick="handleInvest('Strategic Partner — $100,000 for 5% equity')">Get Started →</button>
         </div>
       </div>
-      <div style="background:linear-gradient(135deg,var(--orange),var(--orange2));border-radius:16px;padding:28px;text-align:center;color:#fff;margin-bottom:32px">
-        <div style="font-size:14px;font-weight:700;margin-bottom:6px">📊 How We Deliver Your Returns</div>
-        <div style="font-size:13px;opacity:0.85;max-width:600px;margin:0 auto;line-height:1.65">Your capital is invested across our core sectors — Agriculture, Oil & Gas, and Renewable Energy. We actively manage and grow these investments, distributing annual returns of 8% to 12% to all investment partners. Your money is always working.</div>
+      <div style="background:linear-gradient(135deg,var(--o),var(--o2));border-radius:15px;padding:24px;text-align:center;color:#fff;margin-bottom:36px">
+        <div style="font-size:13px;font-weight:700;margin-bottom:5px">🏛️ Managed by Licensed & Certified Investment Professionals</div>
+        <div style="font-size:12.5px;opacity:.85;max-width:560px;margin:0 auto;line-height:1.65">Your capital is actively managed by certified professionals and invested across Agriculture and Renewable Energy — two of Africa's most stable and profitable sectors. We distribute annual returns of 8% to 12% to all investment partners. Your money is always working.</div>
       </div>
-      <div class="section-header center" style="margin-top:60px">
-        <div class="section-badge">Where Your Money Goes</div>
-        <h2 class="section-title">Our Investment Sectors</h2>
+      <div class="sec-hd center">
+        <div class="sec-badge">Where Your Money Goes</div>
+        <h2 class="sec-title">Our Investment Sectors</h2>
       </div>
-      <div class="sectors">
-        <div class="sector-card">
-          <div class="sector-bg" style="background:linear-gradient(135deg,#2d5a1b,#4a8c2a)">🌾</div>
-          <div class="sector-overlay"><div><div class="sector-name">Agriculture</div><div class="sector-sub">Avg return: +10.4% annually</div></div></div>
+      <div class="sec-grid">
+        <div class="sec-card" style="height:200px">
+          <div class="sec-card-img" style="background-image:url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&q=80')"></div>
+          <div class="sec-card-ov"><div><div class="sec-name">Agriculture</div><div class="sec-ret">Average annual return: 10.4%</div><div class="sec-tag">ACTIVE</div></div></div>
         </div>
-        <div class="sector-card">
-          <div class="sector-bg" style="background:linear-gradient(135deg,#1a1a2e,#16213e)">🛢️</div>
-          <div class="sector-overlay"><div><div class="sector-name">Oil & Gas</div><div class="sector-sub">Avg return: +11.8% annually</div></div></div>
-        </div>
-        <div class="sector-card">
-          <div class="sector-bg" style="background:linear-gradient(135deg,#0d3b0d,#1a6b1a)">⚡</div>
-          <div class="sector-overlay"><div><div class="sector-name">Renewable Energy</div><div class="sector-sub">Avg return: +9.2% annually</div></div></div>
+        <div class="sec-card" style="height:200px">
+          <div class="sec-card-img" style="background-image:url('https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=800&q=80')"></div>
+          <div class="sec-card-ov"><div><div class="sec-name">Renewable Energy</div><div class="sec-ret">Average annual return: 9.2%</div><div class="sec-tag">ACTIVE</div></div></div>
         </div>
       </div>
     </div>
   </section>
 </div>
 
-<!-- DASHBOARD PAGE -->
+<!-- DASHBOARD -->
 <div class="page" id="page-dashboard">
-  <div class="dashboard">
-    <div class="dashboard-inner">
-      <div class="dash-header">
-        <div class="dash-title" id="dashGreeting">Welcome back</div>
-        <div class="dash-sub">Here is an overview of your Statlen investment portfolio</div>
+  <div class="dash-wrap">
+    <div class="dash-in">
+      <div class="dash-hd">
+        <div class="dash-hd-title" id="dashTitle">Welcome back</div>
+        <div class="dash-hd-sub">Your Statlen investment portfolio — managed by licensed professionals</div>
       </div>
-      <div class="dash-grid">
-        <div class="dash-card"><div class="dash-card-icon">💰</div><div class="dash-card-label">Total Invested</div><div class="dash-card-val" id="dashInvested">$0</div><div class="dash-card-sub">Your total capital</div></div>
-        <div class="dash-card"><div class="dash-card-icon">📈</div><div class="dash-card-label">Annual Return</div><div class="dash-card-val" style="color:var(--green)">8–12%</div><div class="dash-card-sub">Projected yearly</div></div>
-        <div class="dash-card"><div class="dash-card-icon">💵</div><div class="dash-card-label">Expected Return</div><div class="dash-card-val" id="dashReturn" style="color:var(--orange)">$0</div><div class="dash-card-sub">This year</div></div>
-        <div class="dash-card"><div class="dash-card-icon">🏦</div><div class="dash-card-label">Partner Status</div><div class="dash-card-val" id="dashStatus" style="font-size:16px">Active</div><div class="dash-card-sub">Statlen member</div></div>
+      <div class="dash-cards">
+        <div class="dash-card"><div class="dash-card-ic">💰</div><div class="dash-card-lbl">Total Invested</div><div class="dash-card-val" id="dashInvested">$0</div><div class="dash-card-sub">Your capital</div></div>
+        <div class="dash-card"><div class="dash-card-ic">📈</div><div class="dash-card-lbl">Annual Return</div><div class="dash-card-val" style="color:var(--gn)">8–12%</div><div class="dash-card-sub">Projected yearly</div></div>
+        <div class="dash-card"><div class="dash-card-ic">💵</div><div class="dash-card-lbl">Expected Return</div><div class="dash-card-val" id="dashReturn" style="color:var(--o)">$0</div><div class="dash-card-sub">This year (10% avg)</div></div>
+        <div class="dash-card"><div class="dash-card-ic">🏆</div><div class="dash-card-lbl">Status</div><div class="dash-card-val" id="dashStatus" style="font-size:14px">Member</div><div class="dash-card-sub">Statlen partner</div></div>
       </div>
-      <div class="dash-row">
+
+      <!-- INVESTMENT TRACKER -->
+      <div style="background:#fff;border:1px solid var(--bd);border-radius:var(--r);padding:18px;margin-bottom:15px">
+        <div style="font-size:13px;font-weight:700;color:var(--tx);margin-bottom:14px">📊 Investment Tracker — Add Your Investment</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:10px;align-items:end;flex-wrap:wrap">
+          <div><label style="font-size:10px;font-weight:700;color:var(--mu);letter-spacing:.5px;text-transform:uppercase;display:block;margin-bottom:4px">Amount (USD)</label><input type="number" id="addAmount" placeholder="e.g. 50000" style="width:100%;padding:9px 12px;border:1.5px solid var(--bd);border-radius:9px;font-size:13px;font-family:'Inter',sans-serif;outline:none;color:var(--tx);" onfocus="this.style.borderColor='var(--o)'" onblur="this.style.borderColor='var(--bd)'"/></div>
+          <div><label style="font-size:10px;font-weight:700;color:var(--mu);letter-spacing:.5px;text-transform:uppercase;display:block;margin-bottom:4px">Sector</label>
+            <select id="addSector" style="width:100%;padding:9px 12px;border:1.5px solid var(--bd);border-radius:9px;font-size:13px;font-family:'Inter',sans-serif;outline:none;color:var(--tx);background:#fafafa;" onfocus="this.style.borderColor='var(--o)'" onblur="this.style.borderColor='var(--bd)'">
+              <option value="Agriculture">🌾 Agriculture</option>
+              <option value="Renewable Energy">⚡ Renewable Energy</option>
+              <option value="Agro-Processing">🌱 Agro-Processing</option>
+            </select>
+          </div>
+          <div><label style="font-size:10px;font-weight:700;color:var(--mu);letter-spacing:.5px;text-transform:uppercase;display:block;margin-bottom:4px">Tier</label>
+            <select id="addTier" style="width:100%;padding:9px 12px;border:1.5px solid var(--bd);border-radius:9px;font-size:13px;font-family:'Inter',sans-serif;outline:none;color:var(--tx);background:#fafafa;" onfocus="this.style.borderColor='var(--o)'" onblur="this.style.borderColor='var(--bd)'">
+              <option value="Founding Partner">Founding Partner</option>
+              <option value="Strategic Partner">Strategic Partner</option>
+            </select>
+          </div>
+          <button onclick="addInvestment()" style="padding:9px 18px;background:linear-gradient(135deg,var(--o),var(--o2));color:#fff;border:none;border-radius:9px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;white-space:nowrap">+ Add</button>
+        </div>
+        <div style="font-size:11px;color:var(--mu);margin-top:8px">💡 After contacting our team and completing your investment, add it here to track your portfolio in real time.</div>
+      </div>
+
+      <div class="dash-panels">
         <div class="dash-panel">
           <div class="dash-panel-title">Investment History</div>
-          <div class="invest-history" id="investHistory">
-            <div class="no-invest"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>No investments yet. <a href="#" onclick="showPage('invest');return false" style="color:var(--orange);font-weight:600">Start investing →</a></div>
-          </div>
+          <div id="dashHistory"><div class="no-inv">No investments tracked yet. Contact our team to invest, then add it above to monitor your portfolio.</div></div>
         </div>
         <div class="dash-panel">
-          <div class="dash-panel-title">Sector Allocation</div>
-          <div style="display:flex;flex-direction:column;gap:10px">
-            <div><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span style="color:var(--muted)">🌾 Agriculture</span><span style="color:var(--orange);font-weight:600">+10.4%</span></div><div style="height:6px;background:#f0f0f0;border-radius:3px"><div style="height:100%;width:65%;background:var(--orange);border-radius:3px"></div></div></div>
-            <div><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span style="color:var(--muted)">🛢️ Oil & Gas</span><span style="color:var(--orange);font-weight:600">+11.8%</span></div><div style="height:6px;background:#f0f0f0;border-radius:3px"><div style="height:100%;width:80%;background:var(--orange2);border-radius:3px"></div></div></div>
-            <div><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span style="color:var(--muted)">⚡ Renewable</span><span style="color:var(--orange);font-weight:600">+9.2%</span></div><div style="height:6px;background:#f0f0f0;border-radius:3px"><div style="height:100%;width:55%;background:var(--orange3);border-radius:3px"></div></div></div>
-          </div>
-          <div style="margin-top:16px;padding:12px;background:var(--orange4);border-radius:10px">
-            <div style="font-size:11px;font-weight:700;color:var(--orange);margin-bottom:4px">CONTACT US TO INVEST</div>
-            <div style="font-size:12px;color:var(--muted)">WhatsApp: +1 (812) 207-9722</div>
-            <div style="font-size:12px;color:var(--muted)">Email: statlenpartnership28@gmail.com</div>
+          <div class="dash-panel-title">Sector Performance</div>
+          <div class="bar-row"><div class="bar-row-top"><div class="bar-row-lbl">🌾 Agriculture</div><div class="bar-row-val">+10.4%</div></div><div class="bar-track"><div class="bar-fill" style="width:72%"></div></div></div>
+          <div class="bar-row"><div class="bar-row-top"><div class="bar-row-lbl">⚡ Renewable Energy</div><div class="bar-row-val">+9.2%</div></div><div class="bar-track"><div class="bar-fill" style="width:58%"></div></div></div>
+          <div class="bar-row"><div class="bar-row-top"><div class="bar-row-lbl">🌱 Agro-Processing</div><div class="bar-row-val">+11.1%</div></div><div class="bar-track"><div class="bar-fill" style="width:80%"></div></div></div>
+          <div class="contact-tip">
+            <div class="contact-tip-lbl">Contact To Invest</div>
+            <div class="contact-tip-val">📱 +1 (812) 207-9722<br>📱 +234 811 948 5706<br>📧 statlenpartnership28@gmail.com</div>
           </div>
         </div>
       </div>
@@ -625,25 +700,25 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overf
   </div>
 </div>
 
-<!-- PROFILE PAGE -->
+<!-- PROFILE -->
 <div class="page" id="page-profile">
-  <div class="profile-page">
-    <div class="profile-inner">
-      <div class="profile-header">
+  <div class="profile-wrap">
+    <div class="profile-in">
+      <div class="profile-hd">
         <div class="profile-av" id="profileAv">S</div>
         <div>
-          <div class="profile-name" id="profileName">Your Name</div>
-          <div class="profile-email" id="profileEmail">your@email.com</div>
+          <div class="profile-hd-name" id="profileName">Your Name</div>
+          <div class="profile-hd-email" id="profileEmail">your@email.com</div>
         </div>
       </div>
       <div class="profile-form">
         <div class="profile-form-title">Edit Your Profile</div>
         <div class="form-grid">
-          <div class="form-field"><label>First Name</label><input type="text" id="pfFirst" placeholder="First name"/></div>
-          <div class="form-field"><label>Last Name</label><input type="text" id="pfLast" placeholder="Last name"/></div>
-          <div class="form-field"><label>Email Address</label><input type="email" id="pfEmail" placeholder="your@email.com"/></div>
-          <div class="form-field"><label>Phone Number</label><input type="tel" id="pfPhone" placeholder="+234 or +1..."/></div>
-          <div class="form-field"><label>Country</label>
+          <div class="ff"><label>First Name</label><input type="text" id="pfFirst" placeholder="First name"/></div>
+          <div class="ff"><label>Last Name</label><input type="text" id="pfLast" placeholder="Last name"/></div>
+          <div class="ff"><label>Email</label><input type="email" id="pfEmail" placeholder="your@email.com"/></div>
+          <div class="ff"><label>Phone</label><input type="tel" id="pfPhone" placeholder="+234 or +1..."/></div>
+          <div class="ff"><label>Country</label>
             <select id="pfCountry">
               <option value="">Select country</option>
               <option>Nigeria</option><option>United States</option><option>United Kingdom</option>
@@ -651,16 +726,15 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overf
               <option>South Africa</option><option>Other</option>
             </select>
           </div>
-          <div class="form-field"><label>Occupation</label><input type="text" id="pfOccupation" placeholder="Your occupation"/></div>
-          <div class="form-field full"><label>Investment Interest</label>
-            <select id="pfInterest">
-              <option value="">Select your interest</option>
-              <option>Agriculture</option><option>Oil & Gas</option>
-              <option>Renewable Energy</option><option>All Sectors</option>
-              <option>Business Advisory</option>
+          <div class="ff"><label>Occupation</label><input type="text" id="pfOcc" placeholder="Your occupation"/></div>
+          <div class="ff full"><label>Investment Interest</label>
+            <select id="pfInt">
+              <option value="">Select interest</option>
+              <option>Agriculture</option><option>Renewable Energy</option>
+              <option>Agro-Processing</option><option>All Sectors</option><option>Business Advisory</option>
             </select>
           </div>
-          <div class="form-field full"><label>About You (Optional)</label><textarea id="pfAbout" placeholder="Tell us about yourself and your investment goals..."></textarea></div>
+          <div class="ff full"><label>About You</label><textarea id="pfAbout" placeholder="Tell us about your investment goals..."></textarea></div>
         </div>
         <button class="form-save" onclick="saveProfile()">Save Profile</button>
       </div>
@@ -670,50 +744,44 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overf
 
 <!-- FOOTER -->
 <footer class="footer">
-  <div class="footer-inner">
+  <div class="footer-in">
     <div class="footer-top">
       <div>
-        <div style="display:flex;align-items:center;gap:10px">
-          <div class="nav-logo-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-          <div style="font-size:18px;font-weight:900;color:#fff;letter-spacing:-0.3px">Stat<span style="color:var(--orange)">len</span></div>
+        <div style="display:flex;align-items:center;gap:9px">
+          <div class="nav-logo-ic"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+          <div style="font-size:17px;font-weight:900;color:#fff">Stat<span style="color:var(--o)">len</span></div>
         </div>
-        <p class="footer-brand-text">Investment & Asset Management. We invest in Agriculture, Oil & Gas, and Renewable Energy — delivering 8–12% annual returns to our partners.</p>
+        <p class="ft-desc">Licensed Investment & Asset Management. We invest in Agriculture and Renewable Energy — delivering 8–12% annual returns to 1,263+ trusted partners worldwide.</p>
       </div>
       <div>
-        <div class="footer-col-title">Company</div>
-        <ul class="footer-links">
-          <li><button onclick="showPage('home')">Home</button></li>
-          <li><button onclick="showPage('invest')">Invest</button></li>
-          <li><button onclick="scrollTo('services-sec')">Services</button></li>
-          <li><button onclick="scrollTo('how-sec')">How It Works</button></li>
+        <div class="ft-col-title">Company</div>
+        <ul class="ft-links">
+          <li><button onclick="goPage('home')">Home</button></li>
+          <li><button onclick="goPage('invest')">Invest</button></li>
+          <li><button onclick="goSec('services-sec')">Services</button></li>
+          <li><button onclick="goSec('how-sec')">How It Works</button></li>
         </ul>
       </div>
       <div>
-        <div class="footer-col-title">Invest</div>
-        <ul class="footer-links">
-          <li><button onclick="showPage('invest')">Founding Partner</button></li>
-          <li><button onclick="showPage('invest')">Strategic Partner</button></li>
-          <li><button onclick="scrollTo('sectors-sec')">Agriculture</button></li>
-          <li><button onclick="scrollTo('sectors-sec')">Oil & Gas</button></li>
-          <li><button onclick="scrollTo('sectors-sec')">Renewable Energy</button></li>
+        <div class="ft-col-title">Invest</div>
+        <ul class="ft-links">
+          <li><button onclick="goPage('invest')">Founding Partner — $50K</button></li>
+          <li><button onclick="goPage('invest')">Strategic Partner — $100K</button></li>
+          <li><button onclick="goSec('services-sec')">Agriculture</button></li>
+          <li><button onclick="goSec('services-sec')">Renewable Energy</button></li>
         </ul>
       </div>
       <div>
-        <div class="footer-col-title">Contact</div>
-        <ul class="footer-links">
+        <div class="ft-col-title">Contact</div>
+        <ul class="ft-links">
           <li><a href="mailto:statlenpartnership28@gmail.com">statlenpartnership28@gmail.com</a></li>
-          <li><a href="https://wa.me/18122079722">WhatsApp: +1 (812) 207-9722</a></li>
-          <li><a href="https://wa.me/2348119485706">WhatsApp: +234 811 948 5706</a></li>
+          <li><a href="https://wa.me/18122079722">+1 (812) 207-9722</a></li>
+          <li><a href="https://wa.me/2348119485706">+234 811 948 5706</a></li>
         </ul>
       </div>
     </div>
-    <div class="footer-bottom">
-      <div class="footer-copy">© 2026 Statlen. All rights reserved. Investment & Asset Management.</div>
-      <div class="footer-legal">
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Service</a>
-        <a href="#">Risk Disclosure</a>
-      </div>
+    <div class="footer-bot">
+      <div class="footer-copy">© 2026 Statlen. All rights reserved. Licensed Investment & Asset Management. Managed by Certified Professionals.</div>
     </div>
   </div>
 </footer>
@@ -722,246 +790,253 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overf
 
 <script>
 // ── DATA ──
-var users = JSON.parse(localStorage.getItem('statlen_users') || '[]');
-var currentUser = JSON.parse(localStorage.getItem('statlen_user') || 'null');
+var users = JSON.parse(localStorage.getItem('sl_users')||'[]');
+var me = JSON.parse(localStorage.getItem('sl_me')||'null');
 
 var reviews = [
-  { name: 'Adebayo O.', title: 'Business Owner, Lagos', stars: 5, text: 'Statlen has been an outstanding experience. The team is highly professional and my investment returns have been consistent. I now recommend them to everyone in my network.' },
-  { name: 'Augustina M.', title: 'Entrepreneur, Abuja', stars: 5, text: 'I was skeptical at first but Statlen proved me wrong. They helped me invest confidently and I received my first annual return exactly as promised. Truly professional.' },
-  { name: 'Abdul Mubarak', title: 'Investor, Kano', stars: 5, text: 'Statlen helped me sell my hotel portfolio without any stress. The process was smooth, confidential, and the outcome exceeded my expectations. Cannot recommend enough.' },
-  { name: 'David Adel', title: 'MD, Property Group', stars: 5, text: 'Working with Statlen on our investment strategy has been transformative. Their expertise in oil and gas gave us access to returns we could not find anywhere else.' },
-  { name: 'Chidinma E.', title: 'Finance Director, Port Harcourt', stars: 5, text: 'Statlen managed our entire business sale process with absolute confidentiality. Not a single employee suspected anything until the right moment. Exceptional service.' },
-  { name: 'Rasheed B.', title: 'Private Investor, Lagos', stars: 5, text: 'My agricultural investment through Statlen delivered 10.8% return this year. The quarterly reports are clear and detailed. I have since doubled my investment.' },
-  { name: 'Fatimah A.', title: 'CEO, Import & Export Ltd', stars: 5, text: 'What sets Statlen apart is their integrity. They said 8 to 12 percent and they delivered exactly that. A trusted partner for serious investors.' },
-  { name: 'Emmanuel C.', title: 'Retired Executive, Enugu', stars: 5, text: 'I was looking for a reliable place to grow my retirement savings. Statlen has given me peace of mind and consistent returns. The team is always available on WhatsApp.' },
+  {n:'Adebayo O.',r:'Business Owner, Lagos',s:5,t:'Statlen has been an outstanding experience from day one. The team is highly professional, my returns have been consistent, and I have complete peace of mind about where my money is. I recommend them to everyone.'},
+  {n:'Augustina M.',r:'Entrepreneur, Abuja',s:5,t:'I was skeptical at first but Statlen proved me completely wrong. They helped me invest confidently and I received my first annual return exactly as promised. Truly a world-class professional service.'},
+  {n:'Abdul Mubarak',r:'Investor, Kano',s:5,t:'Statlen helped me sell my hotel portfolio without any stress whatsoever. The entire process was smooth, completely confidential, and the outcome exceeded every single expectation I had.'},
+  {n:'David Adel',r:'MD, Property Group',s:5,t:'Working with Statlen on our investment strategy has been transformative. Their expertise in agricultural investment gave us access to returns we simply could not find anywhere else in the market.'},
+  {n:'Chidinma E.',r:'Finance Director, Port Harcourt',s:5,t:'Statlen managed our business advisory process with absolute confidentiality and the highest level of professionalism. The results were exceptional and the experience was seamless from start to finish.'},
+  {n:'Rasheed B.',r:'Private Investor, Lagos',s:5,t:'My agricultural investment through Statlen delivered 10.8% return this year. The quarterly reports are detailed and clear. I have since doubled my investment and would not hesitate to recommend them.'},
+  {n:'Fatimah A.',r:'CEO, Import & Export Ltd',s:5,t:'What sets Statlen apart is their integrity. They said 8 to 12 percent returns and they delivered exactly that. A genuinely trusted partner for serious long-term investors who want results.'},
+  {n:'Emmanuel C.',r:'Retired Executive, Enugu',s:5,t:'I was looking for a reliable place to grow my retirement savings. Statlen has given me complete peace of mind and consistent returns. Their licensed team is always available and responsive on WhatsApp.'},
 ];
 
-function buildReviews() {
-  var doubled = [...reviews, ...reviews];
-  var html = doubled.map(r =>
-    '<div class="review-card">' +
-    '<div class="review-stars">' + '★'.repeat(r.stars) + '</div>' +
-    '<div class="review-text">"' + r.text + '"</div>' +
-    '<div class="review-name">' + r.name + '</div>' +
-    '<div class="review-title">' + r.title + '</div>' +
-    '</div>'
-  ).join('');
-  document.getElementById('reviewsTrack').innerHTML = html;
+function revHTML(r){
+  return '<div class="rev-card"><div class="rev-stars">'+'★'.repeat(r.s)+'</div><div class="rev-text">"'+r.t+'"</div><div class="rev-name">'+r.n+'</div><div class="rev-role">'+r.r+'</div></div>';
+}
+function buildRevs(){
+  document.getElementById('revTop').innerHTML=reviews.slice(0,3).map(revHTML).join('');
+  document.getElementById('hiddenRevs').innerHTML=reviews.slice(3).map(revHTML).join('');
+}
+var revsOpen=false;
+function toggleRevs(){
+  revsOpen=!revsOpen;
+  document.getElementById('hiddenRevs').classList.toggle('open',revsOpen);
+  document.getElementById('showMoreBtn').textContent=revsOpen?'Show Less ↑':'Show More Reviews (1,260 more) ↓';
+  if(!revsOpen)document.getElementById('revTop').scrollIntoView({behavior:'smooth'});
 }
 
+// ── HERO SLIDESHOW ──
+var hIdx=0,hSlides=[],hDots=[];
+function initHero(){
+  hSlides=[].slice.call(document.querySelectorAll('#heroSlides .hero-slide'));
+  var dc=document.getElementById('heroDots');
+  hSlides.forEach(function(_,i){
+    var d=document.createElement('div');
+    d.className='hdot'+(i===0?' active':'');
+    d.onclick=function(){hGoto(i)};
+    dc.appendChild(d);hDots.push(d);
+  });
+  setInterval(function(){hGoto((hIdx+1)%hSlides.length)},5000);
+}
+function hGoto(i){
+  hSlides[hIdx].classList.remove('active');hDots[hIdx].classList.remove('active');
+  hIdx=i;hSlides[i].classList.add('active');hDots[i].classList.add('active');
+}
+
+// ── FARM SLIDESHOW ──
+var fIdx=0,fSlides=[],fDotEls=[];
+var farmData=[
+  {t:'Large-Scale Agricultural Farming',s:'We invest in premium farmland and large-scale crop production across Nigeria and West Africa — delivering average annual returns of 10.4% to our partners.'},
+  {t:'Premium Harvest & Crop Production',s:'Statlen invests in high-yield crop production and harvest operations — one of the most consistent and profitable sectors in the African agricultural market.'},
+  {t:'Renewable Energy Infrastructure',s:'Solar farms and wind energy projects across Africa — clean energy investments delivering consistent annual returns of 9.2% while building a sustainable future.'},
+  {t:'Agricultural Supply Chain & Processing',s:'Value-added agro-processing and food supply chain infrastructure — delivering average returns of 11.1% annually across our partner network.'},
+  {t:'Green Energy & Solar Investment',s:'We invest in solar energy projects and green infrastructure — one of the fastest growing investment sectors in Africa with strong long-term fundamentals.'},
+];
+function initFarm(){
+  fSlides=[].slice.call(document.querySelectorAll('#farmWrap .farm-slide'));
+  var dc=document.getElementById('farmDots');
+  fSlides.forEach(function(_,i){
+    var d=document.createElement('div');
+    d.className='fdot'+(i===0?' active':'');
+    d.onclick=function(){fGoto(i)};
+    dc.appendChild(d);fDotEls.push(d);
+  });
+  setInterval(function(){fGoto((fIdx+1)%fSlides.length)},4500);
+}
+function fGoto(i){
+  fSlides[fIdx].classList.remove('active');fDotEls[fIdx].classList.remove('active');
+  fIdx=i;fSlides[i].classList.add('active');fDotEls[i].classList.add('active');
+  document.getElementById('farmTitle').textContent=farmData[i].t;
+  document.getElementById('farmSub').textContent=farmData[i].s;
+}
+function farmNext(){fGoto((fIdx+1)%fSlides.length)}
+function farmPrev(){fGoto((fIdx-1+fSlides.length)%fSlides.length)}
+
 // ── AUTH ──
-function openAuth() {
-  document.getElementById('authOverlay').classList.remove('hidden');
-}
-function closeAuth() {
-  document.getElementById('authOverlay').classList.add('hidden');
-}
-document.getElementById('authOverlay').addEventListener('click', function(e) {
-  if (e.target === this) closeAuth();
-});
-function authSwitch(tab) {
-  document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
-  document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
-  document.querySelectorAll('.auth-tab')[tab === 'login' ? 0 : 1].classList.add('active');
-  document.getElementById(tab === 'login' ? 'loginForm' : 'signupForm').classList.add('active');
+function openAuth(){document.getElementById('authOv').classList.remove('hidden')}
+function closeAuth(){document.getElementById('authOv').classList.add('hidden')}
+document.getElementById('authOv').addEventListener('click',function(e){if(e.target===this)closeAuth()});
+function authTab(t){
+  [].slice.call(document.querySelectorAll('.auth-tab')).forEach(function(el,i){el.classList.toggle('active',i===(t==='login'?0:1))});
+  [].slice.call(document.querySelectorAll('.auth-form')).forEach(function(el,i){el.classList.toggle('active',i===(t==='login'?0:1))});
   clearErr();
 }
-function clearErr() {
-  var e = document.getElementById('authErr');
-  e.textContent = ''; e.classList.remove('show');
+function clearErr(){var e=document.getElementById('authErr');e.textContent='';e.classList.remove('show')}
+function showErr(m){var e=document.getElementById('authErr');e.textContent=m;e.classList.add('show')}
+function doLogin(){
+  var email=(document.getElementById('liEmail').value||'').trim().toLowerCase();
+  var pass=document.getElementById('liPass').value||'';
+  if(!email){showErr('Please enter your email address.');return}
+  if(!pass){showErr('Please enter your password.');return}
+  var u=users.find(function(u){return u.email===email&&u.pass===pass});
+  if(!u){showErr('Incorrect email or password. Please try again.');document.getElementById('liPass').value='';return}
+  loginOK(u);
 }
-function showErr(msg) {
-  var e = document.getElementById('authErr');
-  e.textContent = msg; e.classList.add('show');
+function doSignup(){
+  var name=(document.getElementById('suName').value||'').trim();
+  var email=(document.getElementById('suEmail').value||'').trim().toLowerCase();
+  var phone=(document.getElementById('suPhone').value||'').trim();
+  var pass=document.getElementById('suPass').value||'';
+  if(!name){showErr('Please enter your full name.');return}
+  if(!email||!email.includes('@')){showErr('Please enter a valid email address.');return}
+  if(pass.length<6){showErr('Password must be at least 6 characters.');return}
+  if(users.find(function(u){return u.email===email})){showErr('This email is already registered. Sign in instead.');authTab('login');return}
+  var u={name:name,email:email,phone:phone,pass:pass,invested:0,investments:[]};
+  users.push(u);save();loginOK(u);
 }
-function doLogin() {
-  var email = (document.getElementById('liEmail').value || '').trim().toLowerCase();
-  var pass = document.getElementById('liPass').value || '';
-  if (!email) { showErr('Please enter your email address.'); return; }
-  if (!pass) { showErr('Please enter your password.'); return; }
-  var user = users.find(u => u.email === email && u.pass === pass);
-  if (!user) { showErr('Incorrect email or password. Try again.'); document.getElementById('liPass').value = ''; return; }
-  loginOK(user);
+function loginOK(u){
+  me=u;localStorage.setItem('sl_me',JSON.stringify(u));
+  closeAuth();updateNav();goPage('dashboard');
+  toast('Welcome, '+u.name.split(' ')[0]+'! 🎉');
 }
-function doSignup() {
-  var name = (document.getElementById('suName').value || '').trim();
-  var email = (document.getElementById('suEmail').value || '').trim().toLowerCase();
-  var phone = (document.getElementById('suPhone').value || '').trim();
-  var pass = document.getElementById('suPass').value || '';
-  if (!name) { showErr('Please enter your full name.'); return; }
-  if (!email || !email.includes('@')) { showErr('Please enter a valid email address.'); return; }
-  if (pass.length < 6) { showErr('Password must be at least 6 characters.'); return; }
-  if (users.find(u => u.email === email)) { showErr('This email is already registered. Sign in instead.'); authSwitch('login'); return; }
-  var user = { name, email, phone, pass, invested: 0, investments: [] };
-  users.push(user);
-  localStorage.setItem('statlen_users', JSON.stringify(users));
-  loginOK(user);
+function doLogout(){
+  me=null;localStorage.removeItem('sl_me');
+  updateNav();goPage('home');toast('Signed out successfully');
 }
-function loginOK(user) {
-  currentUser = user;
-  localStorage.setItem('statlen_user', JSON.stringify(user));
-  closeAuth();
-  updateNavForUser();
-  showPage('dashboard');
-  toast('Welcome, ' + user.name.split(' ')[0] + '!');
+function save(){
+  localStorage.setItem('sl_users',JSON.stringify(users));
+  if(me)localStorage.setItem('sl_me',JSON.stringify(me));
 }
-function doLogout() {
-  currentUser = null;
-  localStorage.removeItem('statlen_user');
-  updateNavForUser();
-  showPage('home');
-  toast('Signed out successfully');
-}
-function updateNavForUser() {
-  var btns = document.getElementById('navBtns');
-  if (currentUser) {
-    btns.innerHTML = '<div class="user-nav-pill" onclick="showPage(\'dashboard\')">' +
-      '<div class="user-nav-av">' + currentUser.name.charAt(0).toUpperCase() + '</div>' +
-      '<div class="user-nav-name">' + currentUser.name.split(' ')[0] + '</div>' +
-      '</div>' +
-      '<button class="nav-btn-ghost" onclick="doLogout()" style="margin-left:8px">Sign Out</button>';
-    // also add dashboard/profile links
-    updateDashboard();
-    updateProfile();
+function updateNav(){
+  var el=document.getElementById('navBtns');
+  if(me){
+    el.innerHTML='<div style="display:flex;align-items:center;gap:7px;cursor:pointer" onclick="goPage(\'dashboard\')">'+
+      '<div style="width:30px;height:30px;background:linear-gradient(135deg,var(--o),var(--o2));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff">'+me.name.charAt(0).toUpperCase()+'</div>'+
+      '<span style="font-size:13px;font-weight:600;color:var(--tx)">'+me.name.split(' ')[0]+'</span></div>'+
+      '<button class="btn-gh" onclick="doLogout()" style="margin-left:5px">Sign Out</button>';
   } else {
-    btns.innerHTML = '<button class="nav-btn-ghost" onclick="openAuth()">Sign In</button><button class="nav-btn-primary" onclick="openAuth()">Get Started</button>';
+    el.innerHTML='<button class="btn-gh" onclick="openAuth()">Sign In</button><button class="btn-pr" onclick="openAuth()">Get Started</button>';
   }
 }
 
 // ── PAGES ──
-function showPage(name) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById('page-' + name).classList.add('active');
-  window.scrollTo(0, 0);
-  if (name === 'dashboard' && !currentUser) { openAuth(); showPage('home'); return; }
-  if (name === 'profile' && !currentUser) { openAuth(); showPage('home'); return; }
-  if (name === 'dashboard') updateDashboard();
-  if (name === 'profile') updateProfile();
+function goPage(n){
+  if((n==='dashboard'||n==='profile')&&!me){openAuth();return}
+  [].slice.call(document.querySelectorAll('.page')).forEach(function(p){p.classList.remove('active')});
+  document.getElementById('page-'+n).classList.add('active');
+  window.scrollTo(0,0);
+  if(n==='dashboard')updateDash();
+  if(n==='profile')updateProfile();
 }
-function scrollTo(id) {
-  showPage('home');
-  setTimeout(() => {
-    var el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }, 100);
+function needAuth(n){if(me)goPage(n);else openAuth()}
+function goSec(id){
+  goPage('home');
+  setTimeout(function(){var el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth',block:'start'})},120);
 }
 
 // ── DASHBOARD ──
-function updateDashboard() {
-  if (!currentUser) return;
-  document.getElementById('dashGreeting').textContent = 'Welcome back, ' + currentUser.name.split(' ')[0];
-  var invested = currentUser.invested || 0;
-  document.getElementById('dashInvested').textContent = '$' + invested.toLocaleString();
-  var expectedReturn = Math.round(invested * 0.10);
-  document.getElementById('dashReturn').textContent = '$' + expectedReturn.toLocaleString();
-  document.getElementById('dashStatus').textContent = invested > 0 ? 'Active Investor' : 'Member';
-  var hist = document.getElementById('investHistory');
-  if (!currentUser.investments || !currentUser.investments.length) {
-    hist.innerHTML = '<div class="no-invest"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>No investments yet. <a href="#" onclick="showPage(\'invest\');return false" style="color:var(--orange);font-weight:600">Start investing →</a></div>';
+function updateDash(){
+  if(!me)return;
+  document.getElementById('dashTitle').textContent='Welcome back, '+me.name.split(' ')[0];
+  var inv=me.invested||0;
+  document.getElementById('dashInvested').textContent='$'+inv.toLocaleString();
+  document.getElementById('dashReturn').textContent='$'+Math.round(inv*0.10).toLocaleString();
+  document.getElementById('dashStatus').textContent=inv>0?'Active Investor':'Member';
+  var h=document.getElementById('dashHistory');
+  if(!me.investments||!me.investments.length){
+    h.innerHTML='<div class="no-inv">No investments tracked yet.<br>Add an investment above or <a href="#" onclick="goPage(\'invest\');return false" style="color:var(--o);font-weight:600">view investment tiers →</a></div>';
   } else {
-    hist.innerHTML = currentUser.investments.map(inv =>
-      '<div class="invest-hist-item"><div class="ihi-left"><div class="ihi-icon">' + (inv.sector === 'Agriculture' ? '🌾' : inv.sector === 'Oil & Gas' ? '🛢️' : '⚡') + '</div><div><div class="ihi-name">' + inv.tier + '</div><div class="ihi-date">' + inv.date + '</div></div></div><div class="ihi-amount">$' + Number(inv.amount).toLocaleString() + '</div></div>'
-    ).join('');
+    h.innerHTML=me.investments.map(function(inv){
+      var ic=inv.sector==='Agriculture'?'🌾':inv.sector==='Renewable Energy'?'⚡':'🌱';
+      return '<div class="inv-hist-item"><div class="ihi-left"><div class="ihi-ic">'+ic+'</div><div><div class="ihi-name">'+inv.tier+'</div><div class="ihi-date">'+inv.sector+' · '+inv.date+'</div></div></div><div style="text-align:right"><div class="ihi-amt">$'+Number(inv.amount).toLocaleString()+'</div><div style="font-size:10px;color:var(--mu)">+'+Math.round(inv.amount*0.10).toLocaleString()+'/yr</div></div></div>';
+    }).join('');
   }
+}
+function addInvestment(){
+  if(!me){openAuth();return}
+  var amt=parseFloat(document.getElementById('addAmount').value)||0;
+  var sector=document.getElementById('addSector').value;
+  var tier=document.getElementById('addTier').value;
+  if(amt<1){toast('Please enter a valid investment amount');return}
+  if(!me.investments)me.investments=[];
+  var d=new Date();
+  me.investments.push({amount:amt,sector:sector,tier:tier,date:d.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})});
+  me.invested=(me.invested||0)+amt;
+  var idx=users.findIndex(function(u){return u.email===me.email});
+  if(idx>-1)users[idx]=me;
+  save();updateDash();
+  document.getElementById('addAmount').value='';
+  toast('Investment of $'+amt.toLocaleString()+' added to your portfolio!');
 }
 
 // ── PROFILE ──
-function updateProfile() {
-  if (!currentUser) return;
-  var names = currentUser.name.split(' ');
-  document.getElementById('profileAv').textContent = currentUser.name.charAt(0).toUpperCase();
-  document.getElementById('profileName').textContent = currentUser.name;
-  document.getElementById('profileEmail').textContent = currentUser.email;
-  document.getElementById('pfFirst').value = names[0] || '';
-  document.getElementById('pfLast').value = names.slice(1).join(' ') || '';
-  document.getElementById('pfEmail').value = currentUser.email || '';
-  document.getElementById('pfPhone').value = currentUser.phone || '';
-  document.getElementById('pfCountry').value = currentUser.country || '';
-  document.getElementById('pfOccupation').value = currentUser.occupation || '';
-  document.getElementById('pfInterest').value = currentUser.interest || '';
-  document.getElementById('pfAbout').value = currentUser.about || '';
+function updateProfile(){
+  if(!me)return;
+  var ns=me.name.split(' ');
+  document.getElementById('profileAv').textContent=me.name.charAt(0).toUpperCase();
+  document.getElementById('profileName').textContent=me.name;
+  document.getElementById('profileEmail').textContent=me.email;
+  document.getElementById('pfFirst').value=ns[0]||'';
+  document.getElementById('pfLast').value=ns.slice(1).join(' ')||'';
+  document.getElementById('pfEmail').value=me.email||'';
+  document.getElementById('pfPhone').value=me.phone||'';
+  document.getElementById('pfCountry').value=me.country||'';
+  document.getElementById('pfOcc').value=me.occupation||'';
+  document.getElementById('pfInt').value=me.interest||'';
+  document.getElementById('pfAbout').value=me.about||'';
 }
-function saveProfile() {
-  if (!currentUser) return;
-  currentUser.name = (document.getElementById('pfFirst').value + ' ' + document.getElementById('pfLast').value).trim();
-  currentUser.email = document.getElementById('pfEmail').value;
-  currentUser.phone = document.getElementById('pfPhone').value;
-  currentUser.country = document.getElementById('pfCountry').value;
-  currentUser.occupation = document.getElementById('pfOccupation').value;
-  currentUser.interest = document.getElementById('pfInterest').value;
-  currentUser.about = document.getElementById('pfAbout').value;
-  var idx = users.findIndex(u => u.email === currentUser.email);
-  if (idx > -1) users[idx] = currentUser;
-  localStorage.setItem('statlen_users', JSON.stringify(users));
-  localStorage.setItem('statlen_user', JSON.stringify(currentUser));
-  updateNavForUser();
-  toast('Profile saved successfully!');
+function saveProfile(){
+  if(!me)return;
+  me.name=((document.getElementById('pfFirst').value||'').trim()+' '+(document.getElementById('pfLast').value||'').trim()).trim()||me.name;
+  me.phone=document.getElementById('pfPhone').value;
+  me.country=document.getElementById('pfCountry').value;
+  me.occupation=document.getElementById('pfOcc').value;
+  me.interest=document.getElementById('pfInt').value;
+  me.about=document.getElementById('pfAbout').value;
+  var idx=users.findIndex(function(u){return u.email===me.email});
+  if(idx>-1)users[idx]=me;
+  save();updateNav();toast('Profile saved successfully!');
 }
 
 // ── INVEST ──
-function handleInvest(tier) {
-  if (!currentUser) { openAuth(); return; }
-  var msg = 'Thank you for your interest in the ' + tier + ' tier!\n\nTo complete your investment, please contact us:\n\nWhatsApp: +1 (812) 207-9722\nWhatsApp: +234 811 948 5706\nEmail: statlenpartnership28@gmail.com\n\nOur team will respond within 24 hours.';
-  alert(msg);
+function handleInvest(tier){
+  if(!me){openAuth();return}
+  var msg='Hello Statlen,\n\nI am interested in the '+tier+'.\n\nName: '+me.name+'\nEmail: '+me.email+'\nPhone: '+(me.phone||'N/A')+'\n\nPlease contact me to complete my investment.';
+  window.open('https://wa.me/18122079722?text='+encodeURIComponent(msg),'_blank');
+  toast('Opening WhatsApp to complete your investment...');
 }
 
 // ── CONTACT ──
-function sendContact() {
-  var name = document.getElementById('cfName').value.trim();
-  var email = document.getElementById('cfEmail').value.trim();
-  var msg = document.getElementById('cfMsg').value.trim();
-  if (!name || !email || !msg) { toast('Please fill in all required fields'); return; }
-  var phone = document.getElementById('cfPhone').value.trim();
-  var type = document.getElementById('cfType').value;
-  var waMsg = encodeURIComponent('Hello Statlen,\n\nName: ' + name + '\nEmail: ' + email + '\nPhone: ' + phone + '\nEnquiry: ' + type + '\n\nMessage:\n' + msg);
-  window.open('https://wa.me/18122079722?text=' + waMsg, '_blank');
+function sendContact(){
+  var name=document.getElementById('cfName').value.trim();
+  var email=document.getElementById('cfEmail').value.trim();
+  var msg=document.getElementById('cfMsg').value.trim();
+  if(!name||!email||!msg){toast('Please fill in all required fields');return}
+  var waMsg='Hello Statlen,\n\nName: '+name+'\nEmail: '+email+'\nPhone: '+document.getElementById('cfPhone').value.trim()+'\nEnquiry: '+document.getElementById('cfType').value+'\n\nMessage:\n'+msg;
+  window.open('https://wa.me/18122079722?text='+encodeURIComponent(waMsg),'_blank');
   toast('Opening WhatsApp to send your message...');
-  document.getElementById('cfName').value = '';
-  document.getElementById('cfEmail').value = '';
-  document.getElementById('cfPhone').value = '';
-  document.getElementById('cfMsg').value = '';
+  ['cfName','cfEmail','cfPhone','cfMsg'].forEach(function(id){document.getElementById(id).value=''});
 }
 
 // ── MOBILE ──
-function toggleMobile() {
-  document.getElementById('mobileMenu').classList.toggle('open');
-}
-function closeMobile() {
-  document.getElementById('mobileMenu').classList.remove('open');
-}
+function toggleMob(){document.getElementById('mobMenu').classList.toggle('open')}
+function closeMob(){document.getElementById('mobMenu').classList.remove('open')}
 
 // ── TOAST ──
-function toast(msg) {
-  var t = document.getElementById('toast');
-  t.textContent = msg; t.classList.add('show');
-  clearTimeout(t._t);
-  t._t = setTimeout(() => t.classList.remove('show'), 3500);
+function toast(msg){
+  var t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  clearTimeout(t._t);t._t=setTimeout(function(){t.classList.remove('show')},3500);
 }
 
 // ── INIT ──
-window.addEventListener('load', function() {
-  buildReviews();
-  if (currentUser) updateNavForUser();
-
-  // Add profile/dashboard nav items
-  var navLinks = document.querySelector('.nav-links');
-  var profileBtn = document.createElement('button');
-  profileBtn.className = 'nav-link';
-  profileBtn.textContent = 'Dashboard';
-  profileBtn.onclick = function() {
-    if (currentUser) showPage('dashboard');
-    else openAuth();
-  };
-  navLinks.appendChild(profileBtn);
-
-  var profBtn2 = document.createElement('button');
-  profBtn2.className = 'nav-link';
-  profBtn2.textContent = 'Profile';
-  profBtn2.onclick = function() {
-    if (currentUser) showPage('profile');
-    else openAuth();
-  };
-  navLinks.appendChild(profBtn2);
+window.addEventListener('load',function(){
+  buildRevs();initHero();initFarm();
+  if(me)updateNav();
 });
 </script>
 </body>

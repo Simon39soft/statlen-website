@@ -450,6 +450,21 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);overflo
     </div>
   </div>
 
+
+  <!-- TRACKING BANNER -->
+  <section style="background:#fff;border-bottom:1px solid #f0f0f0;padding:20px 0">
+    <div class="sec-in">
+      <div style="background:linear-gradient(135deg,#FFF0E6,#FFF8F3);border:1.5px solid rgba(234,108,30,.2);border-radius:16px;padding:22px 28px;display:flex;align-items:center;gap:20px;flex-wrap:wrap">
+        <div style="width:48px;height:48px;background:linear-gradient(135deg,var(--o),var(--o2));border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">📊</div>
+        <div style="flex:1;min-width:200px">
+          <div style="font-size:15px;font-weight:800;color:var(--tx);margin-bottom:4px">Track Your Investment From Home — 24/7</div>
+          <div style="font-size:13px;color:var(--mu);line-height:1.6">Once you invest with Statlen, you can monitor your portfolio, track your returns, and view your investment history in real time — directly from your phone or computer, from the comfort of your home. No stress. No office visits. Full transparency.</div>
+        </div>
+        <button onclick="needAuth('dashboard')" style="padding:11px 22px;background:linear-gradient(135deg,var(--o),var(--o2));color:#fff;border:none;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;font-family:Inter,sans-serif;white-space:nowrap;flex-shrink:0">View Dashboard →</button>
+      </div>
+    </div>
+  </section>
+
   <!-- SERVICES -->
   <section class="sec" id="services-sec">
     <div class="sec-in">
@@ -539,6 +554,47 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);overflo
         <button class="show-more" id="showMoreBtn" onclick="toggleRevs()">Show More Reviews (1,260 more) ↓</button>
       </div>
       <div class="hidden-revs" id="hiddenRevs"></div>
+    </div>
+  </section>
+
+
+  <!-- PAYMENT METHODS -->
+  <section class="sec" style="background:var(--bg2)">
+    <div class="sec-in">
+      <div class="sec-hd center">
+        <div class="sec-badge">How To Pay</div>
+        <h2 class="sec-title">Simple & Secure Payment Methods</h2>
+        <p class="sec-sub">We accept multiple payment methods to make investing with Statlen easy and accessible from anywhere in the world.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:32px">
+        <div style="background:#fff;border:1px solid var(--bd);border-radius:16px;padding:24px;text-align:center;transition:all .3s" onmouseover="this.style.boxShadow='0 8px 32px rgba(234,108,30,.12)'" onmouseout="this.style.boxShadow='none'">
+          <div style="font-size:36px;margin-bottom:12px">🏦</div>
+          <div style="font-size:14px;font-weight:700;color:var(--tx);margin-bottom:6px">Bank Transfer</div>
+          <div style="font-size:12px;color:var(--mu);line-height:1.6">Send directly to our verified bank account. Contact us via WhatsApp and we will provide full bank details immediately.</div>
+          <a href="https://wa.me/18122079722?text=Hello%20Statlen%2C%20I%20would%20like%20to%20invest%20via%20bank%20transfer." target="_blank" style="display:inline-block;margin-top:12px;padding:8px 18px;background:linear-gradient(135deg,var(--o),var(--o2));color:#fff;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none">Get Bank Details →</a>
+        </div>
+        <div style="background:#fff;border:1.5px solid var(--o);border-radius:16px;padding:24px;text-align:center;position:relative;transition:all .3s" onmouseover="this.style.boxShadow='0 8px 32px rgba(234,108,30,.2)'" onmouseout="this.style.boxShadow='none'">
+          <div style="position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:var(--o);color:#fff;font-size:9px;font-weight:700;padding:3px 10px;border-radius:0 0 8px 8px;letter-spacing:1px">RECOMMENDED</div>
+          <div style="font-size:36px;margin-bottom:12px">💳</div>
+          <div style="font-size:14px;font-weight:700;color:var(--tx);margin-bottom:6px">Paystack</div>
+          <div style="font-size:12px;color:var(--mu);line-height:1.6">Pay securely online with your debit card, credit card, or bank transfer via Paystack — Nigeria's most trusted payment platform.</div>
+          <a href="https://wa.me/18122079722?text=Hello%20Statlen%2C%20I%20would%20like%20to%20invest%20via%20Paystack." target="_blank" style="display:inline-block;margin-top:12px;padding:8px 18px;background:linear-gradient(135deg,var(--o),var(--o2));color:#fff;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none">Pay via Paystack →</a>
+        </div>
+        <div style="background:#fff;border:1px solid var(--bd);border-radius:16px;padding:24px;text-align:center;transition:all .3s" onmouseover="this.style.boxShadow='0 8px 32px rgba(234,108,30,.12)'" onmouseout="this.style.boxShadow='none'">
+          <div style="font-size:36px;margin-bottom:12px">🌍</div>
+          <div style="font-size:14px;font-weight:700;color:var(--tx);margin-bottom:6px">International Transfer</div>
+          <div style="font-size:12px;color:var(--mu);line-height:1.6">International investors can send funds via Wise, Western Union, or SWIFT bank transfer. Contact us for full international payment details.</div>
+          <a href="https://wa.me/18122079722?text=Hello%20Statlen%2C%20I%20am%20an%20international%20investor%20and%20would%20like%20payment%20details." target="_blank" style="display:inline-block;margin-top:12px;padding:8px 18px;background:linear-gradient(135deg,var(--o),var(--o2));color:#fff;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none">Get Details →</a>
+        </div>
+      </div>
+      <div style="background:linear-gradient(135deg,#0D0D0D,#1A0800);border-radius:16px;padding:24px;display:flex;align-items:center;gap:20px;flex-wrap:wrap">
+        <div style="font-size:32px">🔒</div>
+        <div style="flex:1;min-width:200px">
+          <div style="font-size:14px;font-weight:700;color:#fff;margin-bottom:4px">100% Secure & Confidential Transactions</div>
+          <div style="font-size:12px;color:rgba(255,255,255,.65);line-height:1.65">All payments are processed securely. Your financial information is never shared with third parties. Every transaction is confirmed in writing via email and WhatsApp. Managed by licensed and certified investment professionals.</div>
+        </div>
+        <a href="https://wa.me/18122079722?text=Hello%20Statlen%2C%20I%20am%20ready%20to%20invest." target="_blank" style="padding:12px 22px;background:linear-gradient(135deg,var(--o),var(--o2));color:#fff;border-radius:10px;font-size:13px;font-weight:700;text-decoration:none;white-space:nowrap;flex-shrink:0">Start Investing Now →</a>
+      </div>
     </div>
   </section>
 

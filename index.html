@@ -411,7 +411,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);overflo
         <div class="hero-stats">
           <div><div class="hs-num"><span>8–12</span>%</div><div class="hs-lbl">Annual Returns</div></div>
           <div><div class="hs-num"><span>1,263</span></div><div class="hs-lbl">Trusted Partners</div></div>
-          <div><div class="hs-num"><span>100</span>%</div><div class="hs-lbl">Confidential</div></div>
+          <div><div class="hs-num" style="font-size:16px">🔒 Assets</div><div class="hs-lbl">Fully Protected</div></div>
         </div>
       </div>
       <div class="hero-card">
@@ -445,7 +445,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);overflo
     <div class="trust-in">
       <div class="trust-item"><div class="trust-num">8–12%</div><div class="trust-lbl">Annual Returns</div></div>
       <div class="trust-item"><div class="trust-num">1,263</div><div class="trust-lbl">Trusted Partners</div></div>
-      <div class="trust-item"><div class="trust-num">100%</div><div class="trust-lbl">Confidential</div></div>
+      <div class="trust-item"><div class="trust-num" style="font-size:18px;line-height:1.2">🔒 Data</div><div class="trust-lbl">Fully Protected</div></div>
       <div class="trust-item"><div class="trust-num">24hr</div><div class="trust-lbl">Response Time</div></div>
     </div>
   </div>
@@ -700,6 +700,41 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);overflo
 
 <!-- DASHBOARD -->
 <div class="page" id="page-dashboard">
+  <!-- PIN SETUP SCREEN -->
+  <div id="pinSetupScreen" style="display:none;min-height:calc(100vh - 64px);display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0D0D0D,#1A0800);padding:24px">
+    <div style="background:#fff;border-radius:24px;padding:32px;width:100%;max-width:380px;text-align:center;box-shadow:0 32px 80px rgba(0,0,0,0.4)">
+      <div style="width:64px;height:64px;background:linear-gradient(135deg,var(--o),var(--o2));border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 16px">🔒</div>
+      <div style="font-size:20px;font-weight:800;color:var(--tx);margin-bottom:6px">Set Your Dashboard PIN</div>
+      <div style="font-size:13px;color:var(--mu);margin-bottom:24px;line-height:1.6">Create a 4-digit PIN to securely access your investment dashboard. This keeps your portfolio data private.</div>
+      <div style="display:flex;justify-content:center;gap:12px;margin-bottom:20px" id="pinSetupDots">
+        <div style="width:16px;height:16px;border-radius:50%;border:2px solid var(--bd);transition:all .2s" id="sd0"></div>
+        <div style="width:16px;height:16px;border-radius:50%;border:2px solid var(--bd);transition:all .2s" id="sd1"></div>
+        <div style="width:16px;height:16px;border-radius:50%;border:2px solid var(--bd);transition:all .2s" id="sd2"></div>
+        <div style="width:16px;height:16px;border-radius:50%;border:2px solid var(--bd);transition:all .2s" id="sd3"></div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px" id="pinSetupPad"></div>
+      <div style="font-size:11px;color:var(--mu)">🔒 Your PIN is stored securely on your device only</div>
+    </div>
+  </div>
+  <!-- PIN ENTRY SCREEN -->
+  <div id="pinEntryScreen" style="display:none;min-height:calc(100vh - 64px);align-items:center;justify-content:center;background:linear-gradient(135deg,#0D0D0D,#1A0800);padding:24px">
+    <div style="background:#fff;border-radius:24px;padding:32px;width:100%;max-width:380px;text-align:center;box-shadow:0 32px 80px rgba(0,0,0,0.4)">
+      <div style="width:64px;height:64px;background:linear-gradient(135deg,var(--o),var(--o2));border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 16px">📊</div>
+      <div style="font-size:20px;font-weight:800;color:var(--tx);margin-bottom:6px">Enter Your PIN</div>
+      <div style="font-size:13px;color:var(--mu);margin-bottom:24px">Enter your 4-digit PIN to access your investment dashboard</div>
+      <div style="display:flex;justify-content:center;gap:12px;margin-bottom:20px">
+        <div style="width:16px;height:16px;border-radius:50%;border:2px solid var(--bd);transition:all .2s" id="ed0"></div>
+        <div style="width:16px;height:16px;border-radius:50%;border:2px solid var(--bd);transition:all .2s" id="ed1"></div>
+        <div style="width:16px;height:16px;border-radius:50%;border:2px solid var(--bd);transition:all .2s" id="ed2"></div>
+        <div style="width:16px;height:16px;border-radius:50%;border:2px solid var(--bd);transition:all .2s" id="ed3"></div>
+      </div>
+      <div id="pinError" style="font-size:12px;color:#dc2626;margin-bottom:12px;display:none">Incorrect PIN. Please try again.</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px" id="pinEntryPad"></div>
+      <button onclick="resetPin()" style="background:none;border:none;color:var(--mu);font-size:12px;cursor:pointer;font-family:Inter,sans-serif;margin-top:8px">Forgot PIN? Reset</button>
+    </div>
+  </div>
+  <!-- DASHBOARD CONTENT -->
+  <div id="dashContent" style="display:none">
   <div class="dash-wrap">
     <div class="dash-in">
       <div class="dash-hd">
@@ -753,6 +788,8 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);overflo
         </div>
       </div>
     </div>
+  </div>
+  </div>
   </div>
 </div>
 
@@ -985,7 +1022,11 @@ function goPage(n){
   [].slice.call(document.querySelectorAll('.page')).forEach(function(p){p.classList.remove('active')});
   document.getElementById('page-'+n).classList.add('active');
   window.scrollTo(0,0);
-  if(n==='dashboard')updateDash();
+  if(n==='dashboard'){
+    var savedPin = localStorage.getItem('sl_pin');
+    if(!savedPin){ showPinSetup(); }
+    else { showPinEntry(); }
+  }
   if(n==='profile')updateProfile();
 }
 function needAuth(n){if(me)goPage(n);else openAuth()}
@@ -1087,6 +1128,128 @@ function toast(msg){
   var t=document.getElementById('toast');
   t.textContent=msg;t.classList.add('show');
   clearTimeout(t._t);t._t=setTimeout(function(){t.classList.remove('show')},3500);
+}
+
+
+// ── PIN SYSTEM ──
+var setupPin = '';
+var entryPin = '';
+var pinMode = 'setup'; // 'setup' or 'entry'
+
+function buildPinPad(containerId, onDigit, onDelete) {
+  var pad = document.getElementById(containerId);
+  if (!pad) return;
+  pad.innerHTML = '';
+  var nums = ['1','2','3','4','5','6','7','8','9','','0','⌫'];
+  nums.forEach(function(n) {
+    var btn = document.createElement('button');
+    btn.textContent = n;
+    btn.style.cssText = 'padding:18px;border-radius:12px;font-size:20px;font-weight:700;font-family:Inter,sans-serif;border:1.5px solid var(--bd);background:#fff;cursor:pointer;transition:all .2s;color:var(--tx);';
+    if (!n) { btn.style.visibility = 'hidden'; }
+    btn.onmouseover = function(){ this.style.background='var(--orange4)';this.style.borderColor='var(--o)'; };
+    btn.onmouseout = function(){ this.style.background='#fff';this.style.borderColor='var(--bd)'; };
+    btn.onclick = function() {
+      if (n === '⌫') { onDelete(); }
+      else if (n) { onDigit(n); }
+    };
+    pad.appendChild(btn);
+  });
+}
+
+function updateDots(prefix, len) {
+  for (var i = 0; i < 4; i++) {
+    var d = document.getElementById(prefix + i);
+    if (d) {
+      d.style.background = i < len ? 'var(--o)' : 'transparent';
+      d.style.borderColor = i < len ? 'var(--o)' : 'var(--bd)';
+    }
+  }
+}
+
+function showPinSetup() {
+  setupPin = '';
+  var ss = document.getElementById('pinSetupScreen');
+  var es = document.getElementById('pinEntryScreen');
+  var dc = document.getElementById('dashContent');
+  if (ss) { ss.style.display = 'flex'; }
+  if (es) { es.style.display = 'none'; }
+  if (dc) { dc.style.display = 'none'; }
+  updateDots('sd', 0);
+  buildPinPad('pinSetupPad',
+    function(n) {
+      if (setupPin.length < 4) {
+        setupPin += n;
+        updateDots('sd', setupPin.length);
+        if (setupPin.length === 4) {
+          setTimeout(function() {
+            localStorage.setItem('sl_pin', setupPin);
+            toast('PIN set successfully! 🔒');
+            showDashContent();
+          }, 300);
+        }
+      }
+    },
+    function() {
+      setupPin = setupPin.slice(0,-1);
+      updateDots('sd', setupPin.length);
+    }
+  );
+}
+
+function showPinEntry() {
+  entryPin = '';
+  var ss = document.getElementById('pinSetupScreen');
+  var es = document.getElementById('pinEntryScreen');
+  var dc = document.getElementById('dashContent');
+  if (ss) { ss.style.display = 'none'; }
+  if (es) { es.style.display = 'flex'; }
+  if (dc) { dc.style.display = 'none'; }
+  var err = document.getElementById('pinError');
+  if (err) err.style.display = 'none';
+  updateDots('ed', 0);
+  buildPinPad('pinEntryPad',
+    function(n) {
+      if (entryPin.length < 4) {
+        entryPin += n;
+        updateDots('ed', entryPin.length);
+        if (entryPin.length === 4) {
+          setTimeout(function() {
+            var saved = localStorage.getItem('sl_pin');
+            if (entryPin === saved) {
+              showDashContent();
+              toast('Welcome back! 📊');
+            } else {
+              entryPin = '';
+              updateDots('ed', 0);
+              var err = document.getElementById('pinError');
+              if (err) { err.style.display = 'block'; }
+              setTimeout(function(){ if(err) err.style.display='none'; }, 3000);
+            }
+          }, 300);
+        }
+      }
+    },
+    function() {
+      entryPin = entryPin.slice(0,-1);
+      updateDots('ed', entryPin.length);
+    }
+  );
+}
+
+function showDashContent() {
+  var ss = document.getElementById('pinSetupScreen');
+  var es = document.getElementById('pinEntryScreen');
+  var dc = document.getElementById('dashContent');
+  if (ss) ss.style.display = 'none';
+  if (es) es.style.display = 'none';
+  if (dc) dc.style.display = 'block';
+  updateDash();
+}
+
+function resetPin() {
+  localStorage.removeItem('sl_pin');
+  showPinSetup();
+  toast('PIN reset. Please set a new PIN.');
 }
 
 // ── INIT ──

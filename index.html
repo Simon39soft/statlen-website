@@ -669,6 +669,47 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);overflo
     </div>
   </section>
 
+
+  <!-- INDUSTRIALISATION -->
+  <section class="sec" style="background:linear-gradient(135deg,#0D0D0D,#1A0800)">
+    <div class="sec-in">
+      <div style="text-align:center;margin-bottom:32px">
+        <div class="sec-badge" style="background:rgba(234,108,30,.15);color:var(--o3)">Our Mission</div>
+        <h2 style="font-size:clamp(22px,3.5vw,34px);font-weight:800;color:#fff;margin-top:10px;margin-bottom:12px;line-height:1.2">The Industrialisation of <span style="color:var(--o)">Nigerian Agriculture</span></h2>
+        <p style="font-size:14px;color:rgba(255,255,255,.65);max-width:600px;margin:0 auto;line-height:1.75">Africa is the most agriculturally rich continent on earth — yet for decades, its resources have been exported raw and unprocessed, leaving billions in value on the table. Statlen is changing that.</p>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:24px">
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:22px">
+          <div style="font-size:32px;margin-bottom:10px">🌿</div>
+          <div style="font-size:13px;font-weight:700;color:var(--o3);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">Cocoa Processing</div>
+          <div style="font-size:12px;color:rgba(255,255,255,.6);line-height:1.65">Industrial-scale sourcing, processing and export of premium grade cocoa to international buyers across Europe, Asia and the Americas.</div>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:22px">
+          <div style="font-size:32px;margin-bottom:10px">🌾</div>
+          <div style="font-size:13px;font-weight:700;color:var(--o3);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">Sesame Export</div>
+          <div style="font-size:12px;color:rgba(255,255,255,.6);line-height:1.65">High-volume sesame seed processing and export operations serving verified buyers across the Middle East, Asia and global commodity markets.</div>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:22px">
+          <div style="font-size:32px;margin-bottom:10px">⚡</div>
+          <div style="font-size:13px;font-weight:700;color:var(--o3);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">Renewable Energy</div>
+          <div style="font-size:12px;color:rgba(255,255,255,.6);line-height:1.65">Investment in clean solar and wind energy infrastructure across Nigeria and West Africa — powering our operations and surrounding communities.</div>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:22px">
+          <div style="font-size:32px;margin-bottom:10px">🏭</div>
+          <div style="font-size:13px;font-weight:700;color:var(--o3);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">Agro-Processing</div>
+          <div style="font-size:12px;color:rgba(255,255,255,.6);line-height:1.65">Post-harvest industrial processing converting raw agricultural produce into finished, high-margin products for both domestic and international markets.</div>
+        </div>
+      </div>
+
+      <div style="background:rgba(234,108,30,.08);border:1.5px solid rgba(234,108,30,.25);border-radius:16px;padding:24px;text-align:center">
+        <div style="font-size:14px;font-weight:800;color:#fff;margin-bottom:8px">The Demand Exceeds Our Current Capacity</div>
+        <div style="font-size:12px;color:rgba(255,255,255,.65);line-height:1.7;max-width:560px;margin:0 auto 16px">We consistently receive multiple large-volume orders from international buyers that outpace our current processing capacity. We are expanding aggressively. Your investment directly funds that expansion — and earns you 8–12% annually while we grow.</div>
+        <a href="#" onclick="goPage('invest')" style="display:inline-block;padding:12px 28px;background:linear-gradient(135deg,var(--o),var(--o2));color:#fff;border-radius:10px;font-size:13px;font-weight:700;text-decoration:none">Invest in the Expansion →</a>
+      </div>
+    </div>
+  </section>
+
   <!-- FAQ -->
   <section class="sec">
     <div class="sec-in">
@@ -1019,6 +1060,148 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);overflo
   </div>
 </div>
 
+
+<!-- LEGAL PAGE -->
+<div class="page" id="page-legal">
+  <div class="sec" style="background:var(--bg2);min-height:100vh">
+    <div class="sec-in">
+      <div style="text-align:center;margin-bottom:32px">
+        <div class="sec-badge">Legal</div>
+        <h1 style="font-size:clamp(22px,3.5vw,34px);font-weight:800;color:var(--tx);margin-top:10px">Legal Information</h1>
+        <p style="font-size:13px;color:var(--mu)">Terms, policies, and your rights as a Statlen user and investor</p>
+      </div>
+
+      <!-- TAB NAVIGATION -->
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;justify-content:center">
+        <button onclick="showLegal('tc')" id="tab-tc" style="padding:9px 18px;background:var(--o);color:#fff;border:none;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;font-family:Inter,sans-serif">Terms & Conditions</button>
+        <button onclick="showLegal('privacy')" id="tab-privacy" style="padding:9px 18px;background:var(--bd2);color:var(--tx);border:1px solid var(--bd);border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;font-family:Inter,sans-serif">Privacy Policy</button>
+        <button onclick="showLegal('cookies')" id="tab-cookies" style="padding:9px 18px;background:var(--bd2);color:var(--tx);border:1px solid var(--bd);border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;font-family:Inter,sans-serif">Cookie Policy</button>
+        <button onclick="showLegal('refund')" id="tab-refund" style="padding:9px 18px;background:var(--bd2);color:var(--tx);border:1px solid var(--bd);border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;font-family:Inter,sans-serif">Refund Policy</button>
+      </div>
+
+      <!-- TERMS & CONDITIONS -->
+      <div id="legal-tc" class="legal-section">
+        <div style="background:#fff;border:1px solid var(--bd);border-radius:16px;padding:28px">
+          <h2 style="font-size:18px;font-weight:800;color:var(--tx);margin-bottom:4px">Terms & Conditions</h2>
+          <p style="font-size:11px;color:var(--mu);margin-bottom:20px">Last updated: September 2026</p>
+
+          <h3 style="font-size:13px;font-weight:700;color:var(--tx);margin-bottom:8px">1. Acceptance of Terms</h3>
+          <p style="font-size:12px;color:var(--mu);line-height:1.7;margin-bottom:16px">By accessing and using the Statlen platform and services, you accept and agree to be bound by these Terms and Conditions. If you do not agree to these terms, please do not use our services.</p>
+
+          <h3 style="font-size:13px;font-weight:700;color:var(--tx);margin-bottom:8px">2. Our Services</h3>
+          <p style="font-size:12px;color:var(--mu);line-height:1.7;margin-bottom:16px">Statlen provides agricultural commodity investment and asset management services. We facilitate private investment opportunities in Agriculture and Renewable Energy sectors across Nigeria and West Africa. Our services include investment portfolio management, commodity processing and export operations, and digital investment tracking.</p>
+
+          <h3 style="font-size:13px;font-weight:700;color:var(--tx);margin-bottom:8px">3. Investment Risk Disclosure</h3>
+          <p style="font-size:12px;color:var(--mu);line-height:1.7;margin-bottom:16px">All investments carry risk. Past performance does not guarantee future returns. The annual returns of 8–12% stated on our platform represent our target return range based on historical performance and are not guaranteed. You should only invest capital you can afford to commit for the agreed investment period. Statlen is not a licensed financial advisor and you are encouraged to seek independent financial advice before investing.</p>
+
+          <h3 style="font-size:13px;font-weight:700;color:var(--tx);margin-bottom:8px">4. Eligibility</h3>
+          <p style="font-size:12px;color:var(--mu);line-height:1.7;margin-bottom:16px">You must be 18 years or older to use our services and make investments through the Statlen platform. By using our services you confirm that you meet this eligibility requirement.</p>
+
+          <h3 style="font-size:13px;font-weight:700;color:var(--tx);margin-bottom:8px">5. Confidentiality</h3>
+          <p style="font-size:12px;color:var(--mu);line-height:1.7;margin-bottom:16px">All investment details, portfolio information, and personal data shared with Statlen are kept strictly confidential. We do not share your information with third parties without your explicit written consent.</p>
+
+          <h3 style="font-size:13px;font-weight:700;color:var(--tx);margin-bottom:8px">6. Intellectual Property</h3>
+          <p style="font-size:12px;color:var(--mu);line-height:1.7;margin-bottom:16px">All content on this platform — including text, design, graphics, and branding — is the property of Statlen. You may not reproduce, distribute, or use our content without prior written permission.</p>
+
+          <h3 style="font-size:13px;font-weight:700;color:var(--tx);margin-bottom:8px">7. Governing Law</h3>
+          <p style="font-size:12px;color:var(--mu);line-height:1.7;margin-bottom:16px">These Terms and Conditions are governed by the laws of the Federal Republic of Nigeria. Any disputes arising from these terms shall be subject to the jurisdiction of Nigerian courts.</p>
+
+          <h3 style="font-size:13px;font-weight:700;color:var(--tx);margin-bottom:8px">8. Contact</h3>
+          <p style="font-size:12px;color:var(--mu);line-height:1.7">For questions about these Terms and Conditions, contact us at statlenpartnership28@gmail.com or WhatsApp +1 (812) 207-9722.</p>
+        </div>
+      </div>
+
+      <!-- PRIVACY POLICY -->
+      <div id="legal-privacy" class="legal-section" style="display:none">
+        <div style="background:#fff;border:1px solid var(--bd);border-radius:16px;padding:28px">
+          <h2 style="font-size:18px;font-weight:800;color:var(--tx);margin-bottom:4px">Privacy Policy</h2>
+          <p style="font-size:11px;color:var(--mu);margin-bottom:20px">Last updated: September 2026</p>
+
+          <h3 style="font-size:13px;font-weight:700;color:var(--tx);margin-bottom:8px">1. Data We Collect</h3>
+          <p style="font-size:12px;color:var(--mu);line-height:1.7;margin-bottom:8px">We only collect data that is strictly necessary to provide our services. This includes:</p>
+          <ul style="font-size:12px;color:var(--mu);line-height:1.85;margin-bottom:16px;padding-left:20px">
+            <li>Name and contact information (email, phone number)</li>
+            <li>Investment details and portfolio preferences</li>
+            <li>Device information for security purposes</li>
+            <li>Communication records between you and Statlen</li>
+          </ul>
+          <p style="font-size:12px;color:var(--mu);line-height:1.7;margin-bottom:16px"><strong>We do not collect</strong> unnecessary personal data, sell your data to third parties, or use your information for advertising purposes.</p>
+
+          <h3 style="font-size:13px;font-weight:700;color:var(--tx);margin-bottom:8px">2. How We Use Your Data</h3>
+          <p style="font-size:12px;color:var(--mu);line-height:1.7;margin-bottom:16px">Your data is used solely to manage your investment account, communicate with you about your portfolio, process transactions, and improve our services. We do not use your data for any purpose beyond what is necessary to serve you as an investor.</p>
+
+          <h3 style="font-size:13px;font-weight:700;color:var(--tx);margin-bottom:8px">3. Data Security</h3>
+          <p style="font-size:12px;color:var(--mu);line-height:1.7;margin-bottom:16px">We implement industry-standard security measures to protect your personal data. Your investment information and personal details are encrypted and stored securely. Access to your data is restricted to authorised Statlen personnel only.</p>
+
+          <h3 style="font-size:13px;font-weight:700;color:var(--tx);margin-bottom:8px">4. Your Rights</h3>
+          <p style="font-size:12px;color:var(--mu);line-height:1.7;margin-bottom:8px">You have the right to:</p>
+          <ul style="font-size:12px;color:var(--mu);line-height:1.85;margin-bottom:16px;padding-left:20px">
+            <li>Access the personal data we hold about you</li>
+            <li>Request correction of inaccurate data</li>
+            <li>Request deletion of your data</li>
+            <li>Withdraw consent for data processing at any time</li>
+          </ul>
+
+          <h3 style="font-size:13px;font-weight:700;color:var(--tx);margin-bottom:8px">5. Contact</h3>
+          <p style="font-size:12px;color:var(--mu);line-height:1.7">For privacy-related requests, contact statlenpartnership28@gmail.com.</p>
+        </div>
+      </div>
+
+      <!-- COOKIE POLICY -->
+      <div id="legal-cookies" class="legal-section" style="display:none">
+        <div style="background:#fff;border:1px solid var(--bd);border-radius:16px;padding:28px">
+          <h2 style="font-size:18px;font-weight:800;color:var(--tx);margin-bottom:4px">Cookie Policy</h2>
+          <p style="font-size:11px;color:var(--mu);margin-bottom:20px">Last updated: September 2026</p>
+
+          <h3 style="font-size:13px;font-weight:700;color:var(--tx);margin-bottom:8px">What Are Cookies</h3>
+          <p style="font-size:12px;color:var(--mu);line-height:1.7;margin-bottom:16px">Cookies are small text files stored on your device when you visit a website. They help websites remember your preferences and provide a better user experience.</p>
+
+          <h3 style="font-size:13px;font-weight:700;color:var(--tx);margin-bottom:8px">Cookies We Use</h3>
+          <p style="font-size:12px;color:var(--mu);line-height:1.7;margin-bottom:8px">Statlen uses only the following essential cookies — we do not use tracking or advertising cookies:</p>
+          <ul style="font-size:12px;color:var(--mu);line-height:1.85;margin-bottom:16px;padding-left:20px">
+            <li><strong>Session cookies</strong> — keep you logged in during your visit</li>
+            <li><strong>Preference cookies</strong> — remember your dashboard PIN and settings</li>
+            <li><strong>Security cookies</strong> — protect your account from unauthorised access</li>
+          </ul>
+
+          <h3 style="font-size:13px;font-weight:700;color:var(--tx);margin-bottom:8px">What We Do Not Use</h3>
+          <p style="font-size:12px;color:var(--mu);line-height:1.7;margin-bottom:16px">We do not use advertising cookies, third-party tracking cookies, or any cookies that monitor your behaviour across other websites. Your browsing data stays private.</p>
+
+          <h3 style="font-size:13px;font-weight:700;color:var(--tx);margin-bottom:8px">Managing Cookies</h3>
+          <p style="font-size:12px;color:var(--mu);line-height:1.7">You can control and delete cookies through your browser settings. Note that disabling essential cookies may affect the functionality of the Statlen platform.</p>
+        </div>
+      </div>
+
+      <!-- REFUND POLICY -->
+      <div id="legal-refund" class="legal-section" style="display:none">
+        <div style="background:#fff;border:1px solid var(--bd);border-radius:16px;padding:28px">
+          <h2 style="font-size:18px;font-weight:800;color:var(--tx);margin-bottom:4px">Refund Policy</h2>
+          <p style="font-size:11px;color:var(--mu);margin-bottom:20px">Last updated: September 2026</p>
+
+          <h3 style="font-size:13px;font-weight:700;color:var(--tx);margin-bottom:8px">Investment Commitment Period</h3>
+          <p style="font-size:12px;color:var(--mu);line-height:1.7;margin-bottom:16px">All investments with Statlen are committed for a minimum period as agreed in your Investment Agreement. This commitment period is necessary to allow your investment to be properly deployed and generate the agreed returns across our agricultural commodity operations.</p>
+
+          <h3 style="font-size:13px;font-weight:700;color:var(--tx);margin-bottom:8px">Early Withdrawal</h3>
+          <p style="font-size:12px;color:var(--mu);line-height:1.7;margin-bottom:16px">If you wish to withdraw your investment before the end of your agreed commitment period, please contact us directly at statlenpartnership28@gmail.com or WhatsApp +1 (812) 207-9722. Early withdrawal requests are reviewed on a case-by-case basis and are subject to the terms of your individual Investment Agreement.</p>
+
+          <h3 style="font-size:13px;font-weight:700;color:var(--tx);margin-bottom:8px">Return of Capital</h3>
+          <p style="font-size:12px;color:var(--mu);line-height:1.7;margin-bottom:16px">At the end of your agreed investment period, your principal investment amount is returned to you in full along with your earned annual returns. The exact timeline and process for return of capital is detailed in your Investment Agreement.</p>
+
+          <h3 style="font-size:13px;font-weight:700;color:var(--tx);margin-bottom:8px">Processing Time</h3>
+          <p style="font-size:12px;color:var(--mu);line-height:1.7;margin-bottom:16px">Approved refunds and capital returns are processed within 7 to 14 business days and transferred directly to your registered bank account or payment method.</p>
+
+          <h3 style="font-size:13px;font-weight:700;color:var(--tx);margin-bottom:8px">Dispute Resolution</h3>
+          <p style="font-size:12px;color:var(--mu);line-height:1.7;margin-bottom:16px">If you have any concerns about your investment or a refund request, contact us directly. We are committed to resolving all concerns promptly and fairly. Our goal is always to find a resolution that works for both parties.</p>
+
+          <h3 style="font-size:13px;font-weight:700;color:var(--tx);margin-bottom:8px">Contact Us</h3>
+          <p style="font-size:12px;color:var(--mu);line-height:1.7">statlenpartnership28@gmail.com  ·  WhatsApp: +1 (812) 207-9722  ·  +234 811 948 5706</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
 <!-- PROFILE -->
 <div class="page" id="page-profile">
   <div class="profile-wrap">
@@ -1254,6 +1437,7 @@ function goPage(n){
   [].slice.call(document.querySelectorAll('.page')).forEach(function(p){p.classList.remove('active')});
   document.getElementById('page-'+n).classList.add('active');
   window.scrollTo(0,0);
+  if(n==='legal'){showLegal('tc');}
   if(n==='dashboard'){
     var savedPin = localStorage.getItem('sl_pin');
     if(!savedPin){ showPinSetup(); }
@@ -1482,6 +1666,22 @@ function resetPin() {
   localStorage.removeItem('sl_pin');
   showPinSetup();
   toast('PIN reset. Please set a new PIN.');
+}
+
+
+// ── LEGAL PAGE ──
+function showLegal(tab) {
+  var tabs = ['tc','privacy','cookies','refund'];
+  tabs.forEach(function(t) {
+    var el = document.getElementById('legal-' + t);
+    var btn = document.getElementById('tab-' + t);
+    if (el) el.style.display = t === tab ? 'block' : 'none';
+    if (btn) {
+      btn.style.background = t === tab ? 'var(--o)' : 'var(--bd2)';
+      btn.style.color = t === tab ? '#fff' : 'var(--tx)';
+      btn.style.border = t === tab ? 'none' : '1px solid var(--bd)';
+    }
+  });
 }
 
 // ── CALCULATOR ──

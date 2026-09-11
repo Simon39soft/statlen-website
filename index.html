@@ -940,8 +940,63 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);overflo
             <option>📊 All Sectors</option>
           </select>
         </div>
-        <button onclick="submitInvestment()" style="width:100%;padding:14px;background:linear-gradient(135deg,var(--o),var(--o2));color:#fff;border:none;border-radius:11px;font-size:14px;font-weight:700;cursor:pointer;font-family:Inter,sans-serif;transition:all .2s;">Submit Investment Request →</button>
-        <div style="text-align:center;margin-top:10px;font-size:11px;color:var(--mu)">🔒 Your information is 100% confidential. We respond within 24 hours.</div>
+                  <!-- PAYMENT METHOD TABS -->
+          <div style="margin-bottom:16px">
+            <div style="font-size:10px;font-weight:700;color:var(--mu);letter-spacing:.5px;text-transform:uppercase;margin-bottom:8px">Choose Payment Method</div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <button onclick="setPayMethod('card')" id="pm-card" style="padding:8px 16px;background:linear-gradient(135deg,var(--o),var(--o2));color:#fff;border:none;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;font-family:Inter,sans-serif">💳 Card Payment</button>
+              <button onclick="setPayMethod('transfer')" id="pm-transfer" style="padding:8px 16px;background:var(--bd2);color:var(--tx);border:1px solid var(--bd);border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;font-family:Inter,sans-serif">🏦 Bank Transfer</button>
+              <button onclick="setPayMethod('wa')" id="pm-wa" style="padding:8px 16px;background:var(--bd2);color:var(--tx);border:1px solid var(--bd);border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;font-family:Inter,sans-serif">📱 WhatsApp</button>
+            </div>
+          </div>
+
+          <!-- CARD PAYMENT FORM -->
+          <div id="pay-card">
+            <div style="background:var(--bg2);border:1px solid var(--bd);border-radius:12px;padding:16px;margin-bottom:12px">
+              <div style="font-size:10px;font-weight:700;color:var(--mu);letter-spacing:.5px;text-transform:uppercase;margin-bottom:12px">Enter Card Details</div>
+              <div style="margin-bottom:10px">
+                <label style="font-size:10px;font-weight:700;color:var(--mu);letter-spacing:.5px;text-transform:uppercase;display:block;margin-bottom:4px">Card Number</label>
+                <input type="text" id="cardNum" placeholder="1234 5678 9012 3456" maxlength="19" oninput="fmtCard(this)" style="width:100%;padding:10px 13px;border:1.5px solid var(--bd);border-radius:9px;font-size:14px;font-family:Inter,sans-serif;outline:none;color:var(--tx);background:var(--bg);letter-spacing:1px" onfocus="this.style.borderColor='var(--o)'" onblur="this.style.borderColor='var(--bd)'"/>
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+                <div>
+                  <label style="font-size:10px;font-weight:700;color:var(--mu);letter-spacing:.5px;text-transform:uppercase;display:block;margin-bottom:4px">Expiry</label>
+                  <input type="text" id="cardExp" placeholder="MM / YY" maxlength="7" oninput="fmtExp(this)" style="width:100%;padding:10px 13px;border:1.5px solid var(--bd);border-radius:9px;font-size:14px;font-family:Inter,sans-serif;outline:none;color:var(--tx);background:var(--bg)" onfocus="this.style.borderColor='var(--o)'" onblur="this.style.borderColor='var(--bd)'"/>
+                </div>
+                <div>
+                  <label style="font-size:10px;font-weight:700;color:var(--mu);letter-spacing:.5px;text-transform:uppercase;display:block;margin-bottom:4px">CVV</label>
+                  <input type="password" id="cardCvv" placeholder="•••" maxlength="4" style="width:100%;padding:10px 13px;border:1.5px solid var(--bd);border-radius:9px;font-size:14px;font-family:Inter,sans-serif;outline:none;color:var(--tx);background:var(--bg)" onfocus="this.style.borderColor='var(--o)'" onblur="this.style.borderColor='var(--bd)'"/>
+                </div>
+              </div>
+            </div>
+            <button onclick="payCard()" id="payCardBtn" style="width:100%;padding:14px;background:linear-gradient(135deg,var(--o),var(--o2));color:#fff;border:none;border-radius:11px;font-size:14px;font-weight:700;cursor:pointer;font-family:Inter,sans-serif;display:flex;align-items:center;justify-content:center;gap:8px">🔒 Pay Securely →</button>
+          </div>
+
+          <!-- BANK TRANSFER -->
+          <div id="pay-transfer" style="display:none">
+            <div style="background:var(--bg2);border:1px solid var(--bd);border-radius:12px;padding:18px;margin-bottom:12px">
+              <div style="font-size:10px;font-weight:700;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px">Bank Transfer Details</div>
+              <div style="display:flex;flex-direction:column;gap:0">
+                <div style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--bd)"><span style="font-size:12px;color:var(--mu)">Bank</span><span style="font-size:12px;font-weight:700;color:var(--tx)">Contact via WhatsApp</span></div>
+                <div style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--bd)"><span style="font-size:12px;color:var(--mu)">Account Name</span><span style="font-size:12px;font-weight:700;color:var(--tx)">Statlen</span></div>
+                <div style="display:flex;justify-content:space-between;padding:9px 0"><span style="font-size:12px;color:var(--mu)">Reference</span><span style="font-size:12px;font-weight:700;color:var(--o)">Your Name + Investment Amount</span></div>
+              </div>
+              <div style="margin-top:12px;font-size:11px;color:var(--mu);background:var(--orange4);border-radius:8px;padding:10px;line-height:1.6">We will send full bank details via WhatsApp. Reply to confirm receipt and your investment will be processed within 24 hours.</div>
+            </div>
+            <button onclick="submitInvestment()" style="width:100%;padding:14px;background:linear-gradient(135deg,var(--o),var(--o2));color:#fff;border:none;border-radius:11px;font-size:14px;font-weight:700;cursor:pointer;font-family:Inter,sans-serif">Get Bank Details via WhatsApp →</button>
+          </div>
+
+          <!-- WHATSAPP -->
+          <div id="pay-wa" style="display:none">
+            <div style="background:var(--bg2);border:1px solid var(--bd);border-radius:12px;padding:20px;margin-bottom:12px;text-align:center">
+              <div style="font-size:36px;margin-bottom:10px">📱</div>
+              <div style="font-size:14px;font-weight:700;color:var(--tx);margin-bottom:6px">Invest via WhatsApp</div>
+              <div style="font-size:12px;color:var(--mu);line-height:1.65">Click below and our team will process your investment personally. We respond within 24 hours and confirm everything in writing.</div>
+            </div>
+            <button onclick="submitInvestment()" style="width:100%;padding:14px;background:linear-gradient(135deg,#25D366,#128C7E);color:#fff;border:none;border-radius:11px;font-size:14px;font-weight:700;cursor:pointer;font-family:Inter,sans-serif">💬 Open WhatsApp to Invest →</button>
+          </div>
+
+          <div style="text-align:center;margin-top:10px;font-size:11px;color:var(--mu)">🔒 Secured by Paystack · 100% Confidential · Investors from all countries welcome</div>
       </div>
       <div style="background:linear-gradient(135deg,var(--o),var(--o2));border-radius:15px;padding:24px;text-align:center;color:#fff;margin-bottom:36px">
         <div style="font-size:13px;font-weight:700;margin-bottom:5px">🏛️ Managed by Licensed & Certified Investment Professionals</div>
@@ -1811,6 +1866,77 @@ function toggleBalance() {
       if (toggle) toggle.textContent = '🙈';
     }
   }
+}
+
+
+// ── PAYMENT METHODS ──
+function setPayMethod(m) {
+  ['card','transfer','wa'].forEach(function(id) {
+    var el = document.getElementById('pay-' + id);
+    var btn = document.getElementById('pm-' + id);
+    if (el) el.style.display = id === m ? 'block' : 'none';
+    if (btn) {
+      if (id === m) {
+        btn.style.background = 'linear-gradient(135deg,var(--o),var(--o2))';
+        btn.style.color = '#fff';
+        btn.style.border = 'none';
+      } else {
+        btn.style.background = 'var(--bd2)';
+        btn.style.color = 'var(--tx)';
+        btn.style.border = '1px solid var(--bd)';
+      }
+    }
+  });
+}
+
+function fmtCard(el) {
+  var v = el.value.replace(/[^0-9]/g,'').substring(0,16);
+  var out = '';
+  for (var i=0; i<v.length; i++) {
+    if (i>0 && i%4===0) out += ' ';
+    out += v[i];
+  }
+  el.value = out;
+}
+
+function fmtExp(el) {
+  var v = el.value.replace(/[^0-9]/g,'');
+  if (v.length >= 2) el.value = v.substring(0,2) + ' / ' + v.substring(2,4);
+  else el.value = v;
+}
+
+function payCard() {
+  var name = (document.getElementById('invName') && document.getElementById('invName').value || '').trim();
+  var email = (document.getElementById('invEmail') && document.getElementById('invEmail').value || '').trim();
+  var amount = parseFloat(document.getElementById('invAmount') && document.getElementById('invAmount').value || '0');
+  var card = (document.getElementById('cardNum') && document.getElementById('cardNum').value || '').replace(/\s/g,'');
+  var exp = (document.getElementById('cardExp') && document.getElementById('cardExp').value || '').replace(/\s/g,'');
+  var cvv = (document.getElementById('cardCvv') && document.getElementById('cardCvv').value || '').trim();
+
+  if (!name) { toast('Please enter your full name'); return; }
+  if (!email || !email.includes('@')) { toast('Please enter a valid email address'); return; }
+  if (!amount || amount < 50) { toast('Minimum investment is $50'); return; }
+  if (card.length < 16) { toast('Please enter a valid 16-digit card number'); return; }
+  if (exp.length < 4) { toast('Please enter a valid expiry date'); return; }
+  if (cvv.length < 3) { toast('Please enter your CVV'); return; }
+
+  var btn = document.getElementById('payCardBtn');
+  if (btn) { btn.textContent = '⏳ Processing...'; btn.disabled = true; }
+
+  setTimeout(function() {
+    var sector = document.getElementById('invSector') ? document.getElementById('invSector').value : 'Agriculture';
+    var msg = 'Hello Statlen, I would like to complete my card investment.
+
+Name: ' + name + '
+Email: ' + email + '
+Amount: $' + amount + '
+Sector: ' + sector + '
+
+Please process my payment.';
+    window.open('https://wa.me/18122079722?text=' + encodeURIComponent(msg), '_blank');
+    if (btn) { btn.textContent = '🔒 Pay Securely →'; btn.disabled = false; }
+    toast('Redirecting to confirm payment via WhatsApp...');
+  }, 1800);
 }
 
 // ── CALCULATOR ──

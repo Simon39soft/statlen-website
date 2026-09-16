@@ -314,6 +314,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);overflo
   .srv-grid,.steps-row,.dash-cards,.footer-top{grid-template-columns:1fr}
 }
 </style>
+<script src="https://checkout.flutterwave.com/v3.js"></script>
 </head>
 <body>
 
@@ -2041,6 +2042,67 @@ function fmtExp(el) {
 }
 
 function payCard() {
+  var name = (document.getElementById('invName') && document.getElementById('invName').value || '').trim();
+  var email = (document.getElementById('invEmail') && document.getElementById('invEmail').value || '').trim();
+  var amount = parseFloat(document.getElementById('invAmount') && document.getElementById('invAmount').value || '0');
+
+  if (!name) { toast('Please enter your full name'); return; }
+  if (!email || !email.includes('@')) { toast('Please enter a valid email'); return; }
+  if (!amount || amount < 50) { toast('Minimum investment is $50'); return; }
+
+  var btn = document.getElementById('payCardBtn');
+  if (btn) { btn.textContent = '⏳ Processing...'; btn.disabled = true; }
+
+  try {
+    FlutterwaveCheckout({
+      public_key: "FLWPUBK_TEST-XXXX",
+      tx_ref: "statlen-" + Date.now(),
+      amount: amount,
+      currency: "USD",
+      payment_options: "card",
+      customer: { email: email, name: name },
+      customizations: {
+        title: "Statlen Investment",
+        description: "Agricultural Investment — " + name,
+        logo: "https://statlen-website-luwm.vercel.app/favicon.ico"
+      },
+      callback: function(data) {
+        if (btn) { btn.textContent = '🔒 Pay Securely →'; btn.disabled = false; }
+        if (data.status === "successful") {
+          toast("Payment successful! We will contact you within 24 hours to confirm your investment.");
+          var sector = document.getElementById('invSector') ? document.getElementById('invSector').value : 'Agriculture';
+          var msg = "Hello Statlen, I have completed my investment payment.
+
+Name: " + name + "
+Email: " + email + "
+Amount: $" + amount + "
+Sector: " + sector + "
+Transaction ID: " + data.transaction_id;
+          setTimeout(function(){ window.open('https://wa.me/18122079722?text=' + encodeURIComponent(msg), '_blank'); }, 1000);
+        } else {
+          toast("Payment incomplete. Please try again or use WhatsApp.");
+        }
+      },
+      onclose: function() {
+        if (btn) { btn.textContent = '🔒 Pay Securely →'; btn.disabled = false; }
+      }
+    });
+  } catch(e) {
+    if (btn) { btn.textContent = '🔒 Pay Securely →'; btn.disabled = false; }
+    var sector = document.getElementById('invSector') ? document.getElementById('invSector').value : 'Agriculture';
+    var msg = "Hello Statlen, I would like to invest $" + amount + ".
+
+Name: " + name + "
+Email: " + email + "
+Sector: " + sector + "
+
+Please send me payment details.";
+    window.open('https://wa.me/18122079722?text=' + encodeURIComponent(msg), '_blank');
+    toast("Opening WhatsApp to complete your investment...");
+  }
+}
+
+function payCard_old() {
   var name = (document.getElementById('invName') && document.getElementById('invName').value || '').trim();
   var email = (document.getElementById('invEmail') && document.getElementById('invEmail').value || '').trim();
   var amount = parseFloat(document.getElementById('invAmount') && document.getElementById('invAmount').value || '0');

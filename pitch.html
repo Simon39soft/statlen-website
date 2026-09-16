@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Statlen Pitch Deck 2026</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#060D08;color:#fff;height:100vh;overflow:hidden;user-select:none}
+.deck{width:100vw;height:100vh;position:relative}
+.slide{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:48px 56px 80px;opacity:0;pointer-events:none;transition:opacity .4s ease,transform .4s ease;transform:translateX(60px)}
+.slide.active{opacity:1;pointer-events:all;transform:translateX(0)}
+.slide.prev{transform:translateX(-60px)}
+
+/* BACKGROUNDS */
+.bg1{background:radial-gradient(ellipse at 15% 50%,#043D1A 0%,#060D08 55%),radial-gradient(ellipse at 85% 20%,#0A1F05 0%,transparent 50%)}
+.bg2{background:radial-gradient(ellipse at 80% 80%,#1A0505 0%,#060D08 55%)}
+.bg3{background:radial-gradient(ellipse at 50% 20%,#0A1F05 0%,#060D08 55%)}
+.bg4{background:#060D08}
+.bg5{background:radial-gradient(ellipse at 50% 90%,#043D1A 0%,#060D08 65%)}
+.bg6{background:#060D08}
+.bg7{background:radial-gradient(ellipse at 10% 80%,#1a0800 0%,#060D08 55%)}
+.bg8{background:#060D08}
+.bg9{background:radial-gradient(ellipse at 85% 50%,#05050F 0%,#060D08 55%)}
+.bg10{background:#060D08}
+.bg11{background:radial-gradient(ellipse at 25% 25%,#043D1A 0%,#060D08 55%)}
+.bg12{background:#060D08}
+.bg13{background:#060D08}
+.bg14{background:radial-gradient(ellipse at 50% 50%,#043D1A 0%,#060D08 60%)}
+
+/* LOGO & SLIDE NUM */
+.logo{position:absolute;top:20px;left:28px;font-size:11px;font-weight:900;letter-spacing:4px;color:rgba(255,255,255,.25)}
+.snum{position:absolute;top:20px;right:28px;font-size:10px;font-weight:700;color:rgba(255,255,255,.2);letter-spacing:2px}
+
+/* NAV BAR */
+.nav{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);display:flex;gap:10px;align-items:center;background:rgba(255,255,255,.06);backdrop-filter:blur(16px);padding:8px 18px;border-radius:100px;border:1px solid rgba(255,255,255,.1);z-index:999}
+.nav-btn{background:none;border:none;color:rgba(255,255,255,.5);font-size:12px;font-weight:700;cursor:pointer;padding:5px 12px;border-radius:100px;transition:all .2s;font-family:inherit}
+.nav-btn:hover{background:rgba(255,255,255,.1);color:#fff}
+.dot{width:5px;height:5px;background:rgba(255,255,255,.18);border-radius:50%;cursor:pointer;transition:all .25s}
+.dot.on{background:#EA6C1E;width:18px;border-radius:3px}
+.ctr{color:rgba(255,255,255,.3);font-size:11px;min-width:48px;text-align:center}
+
+/* PROGRESS */
+.progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,#0B7A3B,#EA6C1E);transition:width .4s ease;z-index:1000}
+
+/* TYPOGRAPHY */
+.tag{display:inline-block;padding:4px 13px;border-radius:100px;font-size:9px;font-weight:800;letter-spacing:2px;text-transform:uppercase;margin-bottom:14px}
+.tg{background:rgba(11,122,59,.2);color:#4ade80;border:1px solid rgba(11,122,59,.3)}
+.to{background:rgba(234,108,30,.18);color:#EA6C1E;border:1px solid rgba(234,108,30,.25)}
+.tw{background:rgba(255,255,255,.06);color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.1)}
+.tgold{background:rgba(201,168,76,.12);color:#C9A84C;border:1px solid rgba(201,168,76,.2)}
+h1{font-size:clamp(26px,3.8vw,50px);font-weight:900;line-height:1.1;letter-spacing:-1px}
+h2{font-size:clamp(18px,2.6vw,34px);font-weight:800;line-height:1.15;letter-spacing:-.5px}
+h3{font-size:clamp(12px,1.5vw,17px);font-weight:700}
+.sub{font-size:clamp(11px,1.3vw,15px);color:rgba(255,255,255,.55);line-height:1.7;max-width:640px}
+.accent{color:#0B7A3B}
+.acc-o{color:#EA6C1E}
+.acc-g{color:#C9A84C}
+.acc-gr{color:#4ade80}
+
+/* DIVIDER */
+.div{width:48px;height:3px;background:#EA6C1E;border-radius:2px;margin:12px 0}
+.div-g{background:#0B7A3B}
+
+/* CARDS */
+.card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:18px}
+.cg{background:rgba(11,122,59,.1);border:1px solid rgba(11,122,59,.25);border-radius:14px;padding:18px}
+.co{background:rgba(234,108,30,.08);border:1px solid rgba(234,108,30,.2);border-radius:14px;padding:18px}
+.cgold{background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.15);border-radius:14px;padding:18px}
+.cr{background:rgba(220,38,38,.07);border:1px solid rgba(220,38,38,.18);border-radius:14px;padding:18px}
+
+/* GRIDS */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:16px;width:100%}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;width:100%}
+.g4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:12px;width:100%}
+
+/* STAT */
+.big{font-size:clamp(24px,3.5vw,44px);font-weight:900}
+
+/* STAT ROW */
+.sr{display:flex;gap:28px;justify-content:center;flex-wrap:wrap;margin-top:20px}
+.sc{text-align:center}
+.sv{height:1px;background:rgba(255,255,255,.08);align-self:stretch}
+
+/* BUBBLE */
+.bubble{border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center}
+
+/* COMP TABLE */
+.ct{width:100%;border-collapse:collapse;border-radius:10px;overflow:hidden}
+.ct th{padding:9px 12px;font-size:9px;font-weight:700;letter-spacing:1.5px;color:#4ade80;background:rgba(11,122,59,.15);text-align:left}
+.ct td{padding:9px 12px;font-size:11px;color:rgba(255,255,255,.6);border-top:1px solid rgba(255,255,255,.05)}
+.ct tr.hl td{background:rgba(11,122,59,.07);font-weight:600;color:#fff}
+.ck{color:#4ade80}
+.cx{color:#f87171}
+
+/* TIMELINE */
+.tl{display:flex;flex-direction:column;gap:0}
+.ti{display:flex;gap:14px;align-items:flex-start}
+.td{width:28px;height:28px;border-radius:50%;background:#0B7A3B;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;flex-shrink:0;margin-top:3px}
+.tline{width:2px;background:rgba(11,122,59,.3);height:16px;margin-left:13px}
+
+/* ICON CARD */
+.ic{display:flex;gap:14px;align-items:flex-start}
+.ii{font-size:20px;flex-shrink:0;margin-top:2px}
+
+/* ACTION BOX */
+.abox{background:linear-gradient(135deg,#043D1A,#065C2A);border:1.5px solid #C9A84C;border-radius:18px;padding:28px;text-align:center;width:100%;max-width:720px}
+</style>
+</head>
+<body>
+<div class="progress" id="prog"></div>
+<div class="deck" id="deck">
+
+<!-- S1 COVER -->
+<div class="slide bg1 active" id="s1">
+  <div class="logo">STATLEN</div><div class="snum">01 / 14</div>
+  <div style="text-align:center;max-width:820px">
+    <div class="tag tg">INVESTOR PITCH DECK · 2026</div>
+    <h1 style="margin-bottom:14px">Industrialising <span class="accent">Africa's</span><br>Agricultural Future</h1>
+    <div class="div" style="margin:14px auto"></div>
+    <p class="sub" style="margin:0 auto 28px;font-size:15px">Statlen is a fast-growing agricultural commodity and asset management firm — processing and exporting premium cocoa and sesame across Nigeria and West Africa while delivering <strong style="color:#4ade80">8–12% annual returns</strong> to private investors worldwide.</p>
+    <div class="sr">
+      <div class="sc"><div class="big acc-g">$1M</div><div style="font-size:10px;color:rgba(255,255,255,.35);letter-spacing:1px;margin-top:3px">RAISING</div></div>
+      <div class="sv"></div>
+      <div class="sc"><div class="big acc-o">8–12%</div><div style="font-size:10px;color:rgba(255,255,255,.35);letter-spacing:1px;margin-top:3px">ANNUAL RETURNS</div></div>
+      <div class="sv"></div>
+      <div class="sc"><div class="big acc-g">1,263+</div><div style="font-size:10px;color:rgba(255,255,255,.35);letter-spacing:1px;margin-top:3px">PARTNERS</div></div>
+      <div class="sv"></div>
+      <div class="sc"><div class="big" style="color:#C9A84C">NGN 10M+</div><div style="font-size:10px;color:rgba(255,255,255,.35);letter-spacing:1px;margin-top:3px">REVENUE</div></div>
+    </div>
+    <div style="margin-top:28px;font-size:11px;color:rgba(255,255,255,.25)">Simon Mgbe · Founder & CEO · statlenpartnership28@gmail.com · +1 (812) 207-9722</div>
+  </div>
+</div>
+
+<!-- S2 PROBLEM -->
+<div class="slide bg2" id="s2">
+  <div class="logo">STATLEN</div><div class="snum">02 / 14</div>
+  <div style="width:100%;max-width:880px">
+    <div class="tag to">THE PROBLEM</div>
+    <h2 style="margin-bottom:6px">Africa is <span style="color:#f87171">losing billions</span> every year</h2>
+    <p class="sub" style="margin-bottom:22px">Two deeply connected problems hold Africa's agricultural wealth back from reaching its true potential.</p>
+    <div class="g2" style="margin-bottom:16px">
+      <div class="cr">
+        <div style="font-size:30px;margin-bottom:10px">🌾</div>
+        <h3 style="color:#f87171;margin-bottom:8px">For African Producers</h3>
+        <div style="width:36px;height:2px;background:#f87171;margin-bottom:10px;border-radius:2px"></div>
+        <p style="font-size:12px;color:rgba(255,255,255,.58);line-height:1.7">Nigeria and West Africa produce some of the world's most valuable commodities — cocoa, sesame, palm oil — yet export 90%+ raw and unprocessed. Foreign processors capture the margin. Africa gets the smallest share of what it grows.</p>
+      </div>
+      <div class="cr">
+        <div style="font-size:30px;margin-bottom:10px">💰</div>
+        <h3 style="color:#f87171;margin-bottom:8px">For Investors Seeking Returns</h3>
+        <div style="width:36px;height:2px;background:#f87171;margin-bottom:10px;border-radius:2px"></div>
+        <p style="font-size:12px;color:rgba(255,255,255,.58);line-height:1.7">Serious investors across Africa and the diaspora have no reliable, transparent, professionally managed vehicle to participate in Africa's agricultural growth. Banks pay inflation. Markets are volatile. Options are opaque or inaccessible.</p>
+      </div>
+    </div>
+    <div style="background:rgba(220,38,38,.05);border:1px solid rgba(220,38,38,.15);border-radius:10px;padding:14px;text-align:center">
+      <span style="font-size:13px;font-weight:700;color:#f87171">The result: </span>
+      <span style="font-size:13px;color:rgba(255,255,255,.6)">Billions in value leaves Africa unprocessed every year — while African investors have no credible vehicle to grow their capital from it.</span>
+    </div>
+  </div>
+</div>
+
+<!-- S3 SOLUTION -->
+<div class="slide bg3" id="s3">
+  <div class="logo">STATLEN</div><div class="snum">03 / 14</div>
+  <div style="width:100%;max-width:880px;text-align:center">
+    <div class="tag tg">THE SOLUTION</div>
+    <h2 style="margin-bottom:6px">Statlen solves <span class="acc-gr">both problems</span> simultaneously</h2>
+    <p class="sub" style="margin:0 auto 24px">One integrated model — processing Africa's commodities at scale and giving investors a transparent vehicle to profit from that growth.</p>
+    <div class="g3" style="margin-bottom:20px">
+      <div class="cg" style="text-align:center;padding:24px 18px">
+        <div style="width:56px;height:56px;background:rgba(11,122,59,.2);border:1px solid rgba(11,122,59,.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;margin:0 auto 14px">🏭</div>
+        <div style="font-size:16px;font-weight:800;color:#4ade80;margin-bottom:8px">PROCESS</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.55);line-height:1.65">Source, process and export premium cocoa and sesame at industrial scale — capturing the full value chain instead of selling raw</div>
+      </div>
+      <div class="co" style="text-align:center;padding:24px 18px">
+        <div style="width:56px;height:56px;background:rgba(234,108,30,.15);border:1px solid rgba(234,108,30,.25);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;margin:0 auto 14px">📈</div>
+        <div style="font-size:16px;font-weight:800;color:#EA6C1E;margin-bottom:8px">EARN</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.55);line-height:1.65">Generate 8–12% annual returns for investors backed by real commodity export margins — not speculation, not promises</div>
+      </div>
+      <div class="cgold" style="text-align:center;padding:24px 18px">
+        <div style="width:56px;height:56px;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;margin:0 auto 14px">🌍</div>
+        <div style="font-size:16px;font-weight:800;color:#C9A84C;margin-bottom:8px">GROW</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.55);line-height:1.65">Reinvest returns into expanding processing capacity — more output, more exports, more returns — a self-reinforcing flywheel</div>
+      </div>
+    </div>
+    <div style="background:rgba(11,122,59,.08);border:1px solid rgba(11,122,59,.2);border-radius:10px;padding:13px">
+      <span style="font-weight:700;color:#4ade80;font-size:13px">The insight: </span>
+      <span style="font-size:13px;color:rgba(255,255,255,.6)">Commodity operations generate real revenue that backs investor returns. Investor capital funds the expansion that increases commodity output. Each side makes the other stronger.</span>
+    </div>
+  </div>
+</div>
+
+<!-- S4 MARKET VALIDATION -->
+<div class="slide bg4" id="s4">
+  <div class="logo">STATLEN</div><div class="snum">04 / 14</div>
+  <div style="width:100%;max-width:880px">
+    <div class="tag tg">MARKET VALIDATION</div>
+    <h2 style="margin-bottom:6px">The market <span class="acc-gr">already exists</span> — and is thriving</h2>
+    <p class="sub" style="margin-bottom:22px">We are not creating a new market. We are entering one that is already proven, growing, and hungry for better operators.</p>
+    <div class="g2">
+      <div>
+        <div style="font-size:12px;font-weight:700;color:#C9A84C;letter-spacing:1px;margin-bottom:12px">ALREADY PROVEN ON NIGERIAN EXCHANGE (NGX):</div>
+        <div class="card" style="margin-bottom:10px">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+            <div style="font-weight:700;font-size:13px">Presco PLC</div>
+            <div class="tag tg" style="margin:0;font-size:8px">NGX LISTED</div>
+          </div>
+          <div style="font-size:11px;color:rgba(255,255,255,.5);line-height:1.6">Nigerian agro-processor publicly listed on the Nigerian Exchange. Proof that commodity processing in Nigeria generates consistent investor returns at scale.</div>
+        </div>
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+            <div style="font-weight:700;font-size:13px">Okomu Oil Palm</div>
+            <div class="tag tg" style="margin:0;font-size:8px">NGX LISTED</div>
+          </div>
+          <div style="font-size:11px;color:rgba(255,255,255,.5);line-height:1.6">Listed agro-processing company delivering consistent shareholder returns through agricultural commodity operations. Same model. Same market. Proven.</div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:12px;font-weight:700;color:#C9A84C;letter-spacing:1px;margin-bottom:12px">WHY STATLEN IS THE BETTER ENTRY:</div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div class="cg" style="padding:13px">
+            <div style="font-weight:700;color:#4ade80;font-size:12px;margin-bottom:3px">✓ Private Stage Entry</div>
+            <div style="font-size:11px;color:rgba(255,255,255,.5)">Presco and Okomu are already public. Their best returns went to early private investors. Statlen offers that same early entry — today.</div>
+          </div>
+          <div class="cg" style="padding:13px">
+            <div style="font-weight:700;color:#4ade80;font-size:12px;margin-bottom:3px">✓ Multiple Commodities</div>
+            <div style="font-size:11px;color:rgba(255,255,255,.5)">Cocoa, sesame, agro-processing — not dependent on a single commodity for revenue or returns.</div>
+          </div>
+          <div class="cg" style="padding:13px">
+            <div style="font-weight:700;color:#4ade80;font-size:12px;margin-bottom:3px">✓ Live Digital Investment Platform</div>
+            <div style="font-size:11px;color:rgba(255,255,255,.5)">Real-time investor dashboard, AI analytics, $50 minimum — open to investors from every country worldwide.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S5 MARKET SIZE -->
+<div class="slide bg5" id="s5">
+  <div class="logo">STATLEN</div><div class="snum">05 / 14</div>
+  <div style="width:100%;max-width:880px;text-align:center">
+    <div class="tag tg">MARKET SIZE</div>
+    <h2 style="margin-bottom:6px">A <span class="acc-gr">$40B+</span> market opportunity</h2>
+    <p class="sub" style="margin:0 auto 28px">Global commodity markets plus Africa's private investment gap create an enormous addressable opportunity</p>
+    <div style="display:flex;align-items:flex-end;justify-content:center;gap:36px;margin-bottom:24px">
+      <div style="text-align:center">
+        <div class="bubble" style="width:170px;height:170px;background:rgba(11,122,59,.2);border:2px solid rgba(11,122,59,.35);margin:0 auto 12px">
+          <div style="font-size:22px;font-weight:900;color:#4ade80">$40B+</div>
+          <div style="font-size:9px;color:rgba(255,255,255,.4);margin-top:3px;letter-spacing:1px">USD</div>
+        </div>
+        <div style="font-size:11px;font-weight:700;margin-bottom:3px">TOTAL MARKET (TAM)</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.38)">Global cocoa + sesame 2026</div>
+        <div style="font-size:9px;color:rgba(255,255,255,.25);margin-top:3px">Expert Market Research 2026</div>
+      </div>
+      <div style="text-align:center">
+        <div class="bubble" style="width:120px;height:120px;background:rgba(234,108,30,.18);border:2px solid rgba(234,108,30,.3);margin:0 auto 12px">
+          <div style="font-size:17px;font-weight:900;color:#EA6C1E">$8.2B</div>
+          <div style="font-size:9px;color:rgba(255,255,255,.4);margin-top:2px;letter-spacing:1px">USD</div>
+        </div>
+        <div style="font-size:11px;font-weight:700;margin-bottom:3px">SERVICEABLE (SAM)</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.38)">West Africa processed exports</div>
+        <div style="font-size:9px;color:rgba(255,255,255,.25);margin-top:3px">Nigeria & West Africa share</div>
+      </div>
+      <div style="text-align:center">
+        <div class="bubble" style="width:82px;height:82px;background:rgba(201,168,76,.12);border:2px solid rgba(201,168,76,.25);margin:0 auto 12px">
+          <div style="font-size:13px;font-weight:900;color:#C9A84C">$50M</div>
+          <div style="font-size:8px;color:rgba(255,255,255,.4);margin-top:2px;letter-spacing:1px">USD</div>
+        </div>
+        <div style="font-size:11px;font-weight:700;margin-bottom:3px">5-YEAR TARGET (SOM)</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.38)">Statlen conservative target</div>
+        <div style="font-size:9px;color:rgba(255,255,255,.25);margin-top:3px">Conservative estimate</div>
+      </div>
+    </div>
+    <div class="g3">
+      <div class="card" style="padding:13px 16px;text-align:left">
+        <div style="font-size:9px;color:rgba(255,255,255,.35);margin-bottom:3px;letter-spacing:1px">COCOA CAGR 2026–2035</div>
+        <div style="font-size:20px;font-weight:800;color:#4ade80">4.4%</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.35)">Expert Market Research</div>
+      </div>
+      <div class="card" style="padding:13px 16px;text-align:left">
+        <div style="font-size:9px;color:rgba(255,255,255,.35);margin-bottom:3px;letter-spacing:1px">SESAME CAGR 2026–2035</div>
+        <div style="font-size:20px;font-weight:800;color:#EA6C1E">4.0%</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.35)">Business Research Insights</div>
+      </div>
+      <div class="card" style="padding:13px 16px;text-align:left">
+        <div style="font-size:9px;color:rgba(255,255,255,.35);margin-bottom:3px;letter-spacing:1px">AFRICA PRIVATE EQUITY</div>
+        <div style="font-size:20px;font-weight:800;color:#C9A84C">GROWING</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.35)">AVCA 2026 annual report</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S6 PRODUCT -->
+<div class="slide bg6" id="s6">
+  <div class="logo">STATLEN</div><div class="snum">06 / 14</div>
+  <div style="width:100%;max-width:880px">
+    <div class="tag tg">THE PRODUCT</div>
+    <h2 style="margin-bottom:6px">Two <span class="acc-gr">live products</span> — one integrated model</h2>
+    <p class="sub" style="margin-bottom:20px">Both products are deployed and active today — not concepts, not prototypes.</p>
+    <div class="g2">
+      <div style="background:linear-gradient(135deg,rgba(11,122,59,.12),rgba(4,61,26,.18));border:1px solid rgba(11,122,59,.28);border-radius:16px;padding:22px">
+        <div style="font-size:9px;font-weight:800;color:#4ade80;letter-spacing:2px;margin-bottom:8px">PRODUCT 01</div>
+        <div style="font-size:18px;font-weight:800;margin-bottom:5px">Statlen Commodity Platform</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.45);margin-bottom:16px">Agricultural processing, export & investment management</div>
+        <div style="display:flex;flex-direction:column;gap:7px">
+          <div class="ic"><div class="ii">◆</div><div style="font-size:11px;color:rgba(255,255,255,.6)">Cocoa & sesame processing at industrial scale</div></div>
+          <div class="ic"><div class="ii">◆</div><div style="font-size:11px;color:rgba(255,255,255,.6)">Active export operations — verified buyer relationships</div></div>
+          <div class="ic"><div class="ii">◆</div><div style="font-size:11px;color:rgba(255,255,255,.6)">1,263+ active investment partners worldwide</div></div>
+          <div class="ic"><div class="ii">◆</div><div style="font-size:11px;color:rgba(255,255,255,.6)">Open to investors from $50 — any country</div></div>
+          <div class="ic"><div class="ii">◆</div><div style="font-size:11px;color:rgba(255,255,255,.6)">Order demand exceeds current capacity</div></div>
+        </div>
+        <div style="margin-top:14px;font-size:10px;color:#4ade80;font-weight:700">statlen-website-luwm.vercel.app</div>
+      </div>
+      <div style="background:linear-gradient(135deg,rgba(234,108,30,.08),rgba(26,8,0,.18));border:1px solid rgba(234,108,30,.22);border-radius:16px;padding:22px">
+        <div style="font-size:9px;font-weight:800;color:#EA6C1E;letter-spacing:2px;margin-bottom:8px">PRODUCT 02</div>
+        <div style="font-size:18px;font-weight:800;margin-bottom:5px">StatLens Pro</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.45);margin-bottom:16px">AI-powered analytics — built by our technical founder</div>
+        <div style="display:flex;flex-direction:column;gap:7px">
+          <div class="ic"><div class="ii" style="color:#EA6C1E">◆</div><div style="font-size:11px;color:rgba(255,255,255,.6)">210+ active weekly users</div></div>
+          <div class="ic"><div class="ii" style="color:#EA6C1E">◆</div><div style="font-size:11px;color:rgba(255,255,255,.6)">Upload any file — instant AI-powered insights</div></div>
+          <div class="ic"><div class="ii" style="color:#EA6C1E">◆</div><div style="font-size:11px;color:rgba(255,255,255,.6)">Node.js · PostgreSQL · Anthropic API</div></div>
+          <div class="ic"><div class="ii" style="color:#EA6C1E">◆</div><div style="font-size:11px;color:rgba(255,255,255,.6)">Powers investor dashboard & portfolio tracking</div></div>
+          <div class="ic"><div class="ii" style="color:#EA6C1E">◆</div><div style="font-size:11px;color:rgba(255,255,255,.6)">Built entirely from iPhone — zero team</div></div>
+        </div>
+        <div style="margin-top:14px;font-size:10px;color:#EA6C1E;font-weight:700">statlens-ten.vercel.app</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S7 BUSINESS MODEL -->
+<div class="slide bg7" id="s7">
+  <div class="logo">STATLEN</div><div class="snum">07 / 14</div>
+  <div style="width:100%;max-width:880px">
+    <div class="tag to">BUSINESS MODEL</div>
+    <h2 style="margin-bottom:6px">Two revenue streams <span class="acc-o">compounding</span> each other</h2>
+    <p class="sub" style="margin-bottom:20px">Commodity revenue validates investor confidence. Investor capital funds commodity expansion. A flywheel that gets stronger over time.</p>
+    <div class="g2" style="margin-bottom:16px">
+      <div class="co" style="padding:20px">
+        <div style="font-size:9px;font-weight:800;color:#EA6C1E;letter-spacing:2px;margin-bottom:8px">STREAM 01 · COMMODITY</div>
+        <div style="font-size:16px;font-weight:800;margin-bottom:6px">Processing & Export Margin</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.55);margin-bottom:12px;line-height:1.65">Revenue on the margin between procurement + processing costs and export sale price. Processed commodities command 18–35% higher value than raw exports.</div>
+        <div style="background:rgba(234,108,30,.1);border-radius:7px;padding:8px;font-size:11px;color:#EA6C1E;font-weight:600;text-align:center">18–35% margin on processed exports</div>
+      </div>
+      <div class="cg" style="padding:20px">
+        <div style="font-size:9px;font-weight:800;color:#4ade80;letter-spacing:2px;margin-bottom:8px">STREAM 02 · INVESTMENT</div>
+        <div style="font-size:16px;font-weight:800;margin-bottom:6px">Capital Management Fees</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.55);margin-bottom:12px;line-height:1.65">We raise private capital and deploy it into commodity operations. Partners earn 8–12% annually. Statlen retains a management margin — recurring revenue that grows as the investor base grows.</div>
+        <div style="background:rgba(11,122,59,.12);border-radius:7px;padding:8px;font-size:11px;color:#4ade80;font-weight:600;text-align:center">From $50 · Worldwide · No geography limit</div>
+      </div>
+    </div>
+    <div style="background:rgba(201,168,76,.05);border:1px solid rgba(201,168,76,.12);border-radius:10px;padding:14px">
+      <div style="display:flex;gap:20px;justify-content:center;flex-wrap:wrap;text-align:center">
+        <div><div style="font-size:16px;font-weight:800;color:#C9A84C">NGN 10M+</div><div style="font-size:9px;color:rgba(255,255,255,.35);margin-top:2px">Revenue · zero funding</div></div>
+        <div style="width:1px;background:rgba(255,255,255,.08)"></div>
+        <div><div style="font-size:16px;font-weight:800;color:#C9A84C">1,263+</div><div style="font-size:9px;color:rgba(255,255,255,.35);margin-top:2px">Investment partners</div></div>
+        <div style="width:1px;background:rgba(255,255,255,.08)"></div>
+        <div><div style="font-size:16px;font-weight:800;color:#C9A84C">210+</div><div style="font-size:9px;color:rgba(255,255,255,.35);margin-top:2px">StatLens Pro users</div></div>
+        <div style="width:1px;background:rgba(255,255,255,.08)"></div>
+        <div><div style="font-size:16px;font-weight:800;color:#C9A84C">$0</div><div style="font-size:9px;color:rgba(255,255,255,.35);margin-top:2px">External funding raised</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S8 ADOPTION -->
+<div class="slide bg8" id="s8">
+  <div class="logo">STATLEN</div><div class="snum">08 / 14</div>
+  <div style="width:100%;max-width:880px">
+    <div class="tag tg">ADOPTION STRATEGY</div>
+    <h2 style="margin-bottom:6px">How we <span class="acc-gr">go to market</span></h2>
+    <p class="sub" style="margin-bottom:20px">Three channels running simultaneously to drive investor growth and commodity expansion.</p>
+    <div class="g3" style="margin-bottom:16px">
+      <div class="card" style="padding:18px">
+        <div style="font-size:28px;margin-bottom:10px">📱</div>
+        <div style="font-size:9px;font-weight:700;color:#4ade80;letter-spacing:2px;margin-bottom:6px">CHANNEL 01</div>
+        <div style="font-size:14px;font-weight:700;margin-bottom:8px">Brand Ambassador Programme</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.5);line-height:1.6">Selected TikTok and YouTube creators across Africa and the diaspora reach their audiences with Statlen's investment story. First cohort activating now — coordinated multi-platform launch.</div>
+      </div>
+      <div class="card" style="padding:18px">
+        <div style="font-size:28px;margin-bottom:10px">🌐</div>
+        <div style="font-size:9px;font-weight:700;color:#EA6C1E;letter-spacing:2px;margin-bottom:6px">CHANNEL 02</div>
+        <div style="font-size:14px;font-weight:700;margin-bottom:8px">Digital Investment Platform</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.5);line-height:1.6">Live platform — investors from any country start from $50. Full onboarding, PIN-protected dashboard, real-time portfolio tracking, returns calculator, and WhatsApp support 24/7.</div>
+      </div>
+      <div class="card" style="padding:18px">
+        <div style="font-size:28px;margin-bottom:10px">🤝</div>
+        <div style="font-size:9px;font-weight:700;color:#C9A84C;letter-spacing:2px;margin-bottom:6px">CHANNEL 03</div>
+        <div style="font-size:14px;font-weight:700;margin-bottom:8px">Direct Partner Outreach</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.5);line-height:1.6">Direct WhatsApp and email outreach to business owners, entrepreneurs, and diaspora investors. Personalised pitch documents and business advisory proposals for targeted prospects.</div>
+      </div>
+    </div>
+    <div style="background:rgba(11,122,59,.07);border:1px solid rgba(11,122,59,.18);border-radius:10px;padding:13px;text-align:center">
+      <span style="font-size:12px;font-weight:700;color:#4ade80">12-Month Target: </span>
+      <span style="font-size:12px;color:rgba(255,255,255,.55)">5,000+ active investors · $2M+ deployed capital · 3 signed commodity export contracts · Ambassador Programme fully launched</span>
+    </div>
+  </div>
+</div>
+
+<!-- S9 COMPETITION -->
+<div class="slide bg9" id="s9">
+  <div class="logo">STATLEN</div><div class="snum">09 / 14</div>
+  <div style="width:100%;max-width:880px">
+    <div class="tag tw">COMPETITION</div>
+    <h2 style="margin-bottom:6px">The <span style="color:#f87171">landscape</span> — and the gap we fill</h2>
+    <p class="sub" style="margin-bottom:20px">The market is proven. The gap Statlen fills is not being served by any existing player.</p>
+    <table class="ct" style="margin-bottom:16px">
+      <thead>
+        <tr>
+          <th>COMPANY</th>
+          <th>AGRO-PROCESSING</th>
+          <th>PRIVATE INVESTMENT</th>
+          <th>DIGITAL PLATFORM</th>
+          <th>$50 MIN / WORLDWIDE</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="hl">
+          <td style="color:#4ade80;font-weight:800">STATLEN ★</td>
+          <td><span class="ck">✓</span> Cocoa + Sesame</td>
+          <td><span class="ck">✓</span> 8–12% returns</td>
+          <td><span class="ck">✓</span> Live & active</td>
+          <td><span class="ck">✓</span> From $50 · Any country</td>
+        </tr>
+        <tr>
+          <td>Presco PLC</td>
+          <td><span class="ck">✓</span> Palm oil only</td>
+          <td><span class="cx">✗</span> Public shares only</td>
+          <td><span class="cx">✗</span> No platform</td>
+          <td><span class="cx">✗</span> NGX shares required</td>
+        </tr>
+        <tr>
+          <td>Okomu Oil Palm</td>
+          <td><span class="ck">✓</span> Palm oil only</td>
+          <td><span class="cx">✗</span> Public shares only</td>
+          <td><span class="cx">✗</span> No platform</td>
+          <td><span class="cx">✗</span> NGX shares required</td>
+        </tr>
+        <tr>
+          <td>Traditional Banks</td>
+          <td><span class="cx">✗</span> No operations</td>
+          <td><span class="cx">✗</span> 4–7% savings</td>
+          <td><span class="ck">✓</span> Mobile banking</td>
+          <td><span class="cx">✗</span> High minimums</td>
+        </tr>
+        <tr>
+          <td>Commodity Traders</td>
+          <td><span class="cx">✗</span> Raw only</td>
+          <td><span class="cx">✗</span> No investment</td>
+          <td><span class="cx">✗</span> No platform</td>
+          <td><span class="cx">✗</span> Institutional only</td>
+        </tr>
+      </tbody>
+    </table>
+    <div style="background:rgba(11,122,59,.07);border:1px solid rgba(11,122,59,.18);border-radius:9px;padding:11px;text-align:center;font-size:12px;color:rgba(255,255,255,.6)">
+      No competitor combines <strong style="color:#4ade80">agro-processing</strong> + <strong style="color:#4ade80">private investment returns</strong> + <strong style="color:#4ade80">live digital platform</strong> + <strong style="color:#4ade80">$50 minimum worldwide</strong> in one model.
+    </div>
+  </div>
+</div>
+
+<!-- S10 COMPETITIVE ADVANTAGE -->
+<div class="slide bg10" id="s10">
+  <div class="logo">STATLEN</div><div class="snum">10 / 14</div>
+  <div style="width:100%;max-width:880px">
+    <div class="tag tg">COMPETITIVE ADVANTAGE</div>
+    <h2 style="margin-bottom:6px">Why Statlen <span class="acc-gr">wins</span></h2>
+    <p class="sub" style="margin-bottom:20px">Six structural advantages that are difficult — and expensive — to replicate.</p>
+    <div class="g2">
+      <div class="card" style="padding:16px"><div class="ic"><div class="ii">🏭</div><div><div style="font-weight:700;color:#4ade80;font-size:12px;margin-bottom:3px">Vertical Integration</div><div style="font-size:11px;color:rgba(255,255,255,.5);line-height:1.6">We own the full value chain — sourcing, processing, export, and investment management. Most competitors own only one part of this chain.</div></div></div></div>
+      <div class="card" style="padding:16px"><div class="ic"><div class="ii">💻</div><div><div style="font-weight:700;color:#4ade80;font-size:12px;margin-bottom:3px">Proprietary Technology</div><div style="font-size:11px;color:rgba(255,255,255,.5);line-height:1.6">Built by a technical founder — our investment platform, analytics, and dashboard are proprietary. Near-zero marginal cost to scale to any number of investors.</div></div></div></div>
+      <div class="card" style="padding:16px"><div class="ic"><div class="ii">🌍</div><div><div style="font-weight:700;color:#4ade80;font-size:12px;margin-bottom:3px">Global from Day One</div><div style="font-size:11px;color:rgba(255,255,255,.5);line-height:1.6">Investors from any country can participate from $50. No geography restrictions. No high minimums. Democratising African agricultural investment for the world.</div></div></div></div>
+      <div class="card" style="padding:16px"><div class="ic"><div class="ii">📊</div><div><div style="font-weight:700;color:#4ade80;font-size:12px;margin-bottom:3px">Actuarial Risk Management</div><div style="font-size:11px;color:rgba(255,255,255,.5);line-height:1.6">AIG Actuarial Analyst certified leadership. Professional risk assessment frameworks applied to commodity and investment operations — institutional-grade risk management.</div></div></div></div>
+      <div class="card" style="padding:16px"><div class="ic"><div class="ii">🔄</div><div><div style="font-weight:700;color:#4ade80;font-size:12px;margin-bottom:3px">Self-Reinforcing Flywheel</div><div style="font-size:11px;color:rgba(255,255,255,.5);line-height:1.6">Commodity revenue validates returns. Investor capital funds expansion. More output = more revenue = more investor confidence. Gets stronger every quarter.</div></div></div></div>
+      <div class="card" style="padding:16px"><div class="ic"><div class="ii">⚡</div><div><div style="font-weight:700;color:#4ade80;font-size:12px;margin-bottom:3px">Proven Without Funding</div><div style="font-size:11px;color:rgba(255,255,255,.5);line-height:1.6">NGN 10M+ revenue · 1,263+ partners · live platform — all built with zero external investment. This team executes. Capital will only multiply what already works.</div></div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- S11 TEAM -->
+<div class="slide bg11" id="s11">
+  <div class="logo">STATLEN</div><div class="snum">11 / 14</div>
+  <div style="width:100%;max-width:860px">
+    <div class="tag tg">THE TEAM</div>
+    <h2 style="margin-bottom:6px">Built by a founder who <span class="acc-gr">executes</span></h2>
+    <p class="sub" style="margin-bottom:20px">One technical founder. Three live products. Zero external funding. The evidence speaks for itself.</p>
+    <div style="display:flex;gap:20px;align-items:flex-start">
+      <div style="background:linear-gradient(135deg,#043D1A,#065C2A);border:2px solid rgba(11,122,59,.4);border-radius:18px;padding:24px;flex-shrink:0;text-align:center;width:200px">
+        <div style="width:64px;height:64px;background:linear-gradient(135deg,#EA6C1E,#C9A84C);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:900;color:#fff;margin:0 auto 12px">S</div>
+        <div style="font-size:15px;font-weight:800;margin-bottom:3px">Simon Mgbe</div>
+        <div style="font-size:10px;color:#4ade80;margin-bottom:12px">Founder & CEO</div>
+        <div style="background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.2);border-radius:7px;padding:7px;margin-bottom:8px">
+          <div style="font-size:8px;color:rgba(255,255,255,.35);margin-bottom:2px;letter-spacing:1px">CERTIFIED</div>
+          <div style="font-size:10px;font-weight:700;color:#C9A84C">AIG Actuarial Analyst</div>
+        </div>
+        <div style="font-size:9px;color:rgba(255,255,255,.35)">FULAFIA · Nigeria</div>
+      </div>
+      <div style="flex:1;display:flex;flex-direction:column;gap:10px">
+        <div class="card" style="padding:13px"><div style="font-size:10px;color:#4ade80;font-weight:700;margin-bottom:4px;letter-spacing:1px">TECHNICAL FOUNDER</div><div style="font-size:11px;color:rgba(255,255,255,.6);line-height:1.6">Self-taught full stack developer since 2020. Built 3 live production products from an iPhone — no laptop, no team, no shortcuts. Node.js · React · PostgreSQL · AI integration.</div></div>
+        <div class="card" style="padding:13px"><div style="font-size:10px;color:#EA6C1E;font-weight:700;margin-bottom:6px;letter-spacing:1px">LIVE PRODUCTS</div><div style="display:flex;gap:8px;flex-wrap:wrap"><div style="font-size:10px;background:rgba(234,108,30,.1);border-radius:5px;padding:3px 9px;color:#EA6C1E">StatLens Pro — 210+ users</div><div style="font-size:10px;background:rgba(234,108,30,.1);border-radius:5px;padding:3px 9px;color:#EA6C1E">Tracebit — npm published</div><div style="font-size:10px;background:rgba(234,108,30,.1);border-radius:5px;padding:3px 9px;color:#EA6C1E">Statlen — 1,263+ partners</div></div></div>
+        <div class="card" style="padding:13px"><div style="font-size:10px;color:#C9A84C;font-weight:700;margin-bottom:4px;letter-spacing:1px">TRACK RECORD</div><div style="font-size:11px;color:rgba(255,255,255,.6);line-height:1.6">NGN 10M+ revenue with zero external funding. Applied to TechCrunch Startup Battlefield 200. AIG Actuarial Analyst certified. 6 years of independent product development.</div></div>
+        <div class="card" style="padding:13px"><div style="font-size:10px;color:rgba(255,255,255,.35);font-weight:700;margin-bottom:4px;letter-spacing:1px">GAPS & HOW WE FILL THEM</div><div style="font-size:11px;color:rgba(255,255,255,.5);line-height:1.6">Investment will fund specialist hires in commodity trade operations, legal & regulatory compliance, and institutional investor relations. Technical and entrepreneurial capability is already proven.</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S12 PRESS -->
+<div class="slide bg12" id="s12">
+  <div class="logo">STATLEN</div><div class="snum">12 / 14</div>
+  <div style="width:100%;max-width:880px;text-align:center">
+    <div class="tag tw">PRESS & VALIDATION</div>
+    <h2 style="margin-bottom:6px">Building <span class="acc-g">credibility</span> from day one</h2>
+    <p class="sub" style="margin:0 auto 24px">Recognition and validation demonstrating Statlen is a serious, credible, and investable operation.</p>
+    <div class="g3" style="margin-bottom:20px">
+      <div class="cgold" style="text-align:center;padding:22px">
+        <div style="font-size:30px;margin-bottom:10px">🏆</div>
+        <div style="font-size:11px;font-weight:700;color:#C9A84C;margin-bottom:6px">TECHCRUNCH BATTLEFIELD</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.5);line-height:1.6">Applied to TechCrunch Startup Battlefield 200 — one of the world's most competitive global startup competitions.</div>
+      </div>
+      <div class="cgold" style="text-align:center;padding:22px">
+        <div style="font-size:30px;margin-bottom:10px">📜</div>
+        <div style="font-size:11px;font-weight:700;color:#C9A84C;margin-bottom:6px">AIG ACTUARIAL CERTIFIED</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.5);line-height:1.6">Founder certified by AIG — one of the world's largest insurance and financial services companies. Professional risk framework applied to all operations.</div>
+      </div>
+      <div class="cgold" style="text-align:center;padding:22px">
+        <div style="font-size:30px;margin-bottom:10px">📦</div>
+        <div style="font-size:11px;font-weight:700;color:#C9A84C;margin-bottom:6px">OPEN SOURCE PUBLISHED</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.5);line-height:1.6">Tracebit published on npm — open source JavaScript package for AI content detection. Adopted by developers worldwide with zero marketing.</div>
+      </div>
+    </div>
+    <div class="g4">
+      <div class="card" style="text-align:center;padding:13px"><div style="font-size:18px;font-weight:800;color:#4ade80">1,263+</div><div style="font-size:9px;color:rgba(255,255,255,.35);margin-top:3px">Investment partners</div></div>
+      <div class="card" style="text-align:center;padding:13px"><div style="font-size:18px;font-weight:800;color:#EA6C1E">210+</div><div style="font-size:9px;color:rgba(255,255,255,.35);margin-top:3px">StatLens active users</div></div>
+      <div class="card" style="text-align:center;padding:13px"><div style="font-size:18px;font-weight:800;color:#C9A84C">NGN 10M+</div><div style="font-size:9px;color:rgba(255,255,255,.35);margin-top:3px">Revenue · $0 raised</div></div>
+      <div class="card" style="text-align:center;padding:13px"><div style="font-size:18px;font-weight:800;color:#fff">2020</div><div style="font-size:9px;color:rgba(255,255,255,.35);margin-top:3px">Building since · 6 yrs</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- S13 TESTIMONIALS -->
+<div class="slide bg13" id="s13">
+  <div class="logo">STATLEN</div><div class="snum">13 / 14</div>
+  <div style="width:100%;max-width:880px;text-align:center">
+    <div class="tag tg">PARTNER TESTIMONIALS</div>
+    <h2 style="margin-bottom:6px">What our <span class="acc-gr">partners say</span></h2>
+    <p class="sub" style="margin:0 auto 22px">Real words from verified investment partners across the world.</p>
+    <div class="g3" style="margin-bottom:16px">
+      <div class="card" style="text-align:left;padding:18px">
+        <div style="color:#C9A84C;font-size:14px;margin-bottom:8px">★★★★★</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.6);line-height:1.7;margin-bottom:10px">"Statlen has been outstanding from day one. The team is professional, returns are consistent, and I have complete peace of mind about where my money is."</div>
+        <div style="font-size:11px;font-weight:700">Jakob L.</div>
+        <div style="font-size:9px;color:rgba(255,255,255,.35)">Private Investor · Stockholm, Sweden</div>
+      </div>
+      <div class="card" style="text-align:left;padding:18px">
+        <div style="color:#C9A84C;font-size:14px;margin-bottom:8px">★★★★★</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.6);line-height:1.7;margin-bottom:10px">"My agricultural investment delivered 10.8% return this year. Reports are detailed and clear. I have since doubled my investment and would not hesitate to recommend Statlen."</div>
+        <div style="font-size:11px;font-weight:700">Rasheed B.</div>
+        <div style="font-size:9px;color:rgba(255,255,255,.35)">Private Investor · Dubai, UAE</div>
+      </div>
+      <div class="card" style="text-align:left;padding:18px">
+        <div style="color:#C9A84C;font-size:14px;margin-bottom:8px">★★★★★</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.6);line-height:1.7;margin-bottom:10px">"What sets Statlen apart is integrity. They promised 8–12% returns and delivered exactly that. A genuinely trusted partner for serious long-term investors."</div>
+        <div style="font-size:11px;font-weight:700">Fatimah A.</div>
+        <div style="font-size:9px;color:rgba(255,255,255,.35)">CEO, Import & Export · Accra, Ghana</div>
+      </div>
+    </div>
+    <div class="card" style="padding:13px;text-align:center">
+      <span style="font-size:12px;font-weight:700;color:#C9A84C">Average Rating: ★★★★★ 4.9/5</span>
+      <span style="font-size:12px;color:rgba(255,255,255,.4)"> — from 1,263+ verified investment partners worldwide</span>
+    </div>
+  </div>
+</div>
+
+<!-- S14 THE ASK -->
+<div class="slide bg14" id="s14">
+  <div class="logo">STATLEN</div><div class="snum">14 / 14</div>
+  <div style="width:100%;max-width:860px;text-align:center">
+    <div class="tag tgold">THE ASK</div>
+    <h2 style="margin-bottom:6px">We are raising <span class="acc-g">$1,000,000</span></h2>
+    <p class="sub" style="margin:0 auto 20px">To build the processing infrastructure that turns Africa's raw agricultural output into finished, high-margin exports — and keeps that value in Africa.</p>
+    <div class="g4" style="margin-bottom:18px">
+      <div class="cg" style="text-align:center;padding:16px">
+        <div style="font-size:17px;font-weight:800;color:#4ade80;margin-bottom:3px">$400K</div>
+        <div style="font-size:9px;color:rgba(255,255,255,.4);margin-bottom:6px;letter-spacing:1px">40%</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.5);line-height:1.5">Processing Equipment & Industrial Infrastructure</div>
+      </div>
+      <div class="co" style="text-align:center;padding:16px">
+        <div style="font-size:17px;font-weight:800;color:#EA6C1E;margin-bottom:3px">$250K</div>
+        <div style="font-size:9px;color:rgba(255,255,255,.4);margin-bottom:6px;letter-spacing:1px">25%</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.5);line-height:1.5">Working Capital & Commodity Procurement</div>
+      </div>
+      <div class="cgold" style="text-align:center;padding:16px">
+        <div style="font-size:17px;font-weight:800;color:#C9A84C;margin-bottom:3px">$200K</div>
+        <div style="font-size:9px;color:rgba(255,255,255,.4);margin-bottom:6px;letter-spacing:1px">20%</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.5);line-height:1.5">Team Hiring — Operations, Legal & Compliance</div>
+      </div>
+      <div class="card" style="text-align:center;padding:16px">
+        <div style="font-size:17px;font-weight:800;margin-bottom:3px">$150K</div>
+        <div style="font-size:9px;color:rgba(255,255,255,.4);margin-bottom:6px;letter-spacing:1px">15%</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.5);line-height:1.5">Platform Scaling & Ambassador Programme</div>
+      </div>
+    </div>
+    <div class="abox">
+      <div style="font-size:11px;color:#C9A84C;font-weight:700;letter-spacing:2px;margin-bottom:10px">WITH $1M WE WILL ACHIEVE IN 12 MONTHS:</div>
+      <div style="display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-bottom:16px">
+        <div style="font-size:12px;color:rgba(255,255,255,.65)">✓ 5x processing capacity</div>
+        <div style="font-size:12px;color:rgba(255,255,255,.65)">✓ 3 export contracts signed</div>
+        <div style="font-size:12px;color:rgba(255,255,255,.65)">✓ 5,000+ investors onboarded</div>
+        <div style="font-size:12px;color:rgba(255,255,255,.65)">✓ $2M+ revenue in 12 months</div>
+      </div>
+      <div style="border-top:1px solid rgba(201,168,76,.2);padding-top:14px">
+        <div style="font-size:13px;font-weight:700;margin-bottom:6px">Simon Mgbe · Founder & CEO · Statlen</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.4)">statlenpartnership28@gmail.com · +1 (812) 207-9722 · statlen-website-luwm.vercel.app</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<!-- NAV -->
+<div class="nav">
+  <button class="nav-btn" onclick="go(-1)">← Prev</button>
+  <div id="dots"></div>
+  <span class="ctr" id="ctr">1 / 14</span>
+  <button class="nav-btn" onclick="go(1)">Next →</button>
+</div>
+
+<script>
+var cur=0,tot=14;
+var slides=document.querySelectorAll('.slide');
+var prog=document.getElementById('prog');
+var ctr=document.getElementById('ctr');
+var dotsEl=document.getElementById('dots');
+dotsEl.style.cssText='display:flex;gap:5px;align-items:center';
+
+for(var i=0;i<tot;i++){
+  var d=document.createElement('div');
+  d.className='dot'+(i===0?' on':'');
+  d.setAttribute('data-i',i);
+  d.onclick=(function(n){return function(){goTo(n)}})(i);
+  dotsEl.appendChild(d);
+}
+
+function goTo(n){
+  slides[cur].classList.remove('active');
+  slides[cur].classList.add('prev');
+  setTimeout((function(old){return function(){slides[old].classList.remove('prev')}})(cur),420);
+  document.querySelectorAll('.dot')[cur].classList.remove('on');
+  cur=(n+tot)%tot;
+  slides[cur].classList.add('active');
+  document.querySelectorAll('.dot')[cur].classList.add('on');
+  ctr.textContent=(cur+1)+' / '+tot;
+  prog.style.width=((cur+1)/tot*100)+'%';
+}
+
+function go(d){goTo(cur+d);}
+
+document.addEventListener('keydown',function(e){
+  if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();go(1);}
+  if(e.key==='ArrowLeft'){e.preventDefault();go(-1);}
+});
+
+// Touch swipe
+var tx=0;
+document.addEventListener('touchstart',function(e){tx=e.touches[0].clientX;},{passive:true});
+document.addEventListener('touchend',function(e){
+  var dx=tx-e.changedTouches[0].clientX;
+  if(Math.abs(dx)>50){go(dx>0?1:-1);}
+},{passive:true});
+
+prog.style.width=(1/tot*100)+'%';
+</script>
+</body>
+</html>

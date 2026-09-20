@@ -1069,6 +1069,19 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);overflo
           </div>
           <div>
             <label style="font-size:10px;font-weight:700;color:var(--mu);letter-spacing:.5px;text-transform:uppercase;display:block;margin-bottom:4px">Phone / WhatsApp</label>
+            <select id="invCountry" style="width:100%;padding:11px 13px;border:1.5px solid var(--bd);border-radius:9px;font-size:13px;font-family:Inter,sans-serif;outline:none;color:var(--tx);background:var(--bg);margin-bottom:10px" onfocus="this.style.borderColor='var(--o)'" onblur="this.style.borderColor='var(--bd)'">
+              <option value="">Select Your Country</option>
+              <option value="Nigeria">🇳🇬 Nigeria</option>
+              <option value="Ghana">🇬🇭 Ghana</option>
+              <option value="Kenya">🇰🇪 Kenya</option>
+              <option value="South Africa">🇿🇦 South Africa</option>
+              <option value="United Kingdom">🇬🇧 United Kingdom</option>
+              <option value="United States">🇺🇸 United States</option>
+              <option value="Canada">🇨🇦 Canada</option>
+              <option value="Germany">🇩🇪 Germany</option>
+              <option value="UAE">🇦🇪 UAE</option>
+              <option value="Other">🌍 Other Country</option>
+            </select>
             <input type="tel" id="invPhone" placeholder="+234 or +1..." style="width:100%;padding:10px 13px;border:1.5px solid var(--bd);border-radius:9px;font-size:13px;font-family:Inter,sans-serif;outline:none;color:var(--tx);background:#fafafa;" onfocus="this.style.borderColor='var(--o)'" onblur="this.style.borderColor='var(--bd)'"/>
           </div>
           <div>
@@ -2079,6 +2092,7 @@ function payCard() {
         if (btn) { btn.textContent = '🔒 Pay Securely →'; btn.disabled = false; }
         if (data.status === "successful") {
           toast("Payment successful! We will contact you within 24 hours to confirm your investment.");
+          showPaymentDetails(name, email, amount.toString(), sector, false);
           var sector = document.getElementById('invSector') ? document.getElementById('invSector').value : 'Agriculture';
           var msg = "Hello Statlen, I have completed my investment payment.
 
@@ -2172,20 +2186,83 @@ function submitInvestment() {
   var phone = (document.getElementById('invPhone').value || '').trim();
   var amount = (document.getElementById('invAmount').value || '').trim();
   var sector = (document.getElementById('invSector').value || '').trim();
-  if (!name || !email || !amount) { toast('Please fill in your name, email and investment amount'); return; }
-  var msg = 'Hello Statlen,
+  var country = (document.getElementById('invCountry') && document.getElementById('invCountry').value || '').trim();
 
-I would like to invest with Statlen.
+  if (!name) { toast('Please enter your full name'); return; }
+  if (!email || !email.indexOf('@') < 0) { toast('Please enter a valid email'); return; }
+  if (!amount || parseFloat(amount) < 50) { toast('Minimum investment is $50'); return; }
+
+  // Detect if Nigerian investor
+  var isNigeria = country === 'Nigeria' || phone.startsWith('+234') || phone.startsWith('0');
+
+  // Build payment details based on country
+  var payDetails = '';
+  var accountMsg = '';
+  if (isNigeria) {
+    payDetails = 'NIGERIAN INVESTORS - Transfer to:
+Bank: Moniepoint Microfinance
+Account Name: Simon Tawo Mgbe
+Reference: ' + name + ' - Statlen Investment';
+    accountMsg = 'Nigerian Transfer (Moniepoint)';
+  } else {
+    payDetails = 'INTERNATIONAL INVESTORS - Transfer to:
+Bank: Lead Bank
+Account Name: Simon Tawo Mgbe
+Account Type: Checking (USD)
+Reference: ' + name + ' - Statlen Investment';
+    accountMsg = 'International Transfer (USD - Lead Bank)';
+  }
+
+  // Show payment details on screen
+  showPaymentDetails(name, email, amount, sector, isNigeria);
+
+  // Send WhatsApp notification to Statlen
+  var msg = 'NEW INVESTMENT REQUEST
 
 Name: ' + name + '
 Email: ' + email + '
 Phone: ' + phone + '
 Amount: $' + amount + '
 Sector: ' + sector + '
+Payment Method: ' + accountMsg + '
 
-Please contact me to proceed with my investment.';
-  window.open('https://wa.me/18122079722?text=' + encodeURIComponent(msg), '_blank');
-  toast('Opening WhatsApp to complete your investment request...');
+Please confirm receipt and process this investment.';
+  setTimeout(function() {
+    window.open('https://wa.me/18122079722?text=' + encodeURIComponent(msg), '_blank');
+  }, 500);
+}
+
+function showPaymentDetails(name, email, amount, sector, isNigeria) {
+  var overlay = document.getElementById('payOverlay');
+  if (!overlay) {
+    overlay = document.createElement('div');
+    overlay.id = 'payOverlay';
+    overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(8px)';
+    document.body.appendChild(overlay);
+  }
+
+  var nigeriaDetails = '<div style="background:rgba(11,122,59,.1);border:1px solid rgba(11,122,59,.3);border-radius:10px;padding:16px;margin-bottom:12px"><div style="font-size:10px;font-weight:700;color:#4ade80;letter-spacing:1px;margin-bottom:10px">TRANSFER DETAILS — NIGERIA</div><div style="font-size:13px;color:#fff;line-height:2"><b>Bank:</b> Moniepoint Microfinance<br><b>Account Name:</b> Simon Tawo Mgbe<br><b>Reference:</b> ' + name + ' — Statlen Investment</div></div>';
+
+  var intlDetails = '<div style="background:rgba(11,122,59,.1);border:1px solid rgba(11,122,59,.3);border-radius:10px;padding:16px;margin-bottom:12px"><div style="font-size:10px;font-weight:700;color:#4ade80;letter-spacing:1px;margin-bottom:10px">TRANSFER DETAILS — INTERNATIONAL (USD)</div><div style="font-size:13px;color:#fff;line-height:2"><b>Bank:</b> Lead Bank<br><b>Account Name:</b> Simon Tawo Mgbe<br><b>Account Type:</b> Checking<br><b>Country:</b> United States<br><b>Reference:</b> ' + name + ' — Statlen Investment</div></div>';
+
+  overlay.innerHTML = '<div style="background:#0D1F12;border:1.5px solid #0B7A3B;border-radius:20px;padding:28px;max-width:480px;width:100%;max-height:90vh;overflow-y:auto">' +
+    '<div style="text-align:center;margin-bottom:20px">' +
+    '<div style="font-size:20px;font-weight:900;color:#fff;letter-spacing:2px;margin-bottom:4px">STATLEN</div>' +
+    '<div style="font-size:11px;color:#4ade80;margin-bottom:4px">Investment Request Received ✓</div>' +
+    '<div style="font-size:13px;color:rgba(255,255,255,.7)">Thank you <b style="color:#fff">' + name + '</b> — your investment of <b style="color:#C9A84C">$' + amount + '</b> is being processed.</div>' +
+    '</div>' +
+    '<div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.5);letter-spacing:1px;margin-bottom:12px">COMPLETE YOUR PAYMENT</div>' +
+    (isNigeria ? nigeriaDetails : intlDetails) +
+    '<div style="background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);border-radius:10px;padding:14px;margin-bottom:16px">' +
+    '<div style="font-size:11px;color:#C9A84C;font-weight:700;margin-bottom:6px">IMPORTANT</div>' +
+    '<div style="font-size:11px;color:rgba(255,255,255,.65);line-height:1.7">1. Complete your bank transfer using the details above<br>2. Use your name as the payment reference<br>3. Send your payment receipt to our WhatsApp<br>4. We will confirm your investment within 24 hours</div>' +
+    '</div>' +
+    '<div style="display:flex;gap:10px">' +
+    '<button onclick="window.open('https://wa.me/18122079722?text=' + encodeURIComponent('Hello Statlen, I have made my investment transfer of $' + amount + '. My name is ' + name + ' and my email is ' + email + '. Please confirm my investment.') + '','_blank')" style="flex:1;padding:12px;background:linear-gradient(135deg,#25D366,#128C7E);color:#fff;border:none;border-radius:10px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit">📱 Confirm on WhatsApp</button>' +
+    '<button onclick="document.getElementById('payOverlay').remove()" style="padding:12px 16px;background:rgba(255,255,255,.08);color:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.1);border-radius:10px;font-size:12px;cursor:pointer;font-family:inherit">Close</button>' +
+    '</div>' +
+    '</div>';
+  overlay.style.display = 'flex';
 }
 
 // ── FAQ TOGGLE ──

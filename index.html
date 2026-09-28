@@ -550,6 +550,42 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);overflo
     </div>
   </section>
 
+  <!-- FAQ -->
+  <section class="sec" style="background:var(--bg2)">
+    <div class="sec-in">
+      <div style="text-align:center;margin-bottom:28px">
+        <div class="sec-badge">FAQ</div>
+        <h2 style="font-size:clamp(20px,3vw,32px);font-weight:800;color:var(--tx);margin-top:10px">Frequently Asked Questions</h2>
+      </div>
+      <div class="faq" style="max-width:700px;margin:0 auto;display:flex;flex-direction:column;gap:10px">
+        <div class="faq-item" style="background:var(--bg);border:1px solid var(--bd);border-radius:12px;overflow:hidden">
+          <div class="faq-q" onclick="toggleFaq(this)" style="padding:16px 18px;font-size:14px;font-weight:700;color:var(--tx);cursor:pointer;display:flex;justify-content:space-between;align-items:center">What is the minimum investment amount?<span>+</span></div>
+          <div class="faq-a" style="display:none;padding:0 18px 16px;font-size:13px;color:var(--mu);line-height:1.7">You can start investing with as little as $50. Statlen is open to investors from every country in the world with no upper limit on investment amount.</div>
+        </div>
+        <div class="faq-item" style="background:var(--bg);border:1px solid var(--bd);border-radius:12px;overflow:hidden">
+          <div class="faq-q" onclick="toggleFaq(this)" style="padding:16px 18px;font-size:14px;font-weight:700;color:var(--tx);cursor:pointer;display:flex;justify-content:space-between;align-items:center">What annual returns can I expect?<span>+</span></div>
+          <div class="faq-a" style="display:none;padding:0 18px 16px;font-size:13px;color:var(--mu);line-height:1.7">Statlen delivers 8 to 12 percent annual returns to investment partners, backed by real commodity processing and export operations across Nigeria, Kenya, and West Africa.</div>
+        </div>
+        <div class="faq-item" style="background:var(--bg);border:1px solid var(--bd);border-radius:12px;overflow:hidden">
+          <div class="faq-q" onclick="toggleFaq(this)" style="padding:16px 18px;font-size:14px;font-weight:700;color:var(--tx);cursor:pointer;display:flex;justify-content:space-between;align-items:center">How do I make my investment payment?<span>+</span></div>
+          <div class="faq-a" style="display:none;padding:0 18px 16px;font-size:13px;color:var(--mu);line-height:1.7">Fill in the investment form, select your country, and submit. Nigerian investors will receive Moniepoint bank transfer details automatically. International investors will receive USD bank transfer details. You can also complete your investment directly via WhatsApp.</div>
+        </div>
+        <div class="faq-item" style="background:var(--bg);border:1px solid var(--bd);border-radius:12px;overflow:hidden">
+          <div class="faq-q" onclick="toggleFaq(this)" style="padding:16px 18px;font-size:14px;font-weight:700;color:var(--tx);cursor:pointer;display:flex;justify-content:space-between;align-items:center">Is my investment safe?<span>+</span></div>
+          <div class="faq-a" style="display:none;padding:0 18px 16px;font-size:13px;color:var(--mu);line-height:1.7">Statlen is managed by licensed and certified investment professionals. All investments are backed by real commodity processing operations. Every investment is confirmed in writing and your information is kept strictly confidential.</div>
+        </div>
+        <div class="faq-item" style="background:var(--bg);border:1px solid var(--bd);border-radius:12px;overflow:hidden">
+          <div class="faq-q" onclick="toggleFaq(this)" style="padding:16px 18px;font-size:14px;font-weight:700;color:var(--tx);cursor:pointer;display:flex;justify-content:space-between;align-items:center">Which countries can invest with Statlen?<span>+</span></div>
+          <div class="faq-a" style="display:none;padding:0 18px 16px;font-size:13px;color:var(--mu);line-height:1.7">Statlen is open to investors from every country in the world. We have investment partners across Africa, Europe, North America, the Middle East, and beyond.</div>
+        </div>
+        <div class="faq-item" style="background:var(--bg);border:1px solid var(--bd);border-radius:12px;overflow:hidden">
+          <div class="faq-q" onclick="toggleFaq(this)" style="padding:16px 18px;font-size:14px;font-weight:700;color:var(--tx);cursor:pointer;display:flex;justify-content:space-between;align-items:center">What commodities does Statlen process?<span>+</span></div>
+          <div class="faq-a" style="display:none;padding:0 18px 16px;font-size:13px;color:var(--mu);line-height:1.7">Statlen currently processes and exports cocoa and sesame at industrial scale, with operations in Nigeria and Kenya. In 2027 we are expanding into chicken processing with a new facility capable of processing 60,000 chickens daily.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- REVIEWS -->
   <section class="reviews-sec">
     <div class="sec-in">
@@ -1247,6 +1283,34 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);overflo
 
 <!-- DASHBOARD -->
 <div class="page" id="page-dashboard">
+  <!-- PIN SCREEN -->
+  <div id="pinScreen" style="position:fixed;inset:0;background:var(--bg);z-index:500;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px">
+    <div style="text-align:center;max-width:320px;width:100%">
+      <div style="font-size:22px;font-weight:900;color:var(--tx);letter-spacing:3px;margin-bottom:4px">STATLEN</div>
+      <div style="font-size:12px;color:var(--mu);margin-bottom:32px">Enter your PIN to access your dashboard</div>
+      <div id="pinDots" style="display:flex;gap:12px;justify-content:center;margin-bottom:24px">
+        <div style="width:14px;height:14px;border-radius:50%;background:var(--bd);border:2px solid var(--bd)" id="pd1"></div>
+        <div style="width:14px;height:14px;border-radius:50%;background:var(--bd);border:2px solid var(--bd)" id="pd2"></div>
+        <div style="width:14px;height:14px;border-radius:50%;background:var(--bd);border:2px solid var(--bd)" id="pd3"></div>
+        <div style="width:14px;height:14px;border-radius:50%;background:var(--bd);border:2px solid var(--bd)" id="pd4"></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;max-width:240px;margin:0 auto">
+        <button onclick="pinInput('1')" style="padding:18px;background:var(--bg2);border:1px solid var(--bd);border-radius:12px;font-size:20px;font-weight:700;color:var(--tx);cursor:pointer;font-family:inherit">1</button>
+        <button onclick="pinInput('2')" style="padding:18px;background:var(--bg2);border:1px solid var(--bd);border-radius:12px;font-size:20px;font-weight:700;color:var(--tx);cursor:pointer;font-family:inherit">2</button>
+        <button onclick="pinInput('3')" style="padding:18px;background:var(--bg2);border:1px solid var(--bd);border-radius:12px;font-size:20px;font-weight:700;color:var(--tx);cursor:pointer;font-family:inherit">3</button>
+        <button onclick="pinInput('4')" style="padding:18px;background:var(--bg2);border:1px solid var(--bd);border-radius:12px;font-size:20px;font-weight:700;color:var(--tx);cursor:pointer;font-family:inherit">4</button>
+        <button onclick="pinInput('5')" style="padding:18px;background:var(--bg2);border:1px solid var(--bd);border-radius:12px;font-size:20px;font-weight:700;color:var(--tx);cursor:pointer;font-family:inherit">5</button>
+        <button onclick="pinInput('6')" style="padding:18px;background:var(--bg2);border:1px solid var(--bd);border-radius:12px;font-size:20px;font-weight:700;color:var(--tx);cursor:pointer;font-family:inherit">6</button>
+        <button onclick="pinInput('7')" style="padding:18px;background:var(--bg2);border:1px solid var(--bd);border-radius:12px;font-size:20px;font-weight:700;color:var(--tx);cursor:pointer;font-family:inherit">7</button>
+        <button onclick="pinInput('8')" style="padding:18px;background:var(--bg2);border:1px solid var(--bd);border-radius:12px;font-size:20px;font-weight:700;color:var(--tx);cursor:pointer;font-family:inherit">8</button>
+        <button onclick="pinInput('9')" style="padding:18px;background:var(--bg2);border:1px solid var(--bd);border-radius:12px;font-size:20px;font-weight:700;color:var(--tx);cursor:pointer;font-family:inherit">9</button>
+        <button onclick="pinClear()" style="padding:18px;background:var(--bg2);border:1px solid var(--bd);border-radius:12px;font-size:13px;font-weight:700;color:var(--mu);cursor:pointer;font-family:inherit">CLR</button>
+        <button onclick="pinInput('0')" style="padding:18px;background:var(--bg2);border:1px solid var(--bd);border-radius:12px;font-size:20px;font-weight:700;color:var(--tx);cursor:pointer;font-family:inherit">0</button>
+        <button onclick="pinBack()" style="padding:18px;background:var(--bg2);border:1px solid var(--bd);border-radius:12px;font-size:20px;font-weight:700;color:var(--mu);cursor:pointer;font-family:inherit">⌫</button>
+      </div>
+      <div id="pinError" style="margin-top:16px;font-size:12px;color:#f87171;display:none">Incorrect PIN. Please try again.</div>
+    </div>
+  </div>
   <!-- PIN SETUP SCREEN -->
   <div id="pinSetupScreen" style="display:none;min-height:calc(100vh - 64px);display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0D0D0D,#1A0800);padding:24px">
     <div style="background:#fff;border-radius:24px;padding:32px;width:100%;max-width:380px;text-align:center;box-shadow:0 32px 80px rgba(0,0,0,0.4)">
@@ -1746,7 +1810,7 @@ function goPage(n){
   document.getElementById('page-'+n).classList.add('active');
   window.scrollTo(0,0);
   if(n==='legal'){showLegal('tc');} if(n==='invest'){setPayMethod('card');}
-  if(n==='dashboard'){
+  if(n==='dashboard'){initDash();
     var savedPin = localStorage.getItem('sl_pin');
     if(!savedPin){ showPinSetup(); }
     else { showPinEntry(); }
@@ -1998,6 +2062,66 @@ function showLegal(tab) {
   });
 }
 
+
+// ── PIN SYSTEM ──
+var pinEntry = '';
+var pinSet = localStorage.getItem('sl_pin') || '';
+var pinMode = pinSet ? 'enter' : 'set';
+
+function pinInput(d) {
+  if (pinEntry.length >= 4) return;
+  pinEntry += d;
+  updatePinDots();
+  if (pinEntry.length === 4) {
+    setTimeout(function() {
+      if (pinMode === 'set') {
+        localStorage.setItem('sl_pin', pinEntry);
+        pinSet = pinEntry;
+        pinMode = 'enter';
+        unlockDash();
+      } else {
+        if (pinEntry === pinSet) {
+          unlockDash();
+        } else {
+          pinEntry = '';
+          updatePinDots();
+          var err = document.getElementById('pinError');
+          if(err) { err.style.display='block'; setTimeout(function(){err.style.display='none';},2000); }
+        }
+      }
+    }, 200);
+  }
+}
+
+function pinBack() { pinEntry = pinEntry.slice(0,-1); updatePinDots(); }
+function pinClear() { pinEntry = ''; updatePinDots(); }
+
+function updatePinDots() {
+  for(var i=1;i<=4;i++){
+    var dot = document.getElementById('pd'+i);
+    if(dot) dot.style.background = i <= pinEntry.length ? 'var(--o)' : 'var(--bd)';
+  }
+}
+
+function unlockDash() {
+  var ps = document.getElementById('pinScreen');
+  if(ps) ps.style.display = 'none';
+  var dc = document.getElementById('dashContent');
+  if(dc) dc.style.display = 'block';
+  updateDash();
+}
+
+function initDash() {
+  pinEntry = '';
+  pinSet = localStorage.getItem('sl_pin') || '';
+  pinMode = pinSet ? 'enter' : 'set';
+  var ps = document.getElementById('pinScreen');
+  var dc = document.getElementById('dashContent');
+  if(ps) ps.style.display = 'flex';
+  if(dc) dc.style.display = 'none';
+  updatePinDots();
+}
+
 // ── PAYMENT METHODS ──
 function setPayMethod(method) {
   ['card','transfer','whatsapp'].forEach(function(m) {
@@ -2093,6 +2217,66 @@ function toggleBalance() {
   }
 }
 
+
+
+// ── PIN SYSTEM ──
+var pinEntry = '';
+var pinSet = localStorage.getItem('sl_pin') || '';
+var pinMode = pinSet ? 'enter' : 'set';
+
+function pinInput(d) {
+  if (pinEntry.length >= 4) return;
+  pinEntry += d;
+  updatePinDots();
+  if (pinEntry.length === 4) {
+    setTimeout(function() {
+      if (pinMode === 'set') {
+        localStorage.setItem('sl_pin', pinEntry);
+        pinSet = pinEntry;
+        pinMode = 'enter';
+        unlockDash();
+      } else {
+        if (pinEntry === pinSet) {
+          unlockDash();
+        } else {
+          pinEntry = '';
+          updatePinDots();
+          var err = document.getElementById('pinError');
+          if(err) { err.style.display='block'; setTimeout(function(){err.style.display='none';},2000); }
+        }
+      }
+    }, 200);
+  }
+}
+
+function pinBack() { pinEntry = pinEntry.slice(0,-1); updatePinDots(); }
+function pinClear() { pinEntry = ''; updatePinDots(); }
+
+function updatePinDots() {
+  for(var i=1;i<=4;i++){
+    var dot = document.getElementById('pd'+i);
+    if(dot) dot.style.background = i <= pinEntry.length ? 'var(--o)' : 'var(--bd)';
+  }
+}
+
+function unlockDash() {
+  var ps = document.getElementById('pinScreen');
+  if(ps) ps.style.display = 'none';
+  var dc = document.getElementById('dashContent');
+  if(dc) dc.style.display = 'block';
+  updateDash();
+}
+
+function initDash() {
+  pinEntry = '';
+  pinSet = localStorage.getItem('sl_pin') || '';
+  pinMode = pinSet ? 'enter' : 'set';
+  var ps = document.getElementById('pinScreen');
+  var dc = document.getElementById('dashContent');
+  if(ps) ps.style.display = 'flex';
+  if(dc) dc.style.display = 'none';
+  updatePinDots();
+}
 
 // ── PAYMENT METHODS ──
 function setPayMethod(m) {
@@ -2227,6 +2411,31 @@ Please process my payment.';
 }
 
 // ── CALCULATOR ──
+function calculateReturns() {
+  var amt = parseFloat(document.getElementById('calcAmount') && document.getElementById('calcAmount').value || 0);
+  if (!amt || amt < 50) { 
+    var el = document.getElementById('calcResult');
+    if(el) el.innerHTML = '<p style="color:var(--o);font-size:13px">Please enter an amount of at least $50</p>';
+    return; 
+  }
+  var annual = amt * 0.10;
+  var monthly = annual / 12;
+  var fiveyr = amt + (annual * 5);
+  var el = document.getElementById('calcResult');
+  if(el) el.innerHTML = 
+    '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:10px">' +
+    '<div style="background:var(--bg2);border:1px solid var(--bd);border-radius:10px;padding:14px;text-align:center">' +
+    '<div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px">Annual Return</div>' +
+    '<div style="font-size:20px;font-weight:800;color:var(--o)">$' + annual.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}) + '</div></div>' +
+    '<div style="background:var(--bg2);border:1px solid var(--bd);border-radius:10px;padding:14px;text-align:center">' +
+    '<div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px">Monthly</div>' +
+    '<div style="font-size:20px;font-weight:800;color:var(--o)">$' + monthly.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}) + '</div></div>' +
+    '<div style="background:var(--bg2);border:1px solid var(--bd);border-radius:10px;padding:14px;text-align:center">' +
+    '<div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px">5-Year Value</div>' +
+    '<div style="font-size:20px;font-weight:800;color:var(--o)">$' + fiveyr.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}) + '</div></div>' +
+    '</div>';
+}
+
 function calcReturns() {
   var amt = parseFloat(document.getElementById('calcAmount').value) || 0;
   var rate = parseFloat(document.getElementById('calcSector').value) / 100;
@@ -2362,5 +2571,10 @@ window.addEventListener('load',function(){
   if(me)updateNav();
 });
 </script>
+
+  <!-- WHATSAPP FLOAT -->
+  <a href="https://wa.me/18122079722?text=Hello%20Statlen%2C%20I%20would%20like%20to%20learn%20more%20about%20investing." target="_blank" class="whatsapp-float" style="position:fixed;bottom:24px;right:20px;width:56px;height:56px;background:linear-gradient(135deg,#25D366,#128C7E);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;box-shadow:0 4px 20px rgba(37,211,102,.4);z-index:999;text-decoration:none;animation:pulse 2s infinite">💬</a>
+  <style>@keyframes pulse{0%,100%{box-shadow:0 4px 20px rgba(37,211,102,.4)}50%{box-shadow:0 4px 30px rgba(37,211,102,.7)}}</style>
+
 </body>
 </html>
